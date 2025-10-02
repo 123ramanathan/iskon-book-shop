@@ -13,4 +13,10 @@ export class SalesPage implements OnInit {
   ngOnInit() {
   }
 
+  report_list = [
+    {
+      
+    }
+  ]
+
 }
