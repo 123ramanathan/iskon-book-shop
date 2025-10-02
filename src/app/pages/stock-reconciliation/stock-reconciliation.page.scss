@@ -1,0 +1,115 @@
+.main_section {
+    padding: 1rem 1rem 0 1rem;
+
+    .setHeight {
+        height: calc(100vh - 145px);
+        overflow: auto;
+    }
+
+    .stock_reconciliation {
+        padding: 1rem;
+        background: #0da2e71a;
+        border: 1px solid #0da2e7;
+        margin-bottom: 1rem;
+        display: flex;
+        gap: .5rem;
+        border-radius: 0.75rem;
+
+        ion-icon {
+            flex: 0 0 1.25rem;
+            height: 1.25rem;
+        }
+
+        .stock_content {
+
+            .label {
+                font-weight: 600;
+                font-size: .875rem;
+                line-height: 1.25rem;
+            }
+
+            .value {
+                font-size: .75rem;
+                line-height: 1rem;
+                margin-top: .25rem;
+                color: #6b7280;
+            }
+        }
+    }
+
+    .books_list {
+        .boxes {
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            background: #fff;
+            border-radius: 0.75rem;
+
+            .book_name {
+                font-weight: 600;
+                font-size: .875rem;
+                line-height: 1.25rem;
+            }
+
+            .sub_title {
+                color: #6b7280;
+                font-size: .75rem;
+                line-height: 1rem;
+            }
+
+            .cost_inputs {
+                margin-top: 0.75rem;
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: 100%;
+                gap: 0.75rem;
+
+                .system_quantity {
+                    label {
+                        color: #6b7280;
+                        font-weight: 600;
+                        font-size: .75rem;
+                        line-height: 1rem;
+                    }
+
+                    input {
+                        width: 100%;
+                        padding-left: .75rem;
+                        padding-right: .75rem;
+                        padding-top: .5rem;
+                        padding-bottom: .5rem;
+                        background-color: #f0f2f4;
+                        margin-top: .25rem;
+                        border-radius: 0.75rem;
+                        border: unset !important;
+                    }
+
+                    input:focus {
+                        outline: 1px solid var(--primary-color);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.save_btn {
+    padding: 0.75rem;
+    border-top: 1px solid var(--border-col);
+    background: #fff;
+
+    ion-button {
+        --padding-start: 2rem;
+        --padding-end: 2rem;
+        --padding-top: 0.75rem;
+        --padding-bottom: 0.75rem;
+        width: 100%;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 600;
+        --border-radius: calc(0.75rem - 2px);
+
+        ion-icon {
+            margin-right: 1rem;
+        }
+    }
+}

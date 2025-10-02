@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'stock-reconciliation',
+    loadChildren: () => import('./pages/stock-reconciliation/stock-reconciliation.module').then( m => m.StockReconciliationPageModule)
   }
 ];
 @NgModule({
