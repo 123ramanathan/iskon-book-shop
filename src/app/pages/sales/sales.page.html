@@ -4,8 +4,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" style="--background: #f6f7f9;">
   <div class="main_section">
-    <ion-button fill="clear"><ion-icon slot="start" name="cart-outline"></ion-icon>Start New Sale</ion-button>
+    <ion-button fill="clear"><ion-icon slot="start" routerLink="/catalog" name="cart-outline"></ion-icon>Start New Sale</ion-button>
+
+    <div class="sales_report">
+      <div *ngFor="let item of report_list" class="boxes">
+        <ion-icon [src]="item.icon"></ion-icon>
+        <div>
+          <h5 class="m-0 value">{{item.value}}</h5>
+          <p class="m-0 label">{{item.label}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick_actions">
+      <h3 class="m-0">Quick Actions</h3>
+
+      <div *ngFor="let item of quick_actions" class="boxes" [routerLink]="item.route">
+        <ion-icon [src]="item.icon"></ion-icon>
+        <p class="m-0 label">{{item.label}}</p>
+      </div>
+    </div>
+
   </div>
 </ion-content>

@@ -1,0 +1,140 @@
+.main_section {
+    padding: 1rem;
+
+    .header_content {
+        h2 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 2rem;
+            margin-bottom: .5rem;
+        }
+
+        p {
+            color: #6b7280;
+        }
+    }
+
+    .grid_section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1.5rem;
+
+        .section1 {
+            padding: 1.5rem;
+            border: 1px solid var(--border-col);
+            background: #fff;
+            border-radius: 0.75rem;
+            display: flex;
+            gap: 1rem;
+
+            ion-icon {
+                flex: 0 0 1.5rem;
+                height: 1.5rem;
+                padding: .75rem;
+                background: #22295e1a;
+                border-radius: 0.75rem;
+            }
+
+            h3 {
+                font-weight: 600;
+                margin-bottom: .25rem;
+                font-size: 1rem;
+            }
+
+            p {
+                font-size: .875rem;
+                line-height: 1.25rem;
+                margin-bottom: 1rem;
+                color: #6b7280;
+            }
+
+            ion-button {
+                font-weight: 500;
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+                --border-radius: calc(0.75rem - 2px);
+                width: 100%;
+                min-height: 2.5rem;
+            }
+        }
+
+        .section2 {
+            padding: 1.5rem;
+            border: 1px solid var(--border-col);
+            background: #fff;
+            border-radius: 0.75rem;
+            display: flex;
+            gap: 1rem;
+
+            ion-icon {
+                flex: 0 0 1.5rem;
+                height: 1.5rem;
+                padding: .75rem;
+                background: #22295e1a;
+                border-radius: 0.75rem;
+            }
+
+            h3 {
+                font-weight: 600;
+                margin-bottom: .25rem;
+                font-size: 1rem;
+            }
+
+            p {
+                font-size: .875rem;
+                line-height: 1.25rem;
+                margin-bottom: 1rem;
+                color: #6b7280;
+            }
+
+            ion-button {
+                font-weight: 500;
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+                --border-radius: calc(0.75rem - 2px);
+                width: 100%;
+                min-height: 2.5rem;
+            }
+        }
+
+        .stock_reconciliation {
+            padding: 1rem;
+            background: #f59f0a0d;
+            border: 1px solid #f59f0a;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: .5rem;
+            border-radius: 0.75rem;
+
+            ion-icon {
+                flex: 0 0 1.25rem;
+                height: 1.25rem;
+            }
+
+            .stock_content {
+
+                .label {
+                    font-weight: 600;
+                    font-size: .875rem;
+                    line-height: 1.25rem;
+                }
+
+                .value {
+                    font-size: .75rem;
+                    line-height: 1rem;
+                    margin-top: .25rem;
+                    margin-bottom: .5rem;
+                    color: #6b7280;
+                }
+
+                .points {
+                    font-size: 0.75rem;
+                    line-height: 1.8;
+                    color: #6b7280;
+                }
+            }
+        }
+    }
+
+}
