@@ -1,0 +1,7 @@
+{
+  "name": "book-shop",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
