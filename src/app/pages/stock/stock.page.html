@@ -1,13 +1,54 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>stock</ion-title>
+    <ion-title>Stock</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">stock</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" style="--background: #f6f7f9;">
+
+  <div class="main_section">
+
+    <div class="header_content">
+      <h2 class="m-0">Stock Management</h2>
+      <p class="m-0">Manage inventory and receipts</p>
+    </div>
+
+    <div class="grid_section">
+      <div class="section1">
+        <ion-icon src="/assets/icon/stock-reconciliation-color.svg"></ion-icon>
+        <div>
+          <h3 class="m-0">Stock Reconciliation</h3>
+          <p class="m-0">Compare physical inventory with system records</p>
+          <ion-button fill="clear">Start Reconciliation</ion-button>
+        </div>
+      </div>
+  
+      <div class="section2">
+        <ion-icon src="/assets/icon/stock-receipt-color.svg"></ion-icon>
+        <div>
+          <h3 class="m-0">Stock Receipt</h3>
+          <p class="m-0">Process incoming stock from warehouse</p>
+          <ion-button fill="clear">View Receipts</ion-button>
+        </div>
+      </div>
+
+      <div class="stock_reconciliation">
+        <ion-icon src="/assets/icon/warning-yellow.svg"></ion-icon>
+        <div class="stock_content">
+          <p class="m-0 label">Low Stock Alert</p>
+          <p class="m-0 value">3 items are running low on stock</p>
+
+          <div class="points">
+            <p class="m-0">• Pride and Prejudice (15 units)</p>
+            <p class="m-0">• The Catcher in the Rye (12 units)</p>
+            <p class="m-0">• Sapiens (20 units)</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
 </ion-content>
