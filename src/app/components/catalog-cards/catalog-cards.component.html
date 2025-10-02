@@ -1,0 +1,53 @@
+
+<div class="product">
+  <div class="product-card" *ngFor="let item of catalog">
+    <div class="product-card__container">
+      
+      <!-- Thumbnail -->
+      <div class="product-card__thumbnail">
+        <span class="product-card__thumbnail-text">The Great</span>
+      </div>
+  
+      <!-- Content -->
+      <div class="product-card__content">
+        <h3 class="product-card__title">{{item.book_name}}</h3>
+        <p class="product-card__author">{{item.author_name}}</p>
+  
+        <!-- Price + Stock -->
+        <div class="product-card__pricing">
+          <span class="product-card__price">{{db.formatCurrency(item.price)}}</span>
+          <div class="product-card__stock">{{item.stock > 0 ? item.stock + " in stock" : "Out of stock"}} </div>
+        </div>
+  
+        <!-- Actions -->
+        <div class="product-card__actions">
+          
+          <!-- Quantity Control -->
+          <div class="product-card__quantity">
+            <button (click)="update_qty(item,'dec')" [disabled]="item.qty <= 1" class="product-card__quantity-btn product-card__quantity-btn--decrease" >
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M5 12h14"></path>
+              </svg>
+            </button>
+            <span class="product-card__quantity-value">{{item.qty ?? 1}}</span>
+            <button (click)="update_qty(item,'inc')" class="product-card__quantity-btn product-card__quantity-btn--increase">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M5 12h14"></path>
+                <path d="M12 5v14"></path>
+              </svg>
+            </button>
+          </div>
+  
+          <!-- Add to Cart -->
+          <ion-button (click)="add_to_cart(item)" class="product-card__add-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--medium" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M5 12h14"></path>
+              <path d="M12 5v14"></path>
+            </svg>
+            Add
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
