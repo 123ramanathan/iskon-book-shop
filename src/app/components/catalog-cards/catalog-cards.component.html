@@ -24,13 +24,13 @@
           
           <!-- Quantity Control -->
           <div class="product-card__quantity">
-            <button (click)="update_qty(item,'dec')" [disabled]="item.qty <= 1" class="product-card__quantity-btn product-card__quantity-btn--decrease" >
+            <button (click)="db.update_qty(item,'dec')" [disabled]="item.qty <= 1" class="product-card__quantity-btn product-card__quantity-btn--decrease" >
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M5 12h14"></path>
               </svg>
             </button>
             <span class="product-card__quantity-value">{{item.qty ?? 1}}</span>
-            <button (click)="update_qty(item,'inc')" class="product-card__quantity-btn product-card__quantity-btn--increase">
+            <button (click)="db.update_qty(item,'inc')" class="product-card__quantity-btn product-card__quantity-btn--increase">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M5 12h14"></path>
                 <path d="M12 5v14"></path>
