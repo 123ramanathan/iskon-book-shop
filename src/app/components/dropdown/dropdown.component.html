@@ -1,0 +1,28 @@
+<div class="dropdown" (clickOutside)="closeDropdown($event)">
+  <div class="dropdown__options-filter">
+    <ul
+      class="dropdown__filter"
+      role="listbox"
+      tabindex="-1"
+      (click)="toggleDropdown()"
+    >
+      <li class="dropdown__filter-selected" aria-selected="true">
+        {{ selectedOption }}
+      </li>
+    </ul>
+
+    <ul
+      class="dropdown__select"
+      *ngIf="isOpen"
+    >
+      <li
+        class="dropdown__select-option"
+        role="option"
+        *ngFor="let option of options"
+        (click)="selectOption(option)"
+      >
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+</div>

@@ -28,7 +28,7 @@ export class Db {
 
     for (let i = 0; i < cart.length; i++) {
       for (let j = 0; j < books.length; j++) {
-        if(cart[i]['book_name'] === books[j]['book_name']){
+        if(cart[i]['name'] === books[j]['name']){
           books[j]['book_qty'] = cart[i]['qty']
         }
       }
@@ -40,7 +40,7 @@ export class Db {
   add_to_cart(item:any){
     this.cartItems = this.get_cart_items()
     if(this.cartItems && this.cartItems.length > 0){
-      const isExist = this.cartItems.findIndex((res:any)=> res['book_name'] === item.book_name)
+      const isExist = this.cartItems.findIndex((res:any)=> res['name'] === item.name)
       if(isExist > -1){
         this.cartItems[isExist]['qty'] += item.qty;
       }else{
@@ -54,4 +54,14 @@ export class Db {
 
     return this.get_cart_items()
   }
+
+  update_qty(item:any,type:string){
+    if(type === "inc"){
+      if((item['qty'] ?? 0) < item.stock){
+        item['qty'] = item['qty'] > 0 ? item['qty'] + 1 : 2
+      }
+    }else{
+      item['qty'] = item['qty'] > 0 ? item['qty'] - 1 : 1
+    }
+}
 }

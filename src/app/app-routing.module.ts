@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'stock-reconciliation',
     loadChildren: () => import('./pages/stock-reconciliation/stock-reconciliation.module').then( m => m.StockReconciliationPageModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
   }
 ];
 @NgModule({
