@@ -30,6 +30,7 @@ $tablet: 768px;
     position: relative;
     display: flex;
     padding: 1.25rem;
+    width: 100%;
     color: #595959;
     background-color: #fff;
     list-style-type: none;
@@ -39,14 +40,15 @@ $tablet: 768px;
 
     &::after {
       position: absolute;
-      top: 45%;
-      right: 1.25rem;
+      top: 50%;
+      right: 0;
       content: '';
       width: .675rem;
       height: .675rem;
       border-right: 1px solid #595959;
       border-bottom: 1px solid #595959;
-      transform: rotate(45deg) translateX(-45%);
+    //   transform:translateY(-50%);
+      transform: rotate(45deg) translateX(-50%);
       transition: 0.3s ease-in-out;
     }
   }

@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class Db {
-  cartItems:any[] = []
+  cartItems:any[] = [];
+  subtotal:any;
+  tax:any;
   constructor(){}
 
   formatCurrency(amount:number, currency = "INR", locale = "en-IN") {
@@ -18,8 +20,23 @@ export class Db {
 
   get_cart_items(){
     this.cartItems = (localStorage['cartItems'] ? JSON.parse(localStorage['cartItems']) : []) || [];
-
+    if(this.cartItems && this.cartItems.length > 0){
+      this.calculate_subtotal();
+    }
+    
     return this.cartItems
+  }
+
+  calculate_subtotal(){
+    let total = 0;
+
+    for(let i=0;i<this.cartItems.length;i++){
+      total += this.cartItems[i]['qty'] * this.cartItems[i]['price']
+    }
+
+    this.subtotal = total;
+    const taxRate = 0.18
+    this.tax = total * taxRate;
   }
 
 

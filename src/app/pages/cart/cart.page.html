@@ -82,7 +82,14 @@
 
             <div class="cart-item__discount">
               <span class="cart-item__label">Discount:</span>
-              <button class="cart-item__discount-type">%</button>
+              <button class="cart-item__discount-type">
+                <app-dropdown
+                  [options]="['%', '₹']"
+                  defaultLabel="%"
+                  (selectionChange)="onSelect($event)"
+                >
+                </app-dropdown>
+              </button>
               <input
                 type="number"
                 class="cart-item__discount-input"
@@ -96,7 +103,7 @@
             <div class="cart-item__subtotal">
               <span class="cart-item__label">Subtotal:</span>
               <span class="cart-item__value"
-                >{{ db.formatCurrency(subtotal)}}</span
+                >{{ db.formatCurrency(db.subtotal)}}</span
               >
             </div>
           </div>
@@ -104,12 +111,30 @@
       </div>
     </section>
 
-    <!-- <app-dropdown
-  [options]="['Option 1', 'Option 2', 'Option 3', 'Option 4']"
-  defaultLabel="Default option"
-  (selectionChange)="onSelect($event)">
-</app-dropdown> -->
-
-    <section></section>
+    <section class="cart-summary">
+      <!-- <div class="cart-summary"> -->
+        <div class="cart-summary__details">
+          <div class="cart-summary__row">
+            <span class="cart-summary__label">Subtotal</span>
+            <span class="cart-summary__value">{{ db.formatCurrency(db.subtotal)}}</span>
+          </div>
+      
+          <div class="cart-summary__row">
+            <span class="cart-summary__label">Tax (18%)</span>
+            <span class="cart-summary__value">{{ db.formatCurrency(db.tax)}}</span>
+          </div>
+      
+          <div class="cart-summary__total">
+            <span class="cart-summary__total-label">Total</span>
+            <span class="cart-summary__total-value">{{ db.formatCurrency(db.subtotal + db.tax)}}</span>
+          </div>
+        </div>
+      
+        <button on class="cart-summary__button">
+          Proceed to Payment
+        </button>
+      <!-- </div> -->
+      
+    </section>
   </main>
 </ion-content>
