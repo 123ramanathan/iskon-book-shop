@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Stock Receipt</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" style="--background: #f6f7f9;">
+
+  <div class="main_section">
+
+    <div class="pending_reviews">
+
+      <div class="title">
+        <h3 class="m-0">Pending Confirmation (2)</h3>
+        <div class="items_count">2 Items</div>
+      </div>
+
+      <div class="pending_list">
+        <div *ngFor="let item of pending_confirmation_list" class="boxes">
+          <div class="sec1">
+            <div>
+              <h4 class="m-0 book_name">{{item.book_name}}</h4>
+              <p class="m-0 received_date">Received: {{item.received_date}}</p>
+            </div>
+            <div class="status">{{item.status}}</div>
+          </div>
+          <div class="sec2">
+            <span class="quantity">Quantity:</span>
+            <span class="quantity_value">{{item.quantity}} units</span>
+            <ion-button fill="clear"><ion-icon src="/assets/icon/edit.svg"></ion-icon></ion-button>
+          </div>
+          <div class="sec3">
+            <div class="comment_title">
+              <ion-icon src="/assets/icon/comment.svg"></ion-icon>
+              <span>Comments (optional)</span>
+            </div>
+            <textarea placeholder="Add any notes about this receipt..."></textarea>
+          </div>
+          <div class="sec4">
+            <ion-button fill="clear"><ion-icon src="/assets/icon/confirm-tick.svg"></ion-icon>Confirm Receipt</ion-button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="confirmed_receipt">
+      <div class="title">
+        <h3 class="m-0">Confirmed (1)</h3>
+      </div>
+      <div class="confirmed_list">
+        <div *ngFor="let item of confirmed_receipt_list" class="boxes">
+          <div class="book_detail">
+            <h4 class="m-0">{{item.book_name}}</h4>
+            <p class="m-0">{{item.units}} units confirmed</p>
+          </div>
+          <div class="status"><ion-icon src="/assets/icon/confirm-tick-green.svg"></ion-icon>{{item.status}}</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="save_btn">
+    <ion-button fill="clear">Complete Receipt Process</ion-button>
+  </div>
+
+</ion-content>

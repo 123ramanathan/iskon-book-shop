@@ -44,7 +44,8 @@ export class SalesPage implements OnInit {
     },
     {
       icon: '/assets/icon/stock-receipt.svg',
-      label: 'Stock Receipt'
+      label: 'Stock Receipt',
+      route: '/stock-receipt'
     },
     {
       icon: '/assets/icon/close-shift.svg',

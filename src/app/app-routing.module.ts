@@ -29,7 +29,11 @@ const routes: Routes = [
   {
     path: 'stock-reconciliation',
     loadChildren: () => import('./pages/stock-reconciliation/stock-reconciliation.module').then( m => m.StockReconciliationPageModule)
+  },  {
+    path: 'stock-receipt',
+    loadChildren: () => import('./pages/stock-receipt/stock-receipt.module').then( m => m.StockReceiptPageModule)
   }
+
 ];
 @NgModule({
   imports: [
