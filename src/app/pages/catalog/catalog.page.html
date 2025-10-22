@@ -49,7 +49,7 @@
           <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
         </svg>
   
-        <button
+        <!-- <button
           type="button"
           role="combobox"
           aria-controls="radix-:r0:"
@@ -75,7 +75,19 @@
           >
             <path d="m6 9 6 6 6-6"></path>
           </svg>
-        </button>
+        </button> -->
+        <div class="select-wrapper">
+          <select
+            class="select"
+            name="categories"
+            (change)="categoryChange($event)"
+          >
+            <option *ngFor="let item of categories" [value]="item.value">
+              {{ item.name }}
+            </option>
+          </select>
+        </div>
+        
       </div>
     </section>
 

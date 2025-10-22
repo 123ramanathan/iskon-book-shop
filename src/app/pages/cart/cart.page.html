@@ -80,26 +80,6 @@
               </div>
             </div>
 
-            <div class="cart-item__discount">
-              <span class="cart-item__label">Discount:</span>
-              <button class="cart-item__discount-type">
-                <app-dropdown
-                  [options]="['%', '₹']"
-                  defaultLabel="%"
-                  (selectionChange)="onSelect($event)"
-                >
-                </app-dropdown>
-              </button>
-              <input
-                type="number"
-                class="cart-item__discount-input"
-                placeholder="0"
-                min="0"
-                [max]="item.price * item.qty"
-                [(ngModel)]="discount"
-              />
-            </div>
-
             <div class="cart-item__subtotal">
               <span class="cart-item__label">Subtotal:</span>
               <span class="cart-item__value"
