@@ -1,13 +1,117 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>reports</ion-title>
+    <ion-title>Reports</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">reports</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" style="--background: #f6f7f9;">
+
+  <div class="main_section">
+
+    <div class="header_content">
+      <h2 class="m-0">Reports & Analytics</h2>
+      <p class="m-0">View your store performance</p>
+    </div>
+
+    <div class="today_summary">
+      <h3 class="m-0">Today's Summary</h3>
+      <div class="section_2">
+        <div class="sec_1">
+          <p class="m-0">24</p>
+          <p class="m-0">Total Sales</p>
+        </div>
+        <div class="sec_2">
+          <p class="m-0">₹12,450</p>
+          <p class="m-0">Revenue</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment_methods">
+      <h3 class="m-0">Payment Methods</h3>
+      <div class="types_sec">
+        <div class="secs">
+          <p class="m-0 type">Cash</p>
+          <div class="cost_sec">
+            <p class="m-0 transaction">12 transactions</p>
+            <p class="m-0 amount">₹5,200</p>
+          </div>
+        </div>
+        <div class="secs">
+          <p class="m-0 type">UPI</p>
+          <div class="cost_sec">
+            <p class="m-0 transaction">8 transactions</p>
+            <p class="m-0 amount">₹4,850</p>
+          </div>
+        </div>
+        <div class="secs">
+          <p class="m-0 type">Card</p>
+          <div class="cost_sec">
+            <p class="m-0 transaction">4 transactions</p>
+            <p class="m-0 amount">₹2,400</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="top_selling_books">
+      <h3 class="m-0">Top Selling Books</h3>
+      <div class="books_sec">
+        <div class="book_list">
+          <div class="sec_1">
+            <p class="m-0 book_name">Atomic Habits</p>
+            <p class="m-0 sold">8 units sold</p>
+          </div>
+          <div class="sec_2">
+            <p class="m-0 amount">₹4,792</p>
+          </div>
+        </div>
+        <div class="book_list">
+          <div class="sec_1">
+            <p class="m-0 book_name">Harry Potter</p>
+            <p class="m-0 sold">6 units sold</p>
+          </div>
+          <div class="sec_2">
+            <p class="m-0 amount">₹2,994</p>
+          </div>
+        </div>
+        <div class="book_list">
+          <div class="sec_1">
+            <p class="m-0 book_name">Sapiens</p>
+            <p class="m-0 sold">4 units sold</p>
+          </div>
+          <div class="sec_2">
+            <p class="m-0 amount">₹2,796</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="this_week">
+      <h3 class="m-0">This Week</h3>
+
+      <div class="types">
+        <div class="sec_1">
+          <div class="sales_icon">
+            <ion-icon src="/assets/icon/report-sales.svg"></ion-icon>
+          </div>
+          <div>
+            <p class="m-0 sec1_p1">156</p>
+            <p class="m-0 sec1_p2">Sales</p>
+          </div>
+        </div>
+        <div class="sec_2">
+          <div class="revenue_icon">
+            <ion-icon src="/assets/icon/revenue.svg"></ion-icon>
+          </div>
+          <div>
+            <p class="m-0 sec2_p1">₹78,540</p>
+            <p class="m-0 sec2_p2">Revenue</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </ion-content>

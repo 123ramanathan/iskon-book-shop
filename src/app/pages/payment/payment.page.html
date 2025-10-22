@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Payment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" style="--background: #f6f7f9;">
+
+  <div class="main_section">
+
+    <div class="total_amount">
+      <p class="m-0">Total Amount</p>
+      <p class="m-0">₹531.00</p>
+    </div>
+
+    <div class="select_payment_method">
+      <label>Select Payment Mode</label>
+      <div class="payment_list">
+        <div *ngFor="let item of payment_types; let i = index" class="boxes" (click)="selected_payment(item)" [class.selected_payment]="selected_payment_type == item.name">
+          <ion-icon [src]="item.icon"></ion-icon>
+          <p class="m-0">{{item.name}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment_fields" *ngIf="selected_payment_type == 'Cash'">
+      <label>Cash Received</label>
+      <input placeholder="Enter Amount" type="number">
+    </div>
+
+    <div *ngIf="selected_payment_type == 'Split'">
+      <div class="payment_fields first_payment">
+        <div class="type_input">
+          <label>First Payment Method</label>
+          <input placeholder="Select Type" type="number">
+        </div>
+        <div class="amount">
+          <label>Amount</label>
+          <input placeholder="Enter Amount" type="number">
+        </div>
+      </div>
+  
+      <div class="payment_fields">
+        <div class="type_input">
+          <label>Second Payment Method</label>
+          <input placeholder="Select Type" type="number">
+        </div>
+        <div class="amount">
+          <label>Amount</label>
+          <input placeholder="Enter Amount" type="number">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="save_btn">
+    <ion-button fill="clear" class="complete">Complete Payment</ion-button>
+    <ion-button fill="clear" class="cart">Back to Cart</ion-button>
+  </div>
+
+</ion-content>
