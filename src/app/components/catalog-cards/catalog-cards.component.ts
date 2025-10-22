@@ -14,26 +14,11 @@ export class CatalogCardsComponent  implements OnInit {
 
   ngOnInit() {}
 
-  update_qty(item:any,type:string){
-      if(type === "inc"){
-        if((item['qty'] ?? 0) < item.stock){
-          item['qty'] = item['qty'] > 0 ? item['qty'] + 1 : 2
-        }
-      }else{
-        item['qty'] = item['qty'] > 0 ? item['qty'] - 1 : 1
-      }
-  }
+  
 
   
-  async add_to_cart(item:any) {
-    const obj = {
-      book_name: item.name,
-      qty: item.qty
-    };
-    
-    const value = await this.db.add_to_cart(obj);
-    console.log(value,"value")
-
+  async add_to_cart(item:any) {    
+    const value = await this.db.add_to_cart(item);
     item['qty'] = 1;
   }
 

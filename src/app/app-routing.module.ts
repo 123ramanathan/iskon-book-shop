@@ -29,12 +29,20 @@ const routes: Routes = [
   {
     path: 'stock-reconciliation',
     loadChildren: () => import('./pages/stock-reconciliation/stock-reconciliation.module').then( m => m.StockReconciliationPageModule)
-  },  {
+  },
+  {
     path: 'stock-receipt',
     loadChildren: () => import('./pages/stock-receipt/stock-receipt.module').then( m => m.StockReceiptPageModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+  },
+  {
+    path: 'payment',
+    loadChildren: () => import('./pages/payment/payment.module').then( m => m.PaymentPageModule)
   }
-
-];
+]
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
