@@ -1,5 +1,8 @@
 .cart {
   background: rgb(246 247 249);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   &__container {
     padding: 1rem;
@@ -127,30 +130,6 @@
       }
     }
 
-    &__discount {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      &-type {
-        width: 3.5rem;
-        height: 2rem;
-        background-color: #fff;
-        border: 1px solid var(--border-color);
-        border-radius: 0.375rem;
-        font-size: 0.75rem;
-        cursor: pointer;
-      }
-
-      &-input {
-        width: 6rem;
-        height: 2rem;
-        border: 1px solid var(--border-color);
-        border-radius: 0.375rem;
-        padding: 0 0.5rem;
-        font-size: 0.875rem;
-      }
-    }
 
     &__subtotal {
       display: flex;
@@ -172,3 +151,80 @@
     }
   }
 }
+
+.cart-summary {
+    height: 100%;
+    flex: 1;
+    border-top: 1px solid var(--border-color);
+    background-color: #fff;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.75rem;
+  
+    &__details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    &__row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem; // text-sm
+    }
+  
+    &__label {
+      color: var(--muted-foreground);
+    }
+  
+    &__value {
+      font-weight: 500;
+      color: var(--foreground);
+    }
+  
+    &__total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.5rem;
+      font-size: 1.125rem; // text-lg
+      font-weight: 700;
+      color: var(--foreground);
+    }
+  
+    &__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      height: 2.75rem; // h-11
+      padding: 0 2rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--primary-foreground);
+      background-color: var(--primary);
+      transition: background-color 0.2s ease, transform 0.1s ease;
+  
+      &:hover {
+        background-color: color-mix(in srgb, var(--primary) 90%, black 10%);
+      }
+  
+      &:focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+      }
+  
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
+  

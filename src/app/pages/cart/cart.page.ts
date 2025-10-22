@@ -9,11 +9,13 @@ import { Db } from 'src/app/service/db';
 })
 export class CartPage implements OnInit {
   discount:any;
-  subtotal:any
+  subtotal:any;
+  tax:any;
   constructor(public db:Db) { }
 
   ngOnInit() {
     this.db.get_cart_items();
+    
   }
 
 
@@ -25,6 +27,10 @@ export class CartPage implements OnInit {
 
   onSelect(value: string) {
     console.log('Selected:', value);
+  }
+
+  tax_calc() {
+    
   }
   
 

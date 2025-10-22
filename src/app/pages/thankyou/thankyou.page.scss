@@ -1,0 +1,111 @@
+// 🎨 Theme variables — use your purple/black palette
+$color-primary-foreground: #ffffff;
+$color-success: #22c55e;
+$color-card-foreground: #f8fafc;
+$color-muted-foreground: #a1a1aa;
+
+.payment-success {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background: transparent;
+  color: $color-card-foreground;
+
+  &__icon {
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background-color: $color-success;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+      width: 3rem;
+      height: 3rem;
+      color: #fff;
+    }
+  }
+
+  &__header {
+    margin-bottom: 1rem;
+
+    &__title,
+    &__subtitle {
+      display: block;
+    }
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 0.25rem;
+  }
+
+  &__subtitle {
+    color: #000;
+    font-size: 0.95rem;
+  }
+
+  &__details {
+    background: var(--card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+
+    .details-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .label {
+        color: $color-muted-foreground;
+      }
+
+      .value {
+        font-weight: 600;
+        color: #000;
+        &.mode {
+          color: #000;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+      height: 2.75rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+
+      &.btn-primary {
+        background: var(--primary-color);
+        color: $color-primary-foreground;
+        border: none;
+      }
+    }
+  }
+}

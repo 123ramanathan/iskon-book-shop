@@ -21,6 +21,17 @@ export class CatalogPage implements OnInit {
     }
   ]
 
+  categories = [
+    {name: "All Categories", value: "all"},
+    {name: "Classic Fiction", value: "classic fiction"},
+    {name: "Dystopian Fiction", value: "dystopian fiction"},
+    {name: "Romance", value: "romance"},
+    {name: "Fantasy", value: "fantasy"},
+    {name: "Self Help", value: "self help"},
+    {name: "Fiction", value: "fiction"},
+    {name: "Non-fiction", value: "non-fiction"},
+  ]
+
   constructor(public db:Db) { }
 
   ngOnInit() {
@@ -51,6 +62,10 @@ export class CatalogPage implements OnInit {
     // this.filteredItems = this.items.filter((item) =>
     //   item.toLowerCase().includes(searchText)
     // );
+  }
+
+  categoryChange($event:any){
+    console.log($event,"eveent")
   }
 
   ngOnDestroy() {

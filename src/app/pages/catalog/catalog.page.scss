@@ -66,21 +66,18 @@ $line-height: 1.25rem;
     margin-top: .75rem;
 
     &__btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       width: 100%;
       height: $height;
       padding: $padding-y $padding-x;
       border-radius: .675rem;
-      border: 1px solid $border-color;
       background-color: $background;
-      font-size: $font-size;
-      line-height: $line-height;
+      font-size: 0.875rem;
+      line-height: 1.375rem;
       color: $text-color;
       outline: none;
       flex: 1 1 auto;
       cursor: pointer;
+      border: 1px solid var(--border-color);
 
       /* disabled */
       &:disabled,
@@ -89,38 +86,9 @@ $line-height: 1.25rem;
         opacity: $disabled-opacity;
       }
 
-      /* Focus ring */
-      &:focus,
-      &[aria-expanded="true"] {
-        outline: none;
-        /* two-layer ring to mimic tailwind focus:ring + ring-offset */
-        box-shadow: 0 0 0 2px $ring-color, 0 0 0 4px $ring-offset;
-      }
-
-      /* When the popover is open you might want a stronger border */
-    //   &[data-state="open"],
-    //   &[aria-expanded="true"] {
-    //     // border-color: darken($input-border, 6%);
-    //   }
-
-      > span {
-        display: -webkit-box; /* line-clamp fallback */
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: normal;
-        pointer-events: none; /* preserve original behavior */
-        color: $muted-foreground;
-        // flex: 1 1 auto;
-      }
-
-      svg {
-        width: 1rem; /* h-4 w-4 */
-        height: 1rem;
-        opacity: $icon-opacity;
-        flex: 0 0 auto;
-        margin-left: 0.5rem;
+      option{
+        font-size: 0.875rem;
+      line-height: 1.375rem;
       }
     }
   }
