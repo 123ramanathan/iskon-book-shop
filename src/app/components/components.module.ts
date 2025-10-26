@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common'; // Often imported for common dir
 import { IonicModule } from '@ionic/angular';
 import { CatalogCardsComponent } from './catalog-cards/catalog-cards.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { HeaderComponent } from './header/header.component';
 import { ModalPopupComponent } from './modal-popup/modal-popup.component';
 
 @NgModule({
   declarations: [
     CatalogCardsComponent,
     DropdownComponent,
+    HeaderComponent,
     ModalPopupComponent
     
   ],
@@ -19,6 +21,7 @@ import { ModalPopupComponent } from './modal-popup/modal-popup.component';
   exports: [
     CatalogCardsComponent, // Exporting to be used in other modules
     DropdownComponent,
+    HeaderComponent,
     ModalPopupComponent
   ]
 })
