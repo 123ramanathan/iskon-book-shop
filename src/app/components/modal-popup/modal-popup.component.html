@@ -1,16 +1,16 @@
-<header>
-  <!-- <toolbar color="danger"> -->
-    <h6>{{headerText}}</h6>
-  <!-- </toolbar> -->
-</header>
+<div class="confirm-modal">
+  <header class="confirm-header">
+    <h6>{{ headerText }}</h6>
+  </header>
 
-<div class="ion-padding">
-  <div class="text-center">
-    <p>{{title}}</p>
-  </div>
+  <div class="confirm-content ion-padding">
+    <div class="confirm-message text-center">
+      <p>{{ title }}</p>
+    </div>
 
-  <div class="ion-text-center ion-margin-top">
-    <button color="danger" (click)="confirm()">Yes</button>
-    <button color="medium" (click)="cancel()">No</button>
+    <div class="confirm-actions ion-text-center ion-margin-top">
+      <button class="btn btn-danger" (click)="confirm()">Yes</button>
+      <button class="btn btn-secondary" (click)="cancel()">No</button>
+    </div>
   </div>
 </div>
