@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -7,7 +8,9 @@ export class Db {
   cartItems:any[] = [];
   subtotal:any;
   tax:any;
-  constructor(){}
+  private domain = "https://iskcon.m.frappe.cloud"
+  private baseUrl:string = "/api/method/iskcon.iskcon.mobile_app_api."
+  constructor(private http:HttpClient){}
 
   formatCurrency(amount:number, currency = "INR", locale = "en-IN") {
     if (isNaN(amount)) return "Invalid number";
@@ -80,5 +83,78 @@ export class Db {
     }else{
       item['qty'] = item['qty'] > 0 ? item['qty'] - 1 : 1
     }
-}
+  }
+
+  callApi<T>(
+    endpoint: string,
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    body?: any,
+    params?: any,
+    headers?: any
+  ): Observable<T> {
+    const url = `${this.domain}${endpoint}`;
+
+    // Default headers
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      ...headers,
+    });
+
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      httpHeaders = httpHeaders.set('Authorization', `${storedToken}`);
+    }
+
+    const httpParams = new HttpParams({ fromObject: params || {} });
+
+    // Dynamic API method handling
+    switch (method) {
+      case 'GET':
+        return this.http.get<T>(url, { headers: httpHeaders, params: httpParams });
+      case 'POST':
+        return this.http.post<T>(url, body, { headers: httpHeaders, params: httpParams });
+      case 'PUT':
+        return this.http.put<T>(url, body, { headers: httpHeaders, params: httpParams });
+      case 'DELETE':
+        return this.http.delete<T>(url, { headers: httpHeaders, params: httpParams });
+      default:
+        throw new Error(`Unsupported method: ${method}`);
+    }
+  }
+
+  login(params:any){
+    const endpoint = "/api/method/iskcon.iskcon.mobile_app_login_page.mobile_login_verification";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  pos_opening_entry(params:any){
+    const endpoint = this.baseUrl + "pos_opening_entry";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  pos_closing_entry(params:any){
+    const endpoint = this.baseUrl + "pos_opening_entry";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  sales_items_with_filters(params:any){
+    const endpoint = this.baseUrl + "get_items";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  payments_invoice(params:any){
+    const endpoint = "/api/method/iskcon.iskcon.iskcon.mobile_app_payments.create_pos_invoice";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  store_details(params:any){
+    const endpoint = "/api/method/iskcon.iskcon.mobile_app_header.header_content";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  sales_details(params:any){
+    const endpoint = "/api/method/iskcon.iskcon.mobile_app_sales_detail_page.sales_details";
+    return this.callApi(endpoint,"POST",params)
+  }
+
 }
