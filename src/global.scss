@@ -206,3 +206,18 @@ ion-select {
   }
   
 
+.sc-ion-input-md-h{
+  --highlight-color-focused: unset !important;
+}
+
+.has-focus.ion-valid.sc-ion-input-md-h, .ion-touched.ion-invalid.sc-ion-input-md-h{
+  --border-color: unset !important;
+}
+
+.ion-touched.ion-invalid.sc-ion-input-md-h{
+  --highlight-color: unset !important;
+}
+
+.ion-valid.sc-ion-input-md-h{
+  --highlight-color: unset !important;
+}

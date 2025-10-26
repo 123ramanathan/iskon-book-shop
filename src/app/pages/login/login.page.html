@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true" class="login-bg">
+  <div class="login-wrap">
+    <div class="brand">ISKON</div>
+
+    <h2 class="title">Login to Your Account</h2>
+
+    <form [formGroup]="loginForm" class="form-card">
+
+      <div class="form-item">
+        <ion-icon class="person_icon" name="person-outline"></ion-icon>
+        <ion-input
+          formControlName="username"
+          type="email"
+          inputmode="email"
+          placeholder="Email address">
+        </ion-input>
+      </div>
+      <div class="error" *ngIf="(f.username.touched || submitted) && f.username.errors">
+        <div *ngIf="f.username.errors.required">Email is required.</div>
+        <div *ngIf="f.username.errors.email">Enter a valid email address.</div>
+      </div>
+
+      <div class="form-item">
+        <ion-icon class="password_icon" [name]="showPassword ? 'lock-open-outline' : 'lock-closed-outline'"></ion-icon>
+        <ion-input
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Password">
+        </ion-input>
+        <ion-button fill="clear" class="eye-btn" type="button" (click)="togglePassword()" aria-label="Toggle password">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="error" *ngIf="(f.password.touched || submitted) && f.password.errors">
+        <div *ngIf="f.password.errors.required">Password is required.</div>
+        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters.</div>
+      </div>
+
+      <ion-button expand="block" class="submit-btn" type="submit" (click)="onSubmit()">Sign In</ion-button>
+    </form>
+  </div>
+</ion-content>
