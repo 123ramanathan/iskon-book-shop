@@ -21,7 +21,7 @@
                   {{ db.formatCurrency(item.price) }} each
                 </p>
               </div>
-              <button class="cart-item__delete" (click)="remove_item(item)">
+              <button class="cart-item__delete" (click)="openDeleteModal(item)">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="icon"
@@ -94,19 +94,19 @@
     <section class="cart-summary">
       <!-- <div class="cart-summary"> -->
         <div class="cart-summary__details">
-          <div class="cart-summary__row">
+          <!-- <div class="cart-summary__row">
             <span class="cart-summary__label">Subtotal</span>
             <span class="cart-summary__value">{{ db.formatCurrency(db.subtotal)}}</span>
-          </div>
+          </div> -->
       
-          <div class="cart-summary__row">
+          <!-- <div class="cart-summary__row">
             <span class="cart-summary__label">Tax (18%)</span>
             <span class="cart-summary__value">{{ db.formatCurrency(db.tax)}}</span>
-          </div>
+          </div> -->
       
           <div class="cart-summary__total">
             <span class="cart-summary__total-label">Total</span>
-            <span class="cart-summary__total-value">{{ db.formatCurrency(db.subtotal + db.tax)}}</span>
+            <span class="cart-summary__total-value">{{ db.formatCurrency(db.subtotal)}}</span>
           </div>
         </div>
       
