@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Db } from 'src/app/service/db';
 
 @Component({
   selector: 'app-sales',
@@ -8,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalesPage implements OnInit {
 
-  constructor() { }
+  constructor(public db: Db, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.getDashboardDetails();
   }
 
   report_list = [
@@ -52,5 +58,25 @@ export class SalesPage implements OnInit {
       label: 'Close Shift'
     }
   ]
+
+  getDashboardDetails(){
+    let data = {
+      pos_id: "POS-00001"
+    }
+    this.db.sales_details(data).subscribe((res:any)=>{
+      console.log(res, "sales details");
+    });
+  }
+
+  openingPosEntry(){
+    // let data = {
+    //   user_id: 'umarbenz@gmail.com'
+    // }
+    // this.db.pos_opening_entry(data).subscribe((res:any)=>{
+    //   console.log(res, "pos opening entry");
+    //   this.router.navigateByUrl('/catalog');
+    // });
+    this.router.navigateByUrl('/catalog');
+  }
 
 }

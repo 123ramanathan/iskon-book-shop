@@ -107,3 +107,17 @@ ion-icon {
         font-size: 40px;
     }
 }
+
+.logo_icon {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    justify-content: center;
+    margin-bottom: 25px;
+
+    img {
+        width: 150px;
+        object-fit: cover;
+
+    }
+}

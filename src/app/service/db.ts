@@ -8,6 +8,7 @@ export class Db {
   cartItems:any[] = [];
   subtotal:any;
   tax:any;
+  path:any;
   private domain = "https://iskcon.m.frappe.cloud"
   private baseUrl:string = "/api/method/iskcon.iskcon.mobile_app_api."
   constructor(private http:HttpClient){}
@@ -133,7 +134,7 @@ export class Db {
   }
 
   pos_closing_entry(params:any){
-    const endpoint = this.baseUrl + "pos_opening_entry";
+    const endpoint = this.baseUrl + "pos_closing_entry";
     return this.callApi(endpoint,"POST",params)
   }
 
@@ -155,6 +156,20 @@ export class Db {
   sales_details(params:any){
     const endpoint = "/api/method/iskcon.iskcon.mobile_app_sales_detail_page.sales_details";
     return this.callApi(endpoint,"POST",params)
+  }
+
+  get_stock_reconcilation(params:any){
+    const endpoint = "/api/method/iskcon.iskcon.mobile_app_stock_reconcilation.get_item_details";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  headerDetails(){
+    let data = {
+      user_id: 'umarbenz@gmail.com'
+    }
+    this.store_details(data).subscribe((res:any)=>{
+      console.log(res, "store details");
+    });
   }
 
 }

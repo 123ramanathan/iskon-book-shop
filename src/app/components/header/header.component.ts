@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -10,12 +11,17 @@ import { NavController } from '@ionic/angular';
 export class HeaderComponent  implements OnInit {
   @Input() home: any;
   @Input() title: any;
-  constructor(private navCntrl: NavController) { }
+  @Input() backRoute: any;
+  constructor(private navCntrl: NavController, private router: Router) { }
 
   ngOnInit() {}
 
   back_route(){
-    this.navCntrl.back();
+    if(this.backRoute){
+      this.router.navigateByUrl(this.backRoute);
+    }else{
+      this.navCntrl.back();
+    }
   }
 
 }

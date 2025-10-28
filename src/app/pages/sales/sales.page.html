@@ -2,7 +2,7 @@
 
 <ion-content [fullscreen]="true" style="--background: #f6f7f9;">
   <div class="main_section">
-    <ion-button fill="clear" routerLink="/catalog"><ion-icon slot="start" name="cart-outline"></ion-icon>Start New Sale</ion-button>
+    <ion-button fill="clear" (click)="openingPosEntry()"><ion-icon slot="start" name="cart-outline"></ion-icon>Start New Sale</ion-button>
 
     <div class="sales_report">
       <div *ngFor="let item of report_list" class="boxes">

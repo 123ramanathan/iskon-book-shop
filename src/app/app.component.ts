@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { StatusBar, Style } from '@capacitor/status-bar';
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
+import { NavigationEnd, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { App } from '@capacitor/app';
+import { Db } from './service/db';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +13,18 @@ import { Platform } from '@ionic/angular';
   standalone: false,
 })
 export class AppComponent {
-  constructor(private platform: Platform) {}
+  constructor(
+    private platform: Platform, 
+    private router: Router, 
+    private alertController: AlertController, 
+    public db: Db,
+    private navCtrl: NavController
+  ) {}
 
   ngOnInit(){
+
+    this.db.headerDetails();
+
     this.platform.ready().then(async () => {
       try {
         // Show status bar
@@ -20,14 +33,49 @@ export class AppComponent {
         // Change background color (Hex format)
         await StatusBar.setBackgroundColor({ color: '#22295e' }); // Ionic primary blue
 
-        // Change text/icons color (LIGHT = white icons, DARK = dark icons)
-        await StatusBar.setStyle({ style: Style.Light }); 
-
         await StatusBar.setOverlaysWebView({ overlay: false });
         // or: Style.Dark
+
       } catch (err) {
         console.log('StatusBar error:', err);
       }
     });
+
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      if (this.router.url === '/login') { // Check if on login page
+        this.showExitConfirmation();
+      }else{
+        this.navCtrl.back();
+      }
+    });
+
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.db.path = event.url;
+        console.log('Current URL:', this.db.path);
+      }
+    });
+  }
+
+  async showExitConfirmation() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Exit',
+      message: 'Do you really want to exit the app?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            App.exitApp();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Db } from 'src/app/service/db';
 
 @Component({
   selector: 'app-stock-reconciliation',
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockReconciliationPage implements OnInit {
 
-  constructor() { }
+  constructor(public db: Db) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.getStocksReconcilation();
   }
 
   conciliation_list = [
@@ -69,5 +74,14 @@ export class StockReconciliationPage implements OnInit {
       physical_count: 0
     }
   ]
+
+  getStocksReconcilation(){
+    let data = {
+      pos_profile: ''
+    }
+    this.db.get_stock_reconcilation(data).subscribe((res:any)=>{
+      console.log(res, "stock reconciliation");
+    });
+  }
 
 }
