@@ -55,7 +55,8 @@ export class SalesPage implements OnInit {
     },
     {
       icon: '/assets/icon/close-shift.svg',
-      label: 'Close Shift'
+      label: 'Close Shift',
+      route: '/close-shift'
     }
   ]
 
