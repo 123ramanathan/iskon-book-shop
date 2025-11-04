@@ -4,12 +4,33 @@
   <div class="main_section">
     <ion-button fill="clear" (click)="openingPosEntry()"><ion-icon slot="start" name="cart-outline"></ion-icon>Start New Sale</ion-button>
 
-    <div class="sales_report">
-      <div *ngFor="let item of report_list" class="boxes">
-        <ion-icon [src]="item.icon"></ion-icon>
+    <div class="sales_report" *ngIf="report_details">
+      <div class="boxes">
+        <ion-icon src="/assets/icon/today-sales.svg"></ion-icon>
         <div>
-          <h5 class="m-0 value">{{item.value}}</h5>
-          <p class="m-0 label">{{item.label}}</p>
+          <h5 class="m-0 value">{{report_details.overall_count}}</h5>
+          <p class="m-0 label">Total Sales</p>
+        </div>
+      </div>
+      <div class="boxes">
+        <ion-icon src="/assets/icon/revenue.svg"></ion-icon>
+        <div>
+          <h5 class="m-0 value">₹ {{report_details.total_revenue}}</h5>
+          <p class="m-0 label">Revenue</p>
+        </div>
+      </div>
+      <div class="boxes">
+        <ion-icon src="/assets/icon/low-stock.svg"></ion-icon>
+        <div>
+          <h5 class="m-0 value">{{report_details.low_stock_items_count}}</h5>
+          <p class="m-0 label">Low Stock Items</p>
+        </div>
+      </div>
+      <div class="boxes">
+        <ion-icon src="/assets/icon/week-sales.svg"></ion-icon>
+        <div>
+          <h5 class="m-0 value">156</h5>
+          <p class="m-0 label">This Week</p>
         </div>
       </div>
     </div>

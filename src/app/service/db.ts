@@ -11,6 +11,8 @@ export class Db {
   path:any;
   private domain = "https://iskcon.m.frappe.cloud"
   private baseUrl:string = "/api/method/iskcon.iskcon.mobile_app_api."
+
+  header_content:any = {};
   constructor(private http:HttpClient){}
 
   formatCurrency(amount:number, currency = "INR", locale = "en-IN") {
@@ -129,12 +131,12 @@ export class Db {
   }
 
   pos_opening_entry(params:any){
-    const endpoint = this.baseUrl + "pos_opening_entry";
+    const endpoint = "/api/method/iskcon.iskcon.mobile_app_pos.pos_opening_entry";
     return this.callApi(endpoint,"POST",params)
   }
 
   pos_closing_entry(params:any){
-    const endpoint = this.baseUrl + "pos_closing_entry";
+    const endpoint = "/api/method/iskcon.iskcon.mobile_app_pos.pos_closing_entry";
     return this.callApi(endpoint,"POST",params)
   }
 
@@ -163,12 +165,26 @@ export class Db {
     return this.callApi(endpoint,"POST",params)
   }
 
+  create_stock_reconciliation(params:any){
+    const endpoint = "/api/method/iskcon.iskcon.mobile_app_stock_reconcilation.create_stock_reconciliation";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  get_orders(params:any){
+    const endpoint = "/api/method/iskcon.iskcon.mobile_app_order_list.get_orders";
+    return this.callApi(endpoint,"POST",params)
+  }
+
   headerDetails(){
     let data = {
-      user_id: 'umarbenz@gmail.com'
+      user: 'umarbenz@gmail.com'
     }
     this.store_details(data).subscribe((res:any)=>{
-      console.log(res, "store details");
+      if(res && res.status == 'Success' && res.message){
+        this.header_content = res.message;
+      }else{
+        this.header_content = {};
+      }
     });
   }
 

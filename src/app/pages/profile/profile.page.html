@@ -7,11 +7,11 @@
       <div class="profile-circle">
         <ion-icon name="person" size="large"></ion-icon>
       </div>
-      <div class="user-info">
-        <h2>John Doe</h2>
+      <div class="user-info" *ngIf="db.header_content">
+        <h2>{{db.header_content.username}}</h2>
         <p class="user-id">ID: EMP123456</p>
         <div class="details">
-          <div><ion-icon name="business"></ion-icon> WH-001 | <ion-icon name="time"></ion-icon> Morning</div>
+          <div><ion-icon name="business"></ion-icon> {{db.header_content.store_name}} | <ion-icon name="time"></ion-icon> {{db.header_content.shift_type ? db.header_content.shift_type : 'Morning'}}</div>
         </div>
       </div>
     </div>

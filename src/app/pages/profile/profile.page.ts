@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Db } from 'src/app/service/db';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +11,13 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private alertController: AlertController, private router: Router) { }
+  constructor(private alertController: AlertController, private router: Router, public db: Db) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.db.headerDetails();
   }
 
   async confirmLogout() {

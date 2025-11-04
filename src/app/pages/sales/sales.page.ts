@@ -10,6 +10,7 @@ import { Db } from 'src/app/service/db';
 })
 export class SalesPage implements OnInit {
 
+  report_details: any = {};
   constructor(public db: Db, private router: Router) { }
 
   ngOnInit() {
@@ -62,22 +63,27 @@ export class SalesPage implements OnInit {
 
   getDashboardDetails(){
     let data = {
-      pos_id: "POS-00001"
+      pos_profile: "Test"
     }
     this.db.sales_details(data).subscribe((res:any)=>{
       console.log(res, "sales details");
+      if(res && res.status == "Success" && res.message){
+        this.report_details = res.message;
+      }else{
+        this.report_details = {};
+      }
     });
   }
 
   openingPosEntry(){
-    // let data = {
-    //   user_id: 'umarbenz@gmail.com'
-    // }
-    // this.db.pos_opening_entry(data).subscribe((res:any)=>{
-    //   console.log(res, "pos opening entry");
-    //   this.router.navigateByUrl('/catalog');
-    // });
-    this.router.navigateByUrl('/catalog');
+    let data = {
+      user: 'umarbenz@gmail.com'
+    }
+    this.db.pos_opening_entry(data).subscribe((res:any)=>{
+      console.log(res, "pos opening entry");
+      this.router.navigateByUrl('/catalog');
+    });
+    // this.router.navigateByUrl('/catalog');
   }
 
 }

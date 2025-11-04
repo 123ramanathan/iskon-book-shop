@@ -52,10 +52,14 @@ export class LoginPage implements OnInit {
       username: this.loginForm.value.username,
       password: this.loginForm.value.password,
     }
-    this.db.login(data).subscribe(res => {
+    this.db.login(data).subscribe((res: any) => {
       // console.log('Login response', res);
-      this.loginForm.reset();
-      this.router.navigateByUrl('/tabs/sales');
+      if(res && res.status == 'Success' && res.message){
+        let token = `token ${res.message.api_key}:${res.message.api_secret}`;
+        localStorage['token'] = token;
+        this.loginForm.reset();
+        this.router.navigateByUrl('/tabs/sales');
+      }
     })
   }
 

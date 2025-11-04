@@ -16,7 +16,7 @@ export class CloseShiftPage implements OnInit {
 
   closeShift(){
     let data = {
-      user_id: ""
+      user: "umarbenz@gmail.com"
     }
     this.db.pos_closing_entry(data).subscribe((res:any)=>{
       console.log(res, "close shift response");
