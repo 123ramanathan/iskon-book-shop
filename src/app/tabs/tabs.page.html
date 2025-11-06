@@ -11,10 +11,10 @@
       <ion-label>Stock</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="orders" href="/tabs/orders" [ngClass]="{'active': selectedTab === 'orders' || db.path.includes('/orders')}">
+    <!-- <ion-tab-button tab="orders" href="/tabs/orders" [ngClass]="{'active': selectedTab === 'orders' || db.path.includes('/orders')}">
       <ion-icon aria-hidden="true" [src]="(selectedTab == 'orders' || db.path.includes('/orders')) ? '/assets/tabs-icon/orders-active.svg' : '/assets/tabs-icon/orders.svg'"></ion-icon>
       <ion-label>Orders</ion-label>
-    </ion-tab-button>
+    </ion-tab-button> -->
 
     <ion-tab-button tab="reports" href="/tabs/reports" [ngClass]="{'active': selectedTab === 'reports' || db.path.includes('/reports')}">
       <ion-icon aria-hidden="true" [src]="(selectedTab == 'reports' || db.path.includes('/reports')) ? '/assets/tabs-icon/reports-active.svg' : '/assets/tabs-icon/reports.svg'"></ion-icon>
