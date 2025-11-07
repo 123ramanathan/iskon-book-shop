@@ -44,5 +44,17 @@ export class OrdersPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewWillEnter(){
+    this.getOrdersList();
+  }
+
+  getOrdersList(){
+    let data = {
+      pos_profile: 'Test'
+    }
+    this.db.get_orders(data).subscribe((res:any)=>{
+      console.log(res, "orders list response");
+    });
+  }
 
 }

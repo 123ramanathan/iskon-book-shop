@@ -16,17 +16,17 @@
       <div class="books_list">
         <div *ngFor="let item of conciliation_list" class="boxes">
           <div>
-            <h3 class="m-0 book_name">{{item.book_name}}</h3>
-            <p class="m-0 sub_title">{{item.sub_title}}</p>
+            <h3 class="m-0 book_name">{{item.item_name}}</h3>
+            <p class="m-0 sub_title">{{item.item_code}}</p>
           </div>
           <div class="cost_inputs">
             <div class="system_quantity">
               <label>System Quantity</label>
               <input type="number" readonly [(ngModel)]="item.system_quantity">
             </div>
-            <div class="system_quantity">
-              <label>System Quantity</label>
-              <input type="number" [(ngModel)]="item.physical_count">
+            <div class="physical_quantity">
+              <label>Physical Quantity</label>
+              <input type="number" [(ngModel)]="item.physical_qty">
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="save_btn">
-    <ion-button fill="clear"><ion-icon slot="start" name="save-outline"></ion-icon>Save & Submit Reconciliation</ion-button>
+    <ion-button fill="clear" (click)="saveReconciliation()"><ion-icon slot="start" name="save-outline"></ion-icon>Save & Submit Reconciliation</ion-button>
   </div>
 
 </ion-content>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Db } from 'src/app/service/db';
 
 @Component({
   selector: 'app-sales',
@@ -8,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalesPage implements OnInit {
 
-  constructor() { }
+  report_details: any = {};
+  constructor(public db: Db, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.getDashboardDetails();
   }
 
   report_list = [
@@ -49,8 +56,34 @@ export class SalesPage implements OnInit {
     },
     {
       icon: '/assets/icon/close-shift.svg',
-      label: 'Close Shift'
+      label: 'Close Shift',
+      route: '/close-shift'
     }
   ]
+
+  getDashboardDetails(){
+    let data = {
+      pos_profile: "Test"
+    }
+    this.db.sales_details(data).subscribe((res:any)=>{
+      console.log(res, "sales details");
+      if(res && res.status == "Success" && res.message){
+        this.report_details = res.message;
+      }else{
+        this.report_details = {};
+      }
+    });
+  }
+
+  openingPosEntry(){
+    let data = {
+      user: 'umarbenz@gmail.com'
+    }
+    this.db.pos_opening_entry(data).subscribe((res:any)=>{
+      console.log(res, "pos opening entry");
+      this.router.navigateByUrl('/catalog');
+    });
+    // this.router.navigateByUrl('/catalog');
+  }
 
 }

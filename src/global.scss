@@ -98,6 +98,9 @@ ion-button {
   --color: #fff;
   text-transform: capitalize;
   margin: 0px;
+  background-color: unset !important;
+  background: unset !important;
+  padding: unset !important;
 }
 
 ion-select {

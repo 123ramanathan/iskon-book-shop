@@ -1,9 +1,43 @@
 <app-header [home]="true"></app-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="profile-container">
+    <!-- User Profile Box -->
+    <div class="profile-box">
+      <div class="profile-circle">
+        <ion-icon name="person" size="large"></ion-icon>
+      </div>
+      <div class="user-info" *ngIf="db.header_content">
+        <h2>{{db.header_content.username}}</h2>
+        <p class="user-id">ID: EMP123456</p>
+        <div class="details">
+          <div><ion-icon name="business"></ion-icon> {{db.header_content.store_name}} | <ion-icon name="time"></ion-icon> {{db.header_content.shift_type ? db.header_content.shift_type : 'Morning'}}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <div class="menu-list">
+      <div class="menu-item" routerLink="/tabs/sales">
+        <ion-icon src="/assets/tabs-icon/sales.svg"></ion-icon>
+        <span>Sales</span>
+      </div>
+      <div class="menu-item" routerLink="/tabs/stock">
+        <ion-icon src="/assets/tabs-icon/stock.svg"></ion-icon>
+        <span>Stock</span>
+      </div>
+      <div class="menu-item" routerLink="/tabs/orders">
+        <ion-icon src="/assets/tabs-icon/orders.svg"></ion-icon>
+        <span>Orders</span>
+      </div>
+      <div class="menu-item" routerLink="/tabs/reports">
+        <ion-icon src="/assets/tabs-icon/reports.svg"></ion-icon>
+        <span>Reports</span>
+      </div>
+      <div class="menu-item logout" (click)="confirmLogout()">
+        <ion-icon name="log-out"></ion-icon>
+        <span>Logout</span>
+      </div>
+    </div>
+  </div>
 </ion-content>

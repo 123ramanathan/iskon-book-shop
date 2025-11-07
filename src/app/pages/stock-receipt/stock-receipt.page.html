@@ -1,8 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Stock Receipt</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [home]="false" [title]="'Stock Receipt'"></app-header>
 
 <ion-content [fullscreen]="true" style="--background: #f6f7f9;">
 
@@ -16,7 +12,7 @@
       </div>
 
       <div class="pending_list">
-        <div *ngFor="let item of pending_confirmation_list" class="boxes">
+        <!-- <div *ngFor="let item of pending_confirmation_list" class="boxes">
           <div class="sec1">
             <div>
               <h4 class="m-0 book_name">{{item.book_name}}</h4>
@@ -39,6 +35,26 @@
           <div class="sec4">
             <ion-button fill="clear"><ion-icon src="/assets/icon/confirm-tick.svg"></ion-icon>Confirm Receipt</ion-button>
           </div>
+        </div> -->
+
+        <div *ngFor="let item of stock_entry_list" class="stock_boxes">
+          <div class="boxes">
+            <div class="box_1">
+              <div class="sec_1">
+                <ion-icon src="/assets/icon/receipt-items-pending.svg"></ion-icon>
+              </div>
+              <div class="sec_2">
+                <p class="m-0 id">{{item.id}}</p>
+                <p class="m-0 from">From: {{item.from}}</p>
+                <p class="m-0 date">Date: {{item.date}}</p>
+                <div class="count_status">
+                  <p class="m-0 items">{{item.items_count}} Items</p>
+                  <p class="m-0 status">{{item.status}}</p>
+                </div>
+              </div>
+            </div>
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </div>
         </div>
       </div>
 
@@ -49,12 +65,31 @@
         <h3 class="m-0">Confirmed (1)</h3>
       </div>
       <div class="confirmed_list">
-        <div *ngFor="let item of confirmed_receipt_list" class="boxes">
+        <!-- <div *ngFor="let item of confirmed_receipt_list" class="boxes">
           <div class="book_detail">
             <h4 class="m-0">{{item.book_name}}</h4>
             <p class="m-0">{{item.units}} units confirmed</p>
           </div>
           <div class="status"><ion-icon src="/assets/icon/confirm-tick-green.svg"></ion-icon>{{item.status}}</div>
+        </div> -->
+        <div *ngFor="let item of stock_entry_list_completed" class="stock_boxes">
+          <div class="boxes">
+            <div class="box_1">
+              <div class="sec_1">
+                <ion-icon src="/assets/icon/receipt-items-completed.svg"></ion-icon>
+              </div>
+              <div class="sec_2">
+                <p class="m-0 id">{{item.id}}</p>
+                <p class="m-0 from">From: {{item.from}}</p>
+                <p class="m-0 date">Date: {{item.date}}</p>
+                <div class="count_status">
+                  <p class="m-0 items">{{item.items_count}} Items</p>
+                  <p class="m-0 status">{{item.status}}</p>
+                </div>
+              </div>
+            </div>
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </div>
         </div>
       </div>
 

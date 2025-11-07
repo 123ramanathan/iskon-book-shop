@@ -162,6 +162,88 @@
                     }
                 }
             }
+
+            .stock_boxes {
+                .boxes {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .box_1 {
+                        display: flex;
+                        gap: 10px;
+
+                        .sec_1 {
+                            ion-icon {
+                                padding: .5rem;
+                                background: #f59f0a1a;
+                                border-radius: 0.75rem;
+                                width: 1.25rem;
+                                height: 1.25rem;
+                            }
+                        }
+
+                        .sec_2 {
+                            .id {
+                                font-size: .875rem;
+                                line-height: 1.25rem;
+                                font-weight: 600;
+                            }
+
+                            .from {
+                                font-size: .75rem;
+                                line-height: 1rem;
+                                margin-top: .25rem;
+                                color: #6b7280;
+                            }
+
+                            .date {
+                                font-size: .75rem;
+                                line-height: 1rem;
+                                margin-top: .25rem;
+                                color: #6b7280;
+                            }
+
+                            .count_status {
+                                display: flex;
+                                align-items: center;
+                                gap: .5rem;
+                                margin-top: .5rem;
+
+                                .items {
+                                    font-weight: 600;
+                                    font-size: .75rem;
+                                    line-height: 1rem;
+                                    padding-top: .125rem;
+                                    padding-bottom: .125rem;
+                                    padding-left: .625rem;
+                                    padding-right: .625rem;
+                                    border-radius: 9999px;
+                                    align-items: center;
+                                    display: inline-flex;
+                                    border: 1px solid var(--border-col);
+                                }
+
+                                .status {
+                                    color: #f59f0a;
+                                    font-weight: 600;
+                                    font-size: .75rem;
+                                    line-height: 1rem;
+                                    padding-top: .125rem;
+                                    padding-bottom: .125rem;
+                                    padding-left: .625rem;
+                                    padding-right: .625rem;
+                                    background-color: #f59f0a1a;
+                                    border: 1px solid #f59f0a;
+                                    border-radius: 9999px;
+                                    align-items: center;
+                                    display: inline-flex;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -224,6 +306,88 @@
                     border-radius: 9999px;
                     display: flex;
                     align-items: center;
+                }
+            }
+
+            .stock_boxes {
+                .boxes {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .box_1 {
+                        display: flex;
+                        gap: 10px;
+
+                        .sec_1 {
+                            ion-icon {
+                                padding: .5rem;
+                                background: #16a2491a;
+                                border-radius: 0.75rem;
+                                width: 1.25rem;
+                                height: 1.25rem;
+                            }
+                        }
+
+                        .sec_2 {
+                            .id {
+                                font-size: .875rem;
+                                line-height: 1.25rem;
+                                font-weight: 600;
+                            }
+
+                            .from {
+                                font-size: .75rem;
+                                line-height: 1rem;
+                                margin-top: .25rem;
+                                color: #6b7280;
+                            }
+
+                            .date {
+                                font-size: .75rem;
+                                line-height: 1rem;
+                                margin-top: .25rem;
+                                color: #6b7280;
+                            }
+
+                            .count_status {
+                                display: flex;
+                                align-items: center;
+                                gap: .5rem;
+                                margin-top: .5rem;
+
+                                .items {
+                                    font-weight: 600;
+                                    font-size: .75rem;
+                                    line-height: 1rem;
+                                    padding-top: .125rem;
+                                    padding-bottom: .125rem;
+                                    padding-left: .625rem;
+                                    padding-right: .625rem;
+                                    border-radius: 9999px;
+                                    align-items: center;
+                                    display: inline-flex;
+                                    border: 1px solid var(--border-col);
+                                }
+
+                                .status {
+                                    color: #16a249;
+                                    font-weight: 600;
+                                    font-size: .75rem;
+                                    line-height: 1rem;
+                                    padding-top: .125rem;
+                                    padding-bottom: .125rem;
+                                    padding-left: .625rem;
+                                    padding-right: .625rem;
+                                    background-color: #16a2491a;
+                                    border: 1px solid #16a249;
+                                    border-radius: 9999px;
+                                    align-items: center;
+                                    display: inline-flex;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

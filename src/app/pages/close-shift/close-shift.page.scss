@@ -1,0 +1,166 @@
+.main_section {
+    padding: 1rem;
+
+    .sec_1 {
+        margin-bottom: 1rem;
+        padding: 1.5rem;
+        background: #fff;
+        box-shadow: 0 0 5px #ddd;
+        border-radius: 0.75rem;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        ion-icon {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            line-height: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: .875rem;
+            line-height: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .sec_2 {
+        margin-bottom: 1rem;
+        padding: 1.5rem;
+        background: #fff;
+        box-shadow: 0 0 5px #ddd;
+        border-radius: 0.75rem;
+
+        .opening_balance {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+            border-bottom: 1px solid var(--border-col);
+
+            p:nth-child(1) {
+                font-size: .875rem;
+                line-height: 1.25rem;
+                color: #6b7280;
+            }
+
+            p:nth-child(2) {
+                font-weight: 600;
+                font-size: 1.125rem;
+                line-height: 1.75rem;
+            }
+        }
+
+        .cash_sales {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+            border-bottom: 1px solid var(--border-col);
+
+            p:nth-child(1) {
+                font-size: .875rem;
+                line-height: 1.25rem;
+                color: #6b7280;
+            }
+
+            p:nth-child(2) {
+                font-weight: 600;
+                font-size: 1.125rem;
+                line-height: 1.75rem;
+                color: #16a249;
+            }
+        }
+
+        .expected_closing {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.75rem;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            padding-left: .75rem;
+            padding-right: .75rem;
+            background: #22295e0d;
+            border-radius: 0.75rem;
+
+            p:nth-child(1) {
+                font-weight: 500;
+                font-size: 1rem;
+                line-height: 1.5rem;
+            }
+
+            p:nth-child(2) {
+                color: #22295e;
+                font-weight: 700;
+                font-size: 1.25rem;
+                line-height: 1.75rem;
+            }
+        }
+    }
+
+    .sec_3 {
+        margin-bottom: 1rem;
+        padding: 1.5rem;
+        background: #fff;
+        box-shadow: 0 0 5px #ddd;
+        border-radius: 0.75rem;
+
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: .875rem;
+        }
+
+        input {
+            font-size: 1rem;
+            line-height: 1.5rem;
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+            padding-left: .75rem;
+            padding-right: .75rem;
+            background-color: #f6f7f9;
+            border-radius: calc(0.75rem - 2px);
+            border: 1px solid var(--border-col);
+            margin-top: .5rem;
+            height: 2.5rem;
+            width: 100%;
+        }
+
+        input:focus {
+            outline: 1px solid var(--primary-color);
+        }
+    }
+
+    .save_btn {
+        // padding: 0.75rem;
+        // border-top: 1px solid var(--border-col);
+        // background: #fff;
+
+        ion-button {
+            --padding-start: 2rem;
+            --padding-end: 2rem;
+            --padding-top: 0.75rem;
+            --padding-bottom: 0.75rem;
+            width: 100%;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 600;
+            --border-radius: calc(0.75rem - 2px);
+            height: 45px;
+
+            ion-icon {
+                margin-right: 1rem;
+            }
+        }
+    }
+}

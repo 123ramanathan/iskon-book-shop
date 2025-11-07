@@ -1,8 +1,12 @@
 <ion-content [fullscreen]="true" class="login-bg">
   <div class="login-wrap">
-    <div class="brand">ISKON</div>
+    <!-- <div class="brand">ISKON</div>
 
-    <h2 class="title">Login to Your Account</h2>
+    <h2 class="title">Login to Your Account</h2> -->
+
+    <div class="logo_icon">
+      <img src="/assets/icon/logo.png" alt="">
+    </div>
 
     <form [formGroup]="loginForm" class="form-card">
 
@@ -12,7 +16,7 @@
           formControlName="username"
           type="email"
           inputmode="email"
-          placeholder="Email address">
+          placeholder="Email address" (keydown.enter)="onSubmit()">
         </ion-input>
       </div>
       <div class="error" *ngIf="(f.username.touched || submitted) && f.username.errors">
@@ -25,7 +29,7 @@
         <ion-input
           [type]="showPassword ? 'text' : 'password'"
           formControlName="password"
-          placeholder="Password">
+          placeholder="Password" (keydown.enter)="onSubmit()">
         </ion-input>
         <ion-button fill="clear" class="eye-btn" type="button" (click)="togglePassword()" aria-label="Toggle password">
           <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>

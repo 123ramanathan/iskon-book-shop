@@ -1,23 +1,28 @@
 <ion-tabs>
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="sales" href="/tabs/sales">
-      <ion-icon aria-hidden="true" name="book-outline"></ion-icon>
+  <ion-tab-bar slot="bottom" *ngIf="db.path">
+    <ion-tab-button tab="sales" href="/tabs/sales" [ngClass]="{'active': selectedTab === 'sales' || db.path.includes('/sales')}">
+      <ion-icon aria-hidden="true" [src]="(selectedTab == 'sales' || db.path.includes('/sales')) ? '/assets/tabs-icon/sales-active.svg' : '/assets/tabs-icon/sales.svg'"></ion-icon>
       <ion-label>Sales</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="stock" href="/tabs/stock">
-      <ion-icon aria-hidden="true" name="heart-outline"></ion-icon>
+    <ion-tab-button tab="stock" href="/tabs/stock" [ngClass]="{'active': selectedTab === 'stock' || db.path.includes('/stock')}">
+      <ion-icon aria-hidden="true" [src]="(selectedTab == 'stock' || db.path.includes('/stock')) ? '/assets/tabs-icon/stock-active.svg' : '/assets/tabs-icon/stock.svg'"></ion-icon>
       <ion-label>Stock</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="reports" href="/tabs/reports">
-      <ion-icon aria-hidden="true" name="heart-outline"></ion-icon>
+    <!-- <ion-tab-button tab="orders" href="/tabs/orders" [ngClass]="{'active': selectedTab === 'orders' || db.path.includes('/orders')}">
+      <ion-icon aria-hidden="true" [src]="(selectedTab == 'orders' || db.path.includes('/orders')) ? '/assets/tabs-icon/orders-active.svg' : '/assets/tabs-icon/orders.svg'"></ion-icon>
+      <ion-label>Orders</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="reports" href="/tabs/reports" [ngClass]="{'active': selectedTab === 'reports' || db.path.includes('/reports')}">
+      <ion-icon aria-hidden="true" [src]="(selectedTab == 'reports' || db.path.includes('/reports')) ? '/assets/tabs-icon/reports-active.svg' : '/assets/tabs-icon/reports.svg'"></ion-icon>
       <ion-label>Reports</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="profile" href="/tabs/profile">
-      <ion-icon aria-hidden="true" name="person-outline"></ion-icon>
+    <ion-tab-button tab="profile" href="/tabs/profile" [ngClass]="{'active': selectedTab === 'profile' || db.path.includes('/profile')}">
+      <ion-icon aria-hidden="true" [src]="(selectedTab == 'profile' || db.path.includes('/profile')) ? '/assets/tabs-icon/profile-active.svg' : '/assets/tabs-icon/profile.svg'"></ion-icon>
       <ion-label>Profile</ion-label>
     </ion-tab-button>
   </ion-tab-bar>

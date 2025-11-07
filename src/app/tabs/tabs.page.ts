@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Db } from '../service/db';
 
 @Component({
   selector: 'app-tabs',
@@ -7,7 +8,8 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class TabsPage {
-
-  constructor() {}
+  selectedTab: any;
+  constructor(public db: Db) {
+  }
 
 }

@@ -36,4 +36,30 @@ export class StockReceiptPage implements OnInit {
     }
   ]
 
+  stock_entry_list = [
+    {
+      id: 'TRF-2025-001',
+      from: 'Main Warehouse',
+      date: '1/15/2025',
+      items_count: 3,
+      status: 'Pending'
+    },
+    {
+      id: 'TRF-2025-002',
+      from: 'Regional Distribution Center',
+      date: '1/14/2025',
+      items_count: 2,
+      status: 'Pending'
+    }
+  ]
+
+  stock_entry_list_completed = [
+    {
+      id: 'TRF-2024-150',
+      from: 'Main Warehouse',
+      date: '12/30/2024',
+      items_count: 5,
+      status: 'Completed'
+    }
+  ]
 }

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PaymentPageRoutingModule } from './payment-routing.module';
 
 import { PaymentPage } from './payment.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PaymentPageRoutingModule
+    PaymentPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [PaymentPage]
 })

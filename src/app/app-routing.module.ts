@@ -70,7 +70,11 @@ const routes: Routes = [
   {
     path: 'tabs/:id',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },  {
+    path: 'close-shift',
+    loadChildren: () => import('./pages/close-shift/close-shift.module').then( m => m.CloseShiftPageModule)
   },
+
 ]
 @NgModule({
   imports: [

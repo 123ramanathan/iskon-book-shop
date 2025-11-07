@@ -6,14 +6,14 @@
         <div class="home_icon">
           <ion-icon src="/assets/icon/header-icon.svg"></ion-icon>
         </div>
-        <div>
-          <h1 class="m-0">Downtown Books</h1>
+        <div *ngIf="db.header_content">
+          <h1 class="m-0">{{db.header_content ? db.header_content.store_name : 'Guest'}}</h1>
           <p class="m-0">POS Terminal</p>
         </div>
       </div>
-      <div class="sec_2">
-        <ion-icon name="person-outline"></ion-icon>
-        <p class="m-0">USER-001</p>
+      <div class="sec_2" *ngIf="db.header_content">
+        <ion-icon src="/assets/tabs-icon/profile.svg"></ion-icon>
+        <p class="m-0">{{db.header_content ? db.header_content.username : 'Guest'}}</p>
       </div>
     </div>
 
