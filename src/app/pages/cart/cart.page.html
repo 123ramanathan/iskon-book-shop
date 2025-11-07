@@ -87,7 +87,7 @@
       </div>
     </section>
 
-    <section class="cart-summary">
+    <section class="cart-summary" *ngIf="db.subtotal && db.subtotal > 0">
       <!-- <div class="cart-summary"> -->
         <div class="cart-summary__details">
           <!-- <div class="cart-summary__row">
@@ -112,5 +112,34 @@
       <!-- </div> -->
       
     </section>
+
+      <!-- 🛒 No Cart Items Found -->
+  <div class="empty-cart" *ngIf="!db.cartItems || db.cartItems.length === 0">
+    <!-- <img
+      src="assets/illustrations/empty-cart.svg"
+      alt="Empty Cart"
+      class="empty-cart__illustration"
+    /> -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400">
+      <path fill="#e0e0e0" d="M100 350h300a10 10 0 010 20H100a10 10 0 010-20z"/>
+      <path fill="#f5f5f5" d="M130 320h240l40-180H90l40 180z"/>
+      <circle cx="180" cy="360" r="20" fill="#9c27b0"/>
+      <circle cx="320" cy="360" r="20" fill="#9c27b0"/>
+      <path fill="#d1c4e9" d="M110 140h280v30H110z"/>
+      <path fill="#b39ddb" d="M130 180h240v10H130z"/>
+      <path fill="#9575cd" d="M150 200h200v10H150z"/>
+      <text x="150" y="270" fill="#9e9e9e" font-size="18" font-family="Arial" opacity="0.6">
+        Your cart is empty
+      </text>
+    </svg>
+    
+    <h3 class="empty-cart__title">Your cart is empty</h3>
+    <p class="empty-cart__text">
+      Looks like you haven’t added anything yet. Start exploring our catalog to find your next great read!
+    </p>
+    <ion-button expand="block" color="primary" (click)="goToCatalog()">
+      Browse Catalog
+    </ion-button>
+  </div>
   </main>
 </ion-content>

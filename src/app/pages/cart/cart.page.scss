@@ -228,3 +228,53 @@
     }
   }
   
+/* ========== EMPTY CART STYLES ========== */
+.empty-cart {
+  text-align: center;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .empty-cart__illustration {
+    width: 240px;
+    max-width: 80%;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .empty-cart__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ion-text-color, #222);
+    margin-bottom: 0.5rem;
+  }
+
+  .empty-cart__text {
+    font-size: 1rem;
+    color: var(--ion-color-medium);
+    margin-bottom: 1.5rem;
+    max-width: 340px;
+  }
+
+  ion-button {
+    --border-radius: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+}
+
+/* Float animation for the illustration */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

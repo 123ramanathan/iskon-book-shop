@@ -28,6 +28,8 @@ export class Db {
     this.cartItems = (localStorage['cartItems'] ? JSON.parse(localStorage['cartItems']) : []) || [];
     if(this.cartItems && this.cartItems.length > 0){
       this.calculate_subtotal();
+    }else{
+      this.subtotal = 0;
     }
     
     return this.cartItems
@@ -41,8 +43,8 @@ export class Db {
     }
 
     this.subtotal = total;
-    const taxRate = 0.18
-    this.tax = total * taxRate;
+    // const taxRate = 0.18
+    // this.tax = total * taxRate;
   }
 
 
@@ -79,6 +81,7 @@ export class Db {
   }
 
   update_qty(item:any,type:string){
+
     if(type === "inc"){
       if((item['qty'] ?? 0) < item.stock){
         item['qty'] = item['qty'] > 0 ? item['qty'] + 1 : 2
@@ -86,6 +89,28 @@ export class Db {
     }else{
       item['qty'] = item['qty'] > 0 ? item['qty'] - 1 : 1
     }
+    
+    for (let i = 0; i < this.cartItems.length; i++) {
+      if(item.name === this.cartItems[i]['name']){
+        this.cartItems[i] = item
+      }
+    }
+
+    localStorage['cartItems'] = JSON.stringify(this.cartItems);
+
+    this.get_cart_items()
+  }
+
+  remove_cart_item(item:any){
+    for (let i = 0; i < this.cartItems.length; i++) {
+      if(item.name === this.cartItems[i]['name']){
+        this.cartItems.splice(i,1);
+        break;
+      }
+    }
+
+    localStorage['cartItems'] = JSON.stringify(this.cartItems);
+    this.get_cart_items();
   }
 
   callApi<T>(
