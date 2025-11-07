@@ -35,9 +35,15 @@ export class CatalogPage implements OnInit {
   constructor(public db:Db) { }
 
   ngOnInit() {
-    this.db.get_cart_items()
+    this.db.get_cart_items();
+    this.getItems();
   }
 
+  getItems(){
+    this.db.sales_items_with_filters({}).subscribe((res:any)=>{
+      console.log(res,"res")
+    })
+  }
 
   onSearchChange(event: any) {
     const value = event.target.value.toLowerCase();
@@ -52,7 +58,6 @@ export class CatalogPage implements OnInit {
     }, 500); // custom delay (500ms)
   }
 
-  
   applyFilter(searchText: string) {
     console.log(searchText,"searchText")
     // if (!searchText) {
