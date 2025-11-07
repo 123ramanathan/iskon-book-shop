@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { ModalPopupComponent } from 'src/app/components/modal-popup/modal-popup.component';
 import { Db } from 'src/app/service/db';
 
@@ -13,7 +13,7 @@ export class CartPage implements OnInit {
   discount:any;
   subtotal:any;
   tax:any;
-  constructor(public db:Db,private modalCtrl: ModalController) { }
+  constructor(public db:Db,private modalCtrl: ModalController,private navCtrl:NavController) { }
 
   ngOnInit() {
     this.db.get_cart_items();
@@ -43,17 +43,15 @@ export class CartPage implements OnInit {
   }
 
   remove_item(item:any){
-
+    this.db.remove_cart_item(item)
   }
-
-
 
   onSelect(value: string) {
     console.log('Selected:', value);
   }
 
-  tax_calc() {
-    
+  goToCatalog() {
+    this.navCtrl.navigateForward('/catalog'); // or your router path
   }
   
 
