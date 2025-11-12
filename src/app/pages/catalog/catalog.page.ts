@@ -9,6 +9,8 @@ import { Db } from 'src/app/service/db';
 })
 export class CatalogPage implements OnInit {
   private debounceTimer: any;
+  searchTxt:any="";
+  category:any="";
   catalog = [
     {
      image: "",
@@ -22,7 +24,7 @@ export class CatalogPage implements OnInit {
   ]
 
   categories = [
-    {name: "All Categories", value: "all"},
+    {name: "All Categories", value: ""},
     {name: "Classic Fiction", value: "classic fiction"},
     {name: "Dystopian Fiction", value: "dystopian fiction"},
     {name: "Romance", value: "romance"},
@@ -40,7 +42,13 @@ export class CatalogPage implements OnInit {
   }
 
   getItems(){
-    this.db.sales_items_with_filters({}).subscribe((res:any)=>{
+    let params = {
+      pos_profile: 'Test',
+      search_book_name: this.searchTxt,
+      item_group: this.category,
+    } 
+
+    this.db.sales_items_with_filters(params).subscribe((res:any)=>{
       console.log(res,"res")
     })
   }
@@ -54,23 +62,13 @@ export class CatalogPage implements OnInit {
 
     // Set new debounce timer
     this.debounceTimer = setTimeout(() => {
-      this.applyFilter(value);
+      this.getItems()
     }, 500); // custom delay (500ms)
-  }
-
-  applyFilter(searchText: string) {
-    console.log(searchText,"searchText")
-    // if (!searchText) {
-    //   this.filteredItems = [...this.items];
-    //   return;
-    // }
-    // this.filteredItems = this.items.filter((item) =>
-    //   item.toLowerCase().includes(searchText)
-    // );
   }
 
   categoryChange($event:any){
     console.log($event,"eveent")
+    this.getItems()
   }
 
   ngOnDestroy() {

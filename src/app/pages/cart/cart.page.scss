@@ -157,7 +157,7 @@
     flex: 1;
     border-top: 1px solid var(--border-color);
     background-color: #fff;
-    padding: 1rem;
+    padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -188,7 +188,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-top: 1px solid var(--border-color);
+      // border-top: 1px solid var(--border-color);
       padding-top: 0.5rem;
       font-size: 1.125rem; // text-lg
       font-weight: 700;

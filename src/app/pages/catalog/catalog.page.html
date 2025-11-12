@@ -7,6 +7,7 @@
       <div class="section__input">
         <input
           class="section__input-field"
+          [(ngModel)]="searchTxt"
           placeholder="Search here..."
           (input)="onSearchChange($event)"
           clearInput
@@ -76,6 +77,7 @@
           <select
             class="select"
             name="categories"
+            [(ngModel)]="category"
             (change)="categoryChange($event)"
           >
             <option *ngFor="let item of categories" [value]="item.value">
