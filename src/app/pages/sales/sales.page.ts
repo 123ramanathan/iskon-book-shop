@@ -17,6 +17,7 @@ export class SalesPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    this.db.headerDetails();
     this.getDashboardDetails();
   }
 

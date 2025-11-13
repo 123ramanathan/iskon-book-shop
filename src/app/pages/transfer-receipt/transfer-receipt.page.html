@@ -1,0 +1,56 @@
+<app-header [home]="false" [title]="'Transfer Receipt'"></app-header>
+
+<ion-content [fullscreen]="true" style="--background: #f6f7f9;">
+  
+  <div class="main_section">
+
+    <div class="stock_boxes">
+      <div class="boxes">
+        <div class="box_1">
+          <div class="sec_1">
+            <ion-icon src="/assets/icon/receipt-items-pending.svg"></ion-icon>
+          </div>
+          <div class="sec_2">
+            <p class="m-0 id">{{stock_details.id}}</p>
+            <p class="m-0 from">From: {{stock_details.from}}</p>
+            <p class="m-0 date">Date: {{stock_details.date}}</p>
+            <div class="count_status">
+              <p class="m-0 items">{{stock_details.items_count}} Items</p>
+              <p class="m-0 status">{{stock_details.status}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="books_list">
+      <div *ngFor="let item of receipt_book_list" class="boxes_item">
+        <div>
+          <h3 class="m-0 book_name">{{item.item_name}}</h3>
+          <p class="m-0 sub_title">{{item.item_code}}</p>
+        </div>
+        <div class="cost_inputs">
+          <div class="system_quantity">
+            <label>System Quantity</label>
+            <input type="number" readonly placeholder="System Quantity" [(ngModel)]="item.system_quantity">
+          </div>
+          <div class="physical_quantity">
+            <label>Physical Quantity</label>
+            <input type="number" placeholder="Physical Quantity" [(ngModel)]="item.physical_qty">
+          </div>
+        </div>
+        <div class="variance">
+          <label>Variance</label>
+          <input type="number" placeholder="Variance" [(ngModel)]="item.variance">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="save_btn">
+    <ion-button fill="clear" (click)="saveReceipt()"><ion-icon class="white" name="checkmark-circle-outline"></ion-icon>Confirm Receipt</ion-button>
+    <ion-button class="wrong_transfer" fill="clear"><ion-icon name="warning-outline"></ion-icon>Report Wrong Transfer</ion-button>
+  </div>
+
+</ion-content>
