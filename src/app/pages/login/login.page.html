@@ -41,6 +41,10 @@
       </div>
 
       <ion-button expand="block" class="submit-btn" type="submit" (click)="onSubmit()">Sign In</ion-button>
+
+      <div *ngIf="error_message" class="error_message">
+        <p class="m-0">{{error_message}}</p>
+      </div>
     </form>
   </div>
 </ion-content>

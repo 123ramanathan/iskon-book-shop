@@ -1,0 +1,45 @@
+<app-header [home]="false" [title]="'Wrong Receipt'"></app-header>
+
+<ion-content [fullscreen]="true" style="--background: #f6f7f9;">
+  
+  <div class="main_section">
+
+    <div class="books">
+      <h5 class="m-0 title">Select Wrong Books Received</h5>
+  
+      <div class="inputs_sec">
+        <div class="book_name_input">
+          <label>Physical Quantity</label>
+          <select [(ngModel)]="selected_book">
+            <option value="" selected>Select Book</option>
+            <option value="Book A">Book A</option>
+            <option value="Book B">Book B</option>
+            <option value="Book C">Book C</option>
+          </select>
+        </div>
+        <div class="quantity">
+          <label>Quantity</label>
+          <input type="number" placeholder="Quantity" [(ngModel)]="quantity">
+        </div>
+      </div>
+
+      <div class="save_btn">
+        <ion-button fill="clear" (click)="saveSelectBook()"><ion-icon class="white" name="add-outline"></ion-icon>Add Book to Report</ion-button>
+      </div>
+    </div>
+
+    <div class="saved_books" *ngIf="saved_books && saved_books.length > 0">
+      <h5 class="m-0 title">Books in Wrong Transfer Report</h5>
+
+      <div *ngFor="let item of saved_books; let i = index" class="books_">
+        <div>
+          <p class="m-0 book">{{item.book}}</p>
+          <p class="m-0 quantity">Qty: {{item.quantity}}</p>
+        </div>
+        <ion-icon (click)="remove_book(i)" name="close-outline"></ion-icon>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

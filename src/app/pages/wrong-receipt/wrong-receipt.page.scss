@@ -1,0 +1,136 @@
+.main_section {
+    padding: 1rem;
+
+    .books {
+        padding: 0.75rem;
+        background: #fff;
+        border-radius: 10px;
+
+        .title {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .book_name_input {
+            margin-bottom: 0.75rem;
+
+            label {
+                color: #6b7280;
+                font-weight: 600;
+                font-size: .75rem;
+                line-height: 1rem;
+            }
+
+            select {
+                width: 100%;
+                padding-left: .75rem;
+                padding-right: .75rem;
+                padding-top: .5rem;
+                padding-bottom: .5rem;
+                background-color: #f0f2f4;
+                margin-top: .25rem;
+                border-radius: 0.75rem;
+                border: unset !important;
+                font-size: 14px;
+            }
+
+            select:focus {
+                outline: 1px solid var(--primary-color);
+            }
+
+        }
+
+        .quantity {
+            label {
+                color: #6b7280;
+                font-weight: 600;
+                font-size: .75rem;
+                line-height: 1rem;
+            }
+
+            input {
+                width: 100%;
+                padding-left: .75rem;
+                padding-right: .75rem;
+                padding-top: .5rem;
+                padding-bottom: .5rem;
+                background-color: #f0f2f4;
+                margin-top: .25rem;
+                border-radius: 0.75rem;
+                border: unset !important;
+                font-size: 14px;
+            }
+
+            input:focus {
+                outline: 1px solid var(--primary-color);
+            }
+        }
+
+        .save_btn {
+            // padding: 0.75rem;
+            // border-top: 1px solid var(--border-col);
+            // background: #fff;
+            margin-top: 1rem;
+
+            ion-button {
+                --padding-start: 2rem;
+                --padding-end: 2rem;
+                --padding-top: 0.75rem;
+                --padding-bottom: 0.75rem;
+                width: 100%;
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+                font-weight: 600;
+                --border-radius: calc(0.75rem - 2px);
+
+                ion-icon {
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+
+    .saved_books {
+        margin-top: 1rem;
+
+        .title {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .books_ {
+            padding: 0.75rem;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 10px;
+            margin-bottom: 10px;
+
+            .book {
+                font-size: 14px;
+                font-weight: 500;
+                margin-bottom: 0.25rem;
+            }
+
+            .quantity {
+                padding-top: .125rem;
+                padding-bottom: .125rem;
+                font-size: .75rem;
+                line-height: 1rem;
+                padding-left: .625rem;
+                padding-right: .625rem;
+                background-color: #f0f2f4;
+                border-radius: 9999px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            ion-icon {
+                color: red;
+            }
+        }
+    }
+}
