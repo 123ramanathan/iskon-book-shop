@@ -5,13 +5,15 @@ import { CatalogCardsComponent } from './catalog-cards/catalog-cards.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { HeaderComponent } from './header/header.component';
 import { ModalPopupComponent } from './modal-popup/modal-popup.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
     CatalogCardsComponent,
     DropdownComponent,
     HeaderComponent,
-    ModalPopupComponent
+    ModalPopupComponent,
+    PaymentComponent
     
   ],
   imports: [
@@ -22,7 +24,8 @@ import { ModalPopupComponent } from './modal-popup/modal-popup.component';
     CatalogCardsComponent, // Exporting to be used in other modules
     DropdownComponent,
     HeaderComponent,
-    ModalPopupComponent
+    ModalPopupComponent,
+    PaymentComponent
   ]
 })
 export class ComponentsModule { }

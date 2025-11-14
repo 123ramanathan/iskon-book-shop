@@ -166,7 +166,8 @@ export class Db {
   }
 
   sales_items_with_filters(params:any){
-    const endpoint = this.baseUrl + "get_items";
+    // pos_profile = Store ID ,search_book_name = Bookname filter,item_group = Item group filter
+    const endpoint = this.baseUrl + `get_items`;
     return this.callApi(endpoint,"POST",params)
   }
 
