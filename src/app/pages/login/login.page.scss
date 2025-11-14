@@ -121,3 +121,17 @@ ion-icon {
 
     }
 }
+
+.error_message {
+    margin-top: 15px;
+    padding: 2px;
+    background: #ff000047;
+    border-radius: 5px;
+
+    p {
+        font-size: 13px;
+        font-weight: 500;
+        color: red;
+        text-align: center;
+    }
+}

@@ -171,6 +171,11 @@ export class Db {
     return this.callApi(endpoint,"POST",params)
   }
 
+  get_latest_stock_entries(params:any){
+    const endpoint = this.baseUrl + "get_latest_stock_entries";
+    return this.callApi(endpoint,"POST",params)
+  }
+
   payments_invoice(params:any){
     const endpoint = "/api/method/iskcon.iskcon.iskcon.mobile_app_payments.create_pos_invoice";
     return this.callApi(endpoint,"POST",params)

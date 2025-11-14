@@ -74,6 +74,14 @@ const routes: Routes = [
     path: 'close-shift',
     loadChildren: () => import('./pages/close-shift/close-shift.module').then( m => m.CloseShiftPageModule)
   },
+  {
+    path: 'transfer-receipt',
+    loadChildren: () => import('./pages/transfer-receipt/transfer-receipt.module').then( m => m.TransferReceiptPageModule)
+  },
+  {
+    path: 'wrong-receipt',
+    loadChildren: () => import('./pages/wrong-receipt/wrong-receipt.module').then( m => m.WrongReceiptPageModule)
+  },
 
 ]
 @NgModule({

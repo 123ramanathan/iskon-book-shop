@@ -15,6 +15,7 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup | any;
   showPassword = false;
   submitted = false;
+  error_message: any;
 
   constructor(private fb: FormBuilder, private navCtrl: NavController, private router: Router, public db: Db) { }
 
@@ -59,6 +60,8 @@ export class LoginPage implements OnInit {
         localStorage['token'] = token;
         this.loginForm.reset();
         this.router.navigateByUrl('/tabs/sales');
+      }else{
+        this.error_message = res.message.message;
       }
     })
   }

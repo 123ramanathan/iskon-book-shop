@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Db } from 'src/app/service/db';
 
 @Component({
   selector: 'app-stock-receipt',
@@ -8,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockReceiptPage implements OnInit {
 
-  constructor() { }
+  constructor(public db: Db, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.getLatestPendingReceipt();
   }
 
   pending_confirmation_list = [
@@ -62,4 +68,18 @@ export class StockReceiptPage implements OnInit {
       status: 'Completed'
     }
   ]
+
+  getLatestPendingReceipt(){
+    let data = {
+      page: 1,
+      limit: 10
+    }
+    this.db.get_latest_stock_entries(data).subscribe((res: any) => {
+      console.log(res, "getLatestPendingReceipt")
+    })
+  }
+
+  goToReceiptDetails(item: any){
+    this.router.navigateByUrl('/transfer-receipt');
+  }
 }

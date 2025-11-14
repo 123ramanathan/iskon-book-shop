@@ -1,0 +1,203 @@
+.main_section {
+    padding: 1rem;
+    // height: calc(100vh - 125px);
+    // overflow: auto;
+
+    .boxes {
+        padding: 1rem;
+        border: 1px solid #f59f0a;
+        border-radius: 0.75rem;
+        background: #fff;
+        margin-bottom: 0.75rem;
+
+        .box_1 {
+            display: flex;
+            gap: 10px;
+
+            .sec_1 {
+                ion-icon {
+                    padding: .5rem;
+                    background: #f59f0a1a;
+                    border-radius: 0.75rem;
+                    width: 1.25rem;
+                    height: 1.25rem;
+                }
+            }
+
+            .sec_2 {
+                .id {
+                    font-size: .875rem;
+                    line-height: 1.25rem;
+                    font-weight: 600;
+                }
+
+                .from {
+                    font-size: .75rem;
+                    line-height: 1rem;
+                    margin-top: .25rem;
+                    color: #6b7280;
+                }
+
+                .date {
+                    font-size: .75rem;
+                    line-height: 1rem;
+                    margin-top: .25rem;
+                    color: #6b7280;
+                }
+
+                .count_status {
+                    display: flex;
+                    align-items: center;
+                    gap: .5rem;
+                    margin-top: .5rem;
+
+                    .items {
+                        font-weight: 600;
+                        font-size: .75rem;
+                        line-height: 1rem;
+                        padding-top: .125rem;
+                        padding-bottom: .125rem;
+                        padding-left: .625rem;
+                        padding-right: .625rem;
+                        border-radius: 9999px;
+                        align-items: center;
+                        display: inline-flex;
+                        border: 1px solid var(--border-col);
+                    }
+
+                    .status {
+                        color: #f59f0a;
+                        font-weight: 600;
+                        font-size: .75rem;
+                        line-height: 1rem;
+                        padding-top: .125rem;
+                        padding-bottom: .125rem;
+                        padding-left: .625rem;
+                        padding-right: .625rem;
+                        background-color: #f59f0a1a;
+                        border: 1px solid #f59f0a;
+                        border-radius: 9999px;
+                        align-items: center;
+                        display: inline-flex;
+                    }
+                }
+            }
+        }
+    }
+
+    .books_list {
+        .boxes_item {
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            background: #fff;
+            border-radius: 0.75rem;
+
+            .book_name {
+                font-weight: 600;
+                font-size: .875rem;
+                line-height: 1.25rem;
+                margin-bottom: 7px;
+            }
+
+            .sub_title {
+                color: #6b7280;
+                font-size: .75rem;
+                line-height: 1rem;
+            }
+
+            .cost_inputs {
+                margin-top: 0.75rem;
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: 100%;
+                gap: 0.75rem;
+
+                .system_quantity,
+                .physical_quantity {
+                    label {
+                        color: #6b7280;
+                        font-weight: 600;
+                        font-size: .75rem;
+                        line-height: 1rem;
+                    }
+
+                    input {
+                        width: 100%;
+                        padding-left: .75rem;
+                        padding-right: .75rem;
+                        padding-top: .5rem;
+                        padding-bottom: .5rem;
+                        background-color: #f0f2f4;
+                        margin-top: .25rem;
+                        border-radius: 0.75rem;
+                        border: unset !important;
+                        font-size: 14px;
+                    }
+
+                    input:focus {
+                        outline: 1px solid var(--primary-color);
+                    }
+                }
+            }
+
+            .variance {
+                label {
+                    color: #6b7280;
+                    font-weight: 600;
+                    font-size: .75rem;
+                    line-height: 1rem;
+                }
+
+                input {
+                    width: 100%;
+                    padding-left: .75rem;
+                    padding-right: .75rem;
+                    padding-top: .5rem;
+                    padding-bottom: .5rem;
+                    background-color: #f0f2f4;
+                    margin-top: .25rem;
+                    border-radius: 0.75rem;
+                    border: unset !important;
+                    font-size: 14px;
+                }
+
+                input:focus {
+                    outline: 1px solid var(--primary-color);
+                }
+            }
+        }
+    }
+}
+
+.save_btn {
+    padding: 0.75rem;
+    // border-top: 1px solid var(--border-col);
+    // background: #fff;
+
+    ion-button {
+        --padding-start: 2rem;
+        --padding-end: 2rem;
+        --padding-top: 0.75rem;
+        --padding-bottom: 0.75rem;
+        width: 100%;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 600;
+        --border-radius: calc(0.75rem - 2px);
+
+        ion-icon {
+            margin-right: 1rem;
+        }
+    }
+
+    ion-button:nth-child(1) {
+        margin-bottom: 10px;
+    }
+
+    .wrong_transfer {
+        --background: #f6f7f9;
+        border: 1px solid #ef4343;
+        color: #ef4343;
+        border-radius: calc(0.75rem - 2px);
+    }
+}
