@@ -134,3 +134,26 @@
         }
     }
 }
+
+
+.save_btn {
+    padding: 0.75rem;
+    // border-top: 1px solid var(--border-col);
+    // background: #fff;
+
+    ion-button {
+        --padding-start: 2rem;
+        --padding-end: 2rem;
+        --padding-top: 0.75rem;
+        --padding-bottom: 0.75rem;
+        width: 100%;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 600;
+        --border-radius: calc(0.75rem - 2px);
+
+        ion-icon {
+            margin-right: 1rem;
+        }
+    }
+}

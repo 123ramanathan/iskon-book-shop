@@ -70,7 +70,8 @@ const routes: Routes = [
   {
     path: 'tabs/:id',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
-  },  {
+  },
+  {
     path: 'close-shift',
     loadChildren: () => import('./pages/close-shift/close-shift.module').then( m => m.CloseShiftPageModule)
   },
@@ -79,7 +80,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/transfer-receipt/transfer-receipt.module').then( m => m.TransferReceiptPageModule)
   },
   {
+    path: 'transfer-receipt/:id',
+    loadChildren: () => import('./pages/transfer-receipt/transfer-receipt.module').then( m => m.TransferReceiptPageModule)
+  },
+  {
     path: 'wrong-receipt',
+    loadChildren: () => import('./pages/wrong-receipt/wrong-receipt.module').then( m => m.WrongReceiptPageModule)
+  },
+  {
+    path: 'wrong-receipt/:id',
     loadChildren: () => import('./pages/wrong-receipt/wrong-receipt.module').then( m => m.WrongReceiptPageModule)
   },
 
