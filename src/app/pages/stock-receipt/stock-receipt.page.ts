@@ -9,7 +9,15 @@ import { Db } from 'src/app/service/db';
   standalone: false
 })
 export class StockReceiptPage implements OnInit {
+  page_no:number = 1;
 
+  stock_entry_list:any = {
+    pending: [],
+    pending_count:0,
+    confirmed: [],
+    confirmed_count:0,
+
+  }
   constructor(public db: Db, private router: Router) { }
 
   ngOnInit() {
@@ -18,64 +26,27 @@ export class StockReceiptPage implements OnInit {
   ionViewWillEnter(){
     this.getLatestPendingReceipt();
   }
-
-  pending_confirmation_list = [
-    {
-      book_name: "The Great Gatsby",
-      received_date: "1/5/2025",
-      quantity: 50,
-      status: "Pending"
-    },
-    {
-      book_name: "Atomic Habits",
-      received_date: "1/5/2025",
-      quantity: 50,
-      status: "Pending"
-    }
-  ]
-
-  confirmed_receipt_list = [
-    {
-      book_name: "Harry Potter Collection",
-      units: 25,
-      status: "Confirmed"
-    }
-  ]
-
-  stock_entry_list = [
-    {
-      id: 'TRF-2025-001',
-      from: 'Main Warehouse',
-      date: '1/15/2025',
-      items_count: 3,
-      status: 'Pending'
-    },
-    {
-      id: 'TRF-2025-002',
-      from: 'Regional Distribution Center',
-      date: '1/14/2025',
-      items_count: 2,
-      status: 'Pending'
-    }
-  ]
-
-  stock_entry_list_completed = [
-    {
-      id: 'TRF-2024-150',
-      from: 'Main Warehouse',
-      date: '12/30/2024',
-      items_count: 5,
-      status: 'Completed'
-    }
-  ]
+  
 
   getLatestPendingReceipt(){
     let data = {
-      page: 1,
+      page: this.page_no,
       limit: 10
     }
     this.db.get_latest_stock_entries(data).subscribe((res: any) => {
-      console.log(res, "getLatestPendingReceipt")
+      if(res.message){
+        if(this.page_no === 1){
+          // this.stock_entry_list = res.message.data //This one
+          this.stock_entry_list.pending = res.message?.pending?.data
+          this.stock_entry_list.confirmed = res.message?.confirmed?.data
+        }else{
+          this.stock_entry_list.pending = [...this.stock_entry_list.pending, ...res.message?.pending?.data]
+          this.stock_entry_list.confirmed = [...this.stock_entry_list.confirmed, ...res.message?.confirmed?.data]
+        }
+
+        this.stock_entry_list.pending_count =  res.message?.pending?.total_items
+        this.stock_entry_list.confirmed_count =  res.message?.confirmed?.total_items
+      }
     })
   }
 

@@ -1,149 +1,208 @@
 .main_section {
-    // padding: 1rem;
+  // padding: 1rem;
 
-    .select_payment_method {
-        margin-bottom: 1.5rem;
+  .customer_details {
+    background: #fff;
+    padding-block: 1rem;
 
-        label {
-            font-size: .875rem;
-            line-height: 1.25rem;
-            display: block;
-            margin-bottom: .75rem;
-            font-weight: 600;
-        }
-
-        .payment_list {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: .75rem;
-            align-items: center;
-
-            .boxes {
-                padding: 1rem;
-                border: 2px solid var(--border-col);
-                border-radius: 0.75rem;
-
-                ion-icon {
-                    width: 2rem;
-                    height: 2rem;
-                    margin-bottom: .5rem;
-                    margin-left: auto;
-                    margin-right: auto;
-                    display: block;
-                    vertical-align: middle;
-                }
-
-                p {
-                    text-align: center;
-                    font-weight: 500;
-                    color: #6b7280;
-                    font-size: .875rem;
-                    line-height: 1.25rem;
-                }
-            }
-        }
+    label {
+      line-height: 1;
+      font-weight: 500;
+      font-size: 0.875rem;
     }
 
-    .payment_fields {
+    input {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      background-color: #f6f7f9;
+      border-radius: calc(0.75rem - 2px);
+      border: 1px solid var(--border-col);
+      margin-top: 0.25rem;
+      height: 2.5rem;
+      width: 100%;
+    }
+
+    input:focus {
+      outline: 1px solid var(--primary-color);
+    }
+
+    .type_input {
+      margin-bottom: 0.75rem;
+
+      label {
+        font-weight: 600;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+
+        span{
+            color: red;
+        }
+      }
+
+      input {
+        margin-top: 0.75rem;
+      }
+    }
+
+    .amount {
+      label {
+        font-weight: 500;
+        font-size: 0.875rem;
+      }
+
+      input {
+        margin-top: 0.75rem;
+      }
+    }
+  }
+
+  .select_payment_method {
+    margin-bottom: 1.5rem;
+
+    label {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      display: block;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .payment_list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      align-items: center;
+
+      .boxes {
         padding: 1rem;
-        background: #fff;
+        border: 2px solid var(--border-col);
         border-radius: 0.75rem;
-        border: 1px solid var(--border-col);
 
-        label {
-            line-height: 1;
-            font-weight: 500;
-            font-size: .875rem;
+        ion-icon {
+          width: 2rem;
+          height: 2rem;
+          margin-bottom: 0.5rem;
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+          vertical-align: middle;
         }
 
-        input {
-            font-size: 1rem;
-            line-height: 1.5rem;
-            padding-top: .5rem;
-            padding-bottom: .5rem;
-            padding-left: .75rem;
-            padding-right: .75rem;
-            background-color: #f6f7f9;
-            border-radius: calc(0.75rem - 2px);
-            border: 1px solid var(--border-col);
-            margin-top: .25rem;
-            height: 2.5rem;
-            width: 100%;
+        p {
+          text-align: center;
+          font-weight: 500;
+          color: #6b7280;
+          font-size: 0.875rem;
+          line-height: 1.25rem;
         }
+      }
+    }
+  }
 
-        input:focus {
-            outline: 1px solid var(--primary-color);
-        }
+  .payment_fields {
+    padding: 1rem;
+    background: #fff;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-col);
 
-        .type_input {
-            margin-bottom: 0.75rem;
-
-            label {
-                font-weight: 600;
-                font-size: .875rem;
-                line-height: 1.25rem;
-            }
-
-            input {
-                margin-top: 0.75rem;
-            }
-        }
-
-        .amount {
-            label {
-                font-weight: 500;
-                font-size: .875rem;
-            }
-
-            input {
-                margin-top: 0.75rem;
-            }
-        }
+    label {
+      line-height: 1;
+      font-weight: 500;
+      font-size: 0.875rem;
     }
 
-    .first_payment {
-        margin-bottom: 1rem;
+    input {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      background-color: #f6f7f9;
+      border-radius: calc(0.75rem - 2px);
+      border: 1px solid var(--border-col);
+      margin-top: 0.25rem;
+      height: 2.5rem;
+      width: 100%;
     }
+
+    input:focus {
+      outline: 1px solid var(--primary-color);
+    }
+
+    .type_input {
+      margin-bottom: 0.75rem;
+
+      label {
+        font-weight: 600;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      input {
+        margin-top: 0.75rem;
+      }
+    }
+
+    .amount {
+      label {
+        font-weight: 500;
+        font-size: 0.875rem;
+      }
+
+      input {
+        margin-top: 0.75rem;
+      }
+    }
+  }
+
+  .first_payment {
+    margin-bottom: 1rem;
+  }
 }
 
 .selected_payment {
-    border-color: var(--primary-color) !important;
-    background: #22295e1a;
+  border-color: var(--primary-color) !important;
+  background: #22295e1a;
 }
 
 .save_btn {
-    padding: 0.75rem;
-    border-top: 1px solid var(--border-col);
-    background: #fff;
+  padding: 0.75rem;
+  border-top: 1px solid var(--border-col);
+  background: #fff;
 
-    .complete {
-        --padding-start: 2rem;
-        --padding-end: 2rem;
-        --padding-top: 0.75rem;
-        --padding-bottom: 0.75rem;
-        width: 100%;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        font-weight: 600;
-        --border-radius: calc(0.75rem - 2px);
-        margin-bottom: 0.75rem;
-        --height: 2.75rem;
-    }
+  .complete {
+    --padding-start: 2rem;
+    --padding-end: 2rem;
+    --padding-top: 0.75rem;
+    --padding-bottom: 0.75rem;
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    --border-radius: calc(0.75rem - 2px);
+    margin-bottom: 0.75rem;
+    --height: 2.75rem;
+  }
 
-    .cart {
-        --padding-start: 2rem;
-        --padding-end: 2rem;
-        --padding-top: 0.75rem;
-        --padding-bottom: 0.75rem;
-        width: 100%;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        font-weight: 600;
-        --border-radius: calc(0.75rem - 2px);
-        --height: 2.75rem;
-        --background: #fff;
-        color: #000;
-        border: 1px solid var(--border-col);
-        border-radius: calc(0.75rem - 2px);
-    }
+  .cart {
+    --padding-start: 2rem;
+    --padding-end: 2rem;
+    --padding-top: 0.75rem;
+    --padding-bottom: 0.75rem;
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    --border-radius: calc(0.75rem - 2px);
+    --height: 2.75rem;
+    --background: #fff;
+    color: #000;
+    border: 1px solid var(--border-col);
+    border-radius: calc(0.75rem - 2px);
+  }
 }

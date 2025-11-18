@@ -1,40 +1,49 @@
 <section>
   <div class="main_section">
+
+    <div class="customer_details">
+      <div class="type_input">
+        <label for="customer_name">Customer Name <span>*</span></label>
+        <input id="customer_name" [(ngModel)]="customer_name" placeholder="Enter customer name" name="customer_name" type="text" />
+      </div>
+    </div>
+
     <div class="select_payment_method">
       <label>Select Payment Mode</label>
       <div class="payment_list">
-        <div *ngFor="let item of payment_types; let i = index" class="boxes" (click)="selected_payment(item)" [class.selected_payment]="selected_payment_type == item.name">
+        <div *ngFor="let item of payment_types; let i = index" class="boxes" (click)="selected_payment(item)" [class.selected_payment]="payment?.type == item.name">
           <ion-icon [src]="item.icon"></ion-icon>
           <p class="m-0">{{item.name}}</p>
         </div>
       </div>
     </div>
 
-    <div class="payment_fields" *ngIf="selected_payment_type === 'Cash'">
+    <div class="payment_fields" *ngIf="payment?.type === 'Cash'">
       <label>Cash Received</label>
-      <input placeholder="Enter Amount" type="number">
+      <input placeholder="Enter Amount" [(ngModel)]="payment.cash" name="cash" type="number" />
     </div>
 
-    <div *ngIf="selected_payment_type === 'Split'">
+    <div *ngIf="payment?.type === 'Split'">
       <div class="payment_fields first_payment">
         <div class="type_input">
-          <label>First Payment Method</label>
-          <input placeholder="Select Type" type="number">
+          <label for="first_payment">First Payment Method</label>
+          <input id="first_payment" [(ngModel)]="payment.first_payment_type" placeholder="Enter payment type" name="first_payment" type="text">
         </div>
         <div class="amount">
-          <label>Amount</label>
-          <input placeholder="Enter Amount" type="number">
+          <label for="first_payment_amount">Amount</label>
+          <input id="first_payment_amount" [(ngModel)]="payment.first_payment_amount" placeholder="Enter Amount" name="first_payment_amount" type="number">
         </div>
       </div>
   
       <div class="payment_fields">
         <div class="type_input">
-          <label>Second Payment Method</label>
-          <input placeholder="Select Type" type="number">
+          <label for="second_payment">Second Payment Method</label>
+          <input id="second_payment" [(ngModel)]="payment.second_payment_type" placeholder="Enter payment type" name="second_payment" type="text">
         </div>
+
         <div class="amount">
-          <label>Amount</label>
-          <input placeholder="Enter Amount" type="number">
+          <label for="second_payment_amount">Amount</label>
+          <input id="second_payment_amount" [(ngModel)]="payment.second_payment_amount" placeholder="Enter Amount" name="second_payment_amount" type="number">
         </div>
       </div>
     </div>
@@ -42,6 +51,6 @@
   </div>
 
   <div class="save_btn">
-    <ion-button fill="clear" class="complete" routerLink="/thankyou">Complete Payment</ion-button>
+    <ion-button fill="clear" [disabled]="!customer_name" class="complete" (click)="create_invoice()">Complete Payment</ion-button>
   </div>
 </section>

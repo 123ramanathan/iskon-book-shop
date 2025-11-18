@@ -11,10 +11,10 @@
           <div class="cart-item__content">
             <div class="cart-item__header">
               <div class="cart-item__info">
-                <h3 class="cart-item__title">{{ item.book_name }}</h3>
+                <h3 class="cart-item__title">{{ item.item_name }}</h3>
                 <p class="cart-item__author">{{ item.author_name }}</p>
                 <p class="cart-item__price">
-                  {{ db.formatCurrency(item.price) }} each
+                  {{ db.formatCurrency(item.price_list_rate) }} each
                 </p>
               </div>
               <button class="cart-item__delete" (click)="openDeleteModal(item)">
@@ -79,7 +79,8 @@
             <div class="cart-item__subtotal">
               <span class="cart-item__label">Subtotal:</span>
               <span class="cart-item__value"
-                >{{ db.formatCurrency(db.subtotal)}}</span
+                >{{ db.formatCurrency(item.qty*(item.price_list_rate ??
+                0))}}</span
               >
             </div>
           </div>
@@ -87,7 +88,8 @@
       </div>
     </section>
 
-    <section class="cart-summary" *ngIf="db.subtotal && db.subtotal > 0">
+    <!-- *ngIf="db.subtotal && db.subtotal > 0" -->
+    <section class="cart-summary" >
       <div class="cart-summary__details">
         <!-- <div class="cart-summary__row">
             <span class="cart-summary__label">Subtotal</span>
