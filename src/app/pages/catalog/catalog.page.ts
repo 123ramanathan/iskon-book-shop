@@ -46,7 +46,7 @@ export class CatalogPage implements OnInit {
 
   getItems(){
     let params = {
-      pos_profile: 'Test',
+      pos_profile: localStorage['store_name'],
       search_book_name: this.searchTxt,
       item_group: this.category,
       page: this.page,
@@ -76,11 +76,13 @@ export class CatalogPage implements OnInit {
 
     // Set new debounce timer
     this.debounceTimer = setTimeout(() => {
+      this.page = 1
       this.getItems()
     }, 500); // custom delay (500ms)
   }
 
   categoryChange($event:any){
+    this.page = 1
     this.getItems();
   }
 

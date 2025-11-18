@@ -1,7 +1,7 @@
 <app-header [home]="true"></app-header>
 
 <ion-content [fullscreen]="true">
-  <main class="order-history bg-background">
+  <main class="order-history bg-background" *ngIf="orders && orders.length > 0">
     <div
       *ngFor="let order of orders"
       class="order-history__card"
@@ -10,7 +10,7 @@
         <!-- Header -->
         <div class="order-history__header">
           <div>
-            <h3 class="order-history__id">{{ order.id }}</h3>
+            <h3 class="order-history__id">{{ order.order_id }}</h3>
             <div class="order-history__time">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@
             </div>
           </div>
   
-          <div class="order-history__status">Completed</div>
+          <div class="order-history__status">{{order.status}}</div>
         </div>
   
         <!-- Items -->
@@ -43,22 +43,22 @@
             *ngFor="let item of order.items"
             class="order-history__item"
           >
-            {{ item.name }} × {{ item.qty }}
+            {{ item.item_name }} × {{ item.qty }}
           </div>
         </div>
   
         <!-- Payment -->
-        <div class="order-history__payment">
+        <div class="order-history__payment" *ngFor="let pay of order.payments">
           <div class="order-history__payment-type">
-            <img [src]="paymentIcons[order.payment]" alt="payment icon" class="order-history__payment-icon" />
+            <img [src]="paymentIcons[pay.mode_of_payment]" alt="payment icon" class="order-history__payment-icon" />
   
             <span class="order-history__payment-label">
-              {{ order.payment }}
+              {{ pay.mode_of_payment }}
             </span>
           </div>
   
           <div class="order-history__total">
-            {{ db.formatCurrency(order.total) }}
+            {{ db.formatCurrency(pay.amount) }}
           </div>
         </div>
           
