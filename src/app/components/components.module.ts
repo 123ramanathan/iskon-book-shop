@@ -6,7 +6,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { HeaderComponent } from './header/header.component';
 import { ModalPopupComponent } from './modal-popup/modal-popup.component';
 import { PaymentComponent } from './payment/payment.component';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     CatalogCardsComponent,
@@ -18,6 +18,7 @@ import { PaymentComponent } from './payment/payment.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     IonicModule
 ],
   exports: [

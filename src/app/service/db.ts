@@ -11,6 +11,7 @@ export class Db {
   path:any;
   private domain = "https://iskcon.m.frappe.cloud"
   private baseUrl:string = "/api/method/iskcon.iskcon.mobile_app_api."
+  private baseUrlPos:string = "/api/method/iskcon.iskcon.mobile_app_pos."
 
   header_content:any = {};
   constructor(private http:HttpClient){}
@@ -39,7 +40,7 @@ export class Db {
     let total = 0;
 
     for(let i=0;i<this.cartItems.length;i++){
-      total += this.cartItems[i]['qty'] * this.cartItems[i]['price']
+      total += this.cartItems[i]['qty'] * (this.cartItems[i]['price_list_rate'] ?? 0)
     }
 
     this.subtotal = total;
@@ -53,7 +54,7 @@ export class Db {
 
     for (let i = 0; i < cart.length; i++) {
       for (let j = 0; j < books.length; j++) {
-        if(cart[i]['name'] === books[j]['name']){
+        if(cart[i]['item_name'] === books[j]['item_name']){
           books[j]['book_qty'] = cart[i]['qty']
         }
       }
@@ -65,7 +66,7 @@ export class Db {
   add_to_cart(item:any){
     this.cartItems = this.get_cart_items()
     if(this.cartItems && this.cartItems.length > 0){
-      const isExist = this.cartItems.findIndex((res:any)=> res['name'] === item.name)
+      const isExist = this.cartItems.findIndex((res:any)=> res['item_name'] === item.item_name)
       if(isExist > -1){
         this.cartItems[isExist]['qty'] += item.qty;
       }else{
@@ -83,7 +84,7 @@ export class Db {
   update_qty(item:any,type:string){
 
     if(type === "inc"){
-      if((item['qty'] ?? 0) < item.stock){
+      if(item.is_stock_item && (item['qty'] ?? 0) < item.actual_qty){
         item['qty'] = item['qty'] > 0 ? item['qty'] + 1 : 2
       }
     }else{
@@ -91,7 +92,7 @@ export class Db {
     }
     
     for (let i = 0; i < this.cartItems.length; i++) {
-      if(item.name === this.cartItems[i]['name']){
+      if(item.item_name === this.cartItems[i]['item_name']){
         this.cartItems[i] = item
       }
     }
@@ -103,7 +104,7 @@ export class Db {
 
   remove_cart_item(item:any){
     for (let i = 0; i < this.cartItems.length; i++) {
-      if(item.name === this.cartItems[i]['name']){
+      if(item.item_name === this.cartItems[i]['item_name']){
         this.cartItems.splice(i,1);
         break;
       }
@@ -167,7 +168,7 @@ export class Db {
 
   sales_items_with_filters(params:any){
     // pos_profile = Store ID ,search_book_name = Bookname filter,item_group = Item group filter
-    const endpoint = this.baseUrl + `get_items`;
+    const endpoint = this.baseUrlPos + `get_items`;
     return this.callApi(endpoint,"POST",params)
   }
 
@@ -177,7 +178,7 @@ export class Db {
   }
 
   payments_invoice(params:any){
-    const endpoint = "/api/method/iskcon.iskcon.iskcon.mobile_app_payments.create_pos_invoice";
+    const endpoint = "/api/method/iskcon.iskcon.mobile_app_payments.create_pos_invoice";
     return this.callApi(endpoint,"POST",params)
   }
 
@@ -218,5 +219,17 @@ export class Db {
       }
     });
   }
+
+  getImage(image: any) {
+    if (!image) return '';
+  
+    if (image.indexOf('http') === -1) {
+      // When the image is a relative path
+      return `${this.domain+image}`;
+    }
+  
+    return image; // Already a full URL
+  }
+  
 
 }

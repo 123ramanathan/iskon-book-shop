@@ -5,18 +5,19 @@
       
       <!-- Thumbnail -->
       <div class="product-card__thumbnail">
-        <span class="product-card__thumbnail-text">The Great</span>
+        <img *ngIf="item.item_image" [src]="db.getImage(item.item_image)" [alt]="item.item_name" />
+        <span *ngIf="!item.item_image" class="product-card__thumbnail-text">{{item.item_name}}</span>
       </div>
   
       <!-- Content -->
       <div class="product-card__content">
-        <h3 class="product-card__title">{{item.book_name}}</h3>
-        <p class="product-card__author">{{item.author_name}}</p>
+        <h3 class="product-card__title">{{item.item_name}}</h3>
+        <p class="product-card__author">{{item?.author_name ?? " - "}}</p>
   
         <!-- Price + Stock -->
         <div class="product-card__pricing">
-          <span class="product-card__price">{{db.formatCurrency(item.price)}}</span>
-          <div class="product-card__stock">{{item.stock > 0 ? item.stock + " in stock" : "Out of stock"}} </div>
+          <span class="product-card__price">{{db.formatCurrency(item.price_list_rate)}}</span>
+          <div class="product-card__stock">{{item.actual_qty > 0 ? item.actual_qty + " in stock" : "Out of stock"}} </div>
         </div>
   
         <!-- Actions -->

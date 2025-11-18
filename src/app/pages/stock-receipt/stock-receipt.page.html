@@ -7,49 +7,23 @@
     <div class="pending_reviews">
 
       <div class="title">
-        <h3 class="m-0">Pending Confirmation (2)</h3>
-        <div class="items_count">2 Items</div>
+        <h3 class="m-0">Pending Confirmation ({{stock_entry_list?.pending_count}})</h3>
       </div>
 
-      <div class="pending_list">
-        <!-- <div *ngFor="let item of pending_confirmation_list" class="boxes">
-          <div class="sec1">
-            <div>
-              <h4 class="m-0 book_name">{{item.book_name}}</h4>
-              <p class="m-0 received_date">Received: {{item.received_date}}</p>
-            </div>
-            <div class="status">{{item.status}}</div>
-          </div>
-          <div class="sec2">
-            <span class="quantity">Quantity:</span>
-            <span class="quantity_value">{{item.quantity}} units</span>
-            <ion-button fill="clear"><ion-icon src="/assets/icon/edit.svg"></ion-icon></ion-button>
-          </div>
-          <div class="sec3">
-            <div class="comment_title">
-              <ion-icon src="/assets/icon/comment.svg"></ion-icon>
-              <span>Comments (optional)</span>
-            </div>
-            <textarea placeholder="Add any notes about this receipt..."></textarea>
-          </div>
-          <div class="sec4">
-            <ion-button fill="clear"><ion-icon src="/assets/icon/confirm-tick.svg"></ion-icon>Confirm Receipt</ion-button>
-          </div>
-        </div> -->
-
-        <div *ngFor="let item of stock_entry_list" class="stock_boxes" (click)="goToReceiptDetails(item)">
+      <div class="pending_list" *ngIf="stock_entry_list.pending && stock_entry_list.pending.length > 0">
+        <div *ngFor="let item of stock_entry_list.pending" class="stock_boxes" (click)="goToReceiptDetails(item)">
           <div class="boxes">
             <div class="box_1">
               <div class="sec_1">
                 <ion-icon src="/assets/icon/receipt-items-pending.svg"></ion-icon>
               </div>
               <div class="sec_2">
-                <p class="m-0 id">{{item.id}}</p>
-                <p class="m-0 from">From: {{item.from}}</p>
-                <p class="m-0 date">Date: {{item.date}}</p>
+                <p class="m-0 id">{{item.name}}</p>
+                <p class="m-0 from">From: {{item.from_warehouse ?? " - "}}</p>
+                <p class="m-0 date">Date: {{item.posting_date}}</p>
                 <div class="count_status">
-                  <p class="m-0 items">{{item.items_count}} Items</p>
-                  <p class="m-0 status">{{item.status}}</p>
+                  <p class="m-0 items">{{item.items_count ?? ' 0 '}} Items</p>
+                  <p class="m-0 status">{{item.status ?? "-"}}</p>
                 </div>
               </div>
             </div>
@@ -60,31 +34,25 @@
 
     </div>
 
-    <div class="confirmed_receipt">
+    <div class="confirmed_receipt" *ngIf="stock_entry_list.confirmed && stock_entry_list.confirmed.length > 0">
       <div class="title">
-        <h3 class="m-0">Confirmed (1)</h3>
+        <h3 class="m-0">Confirmed ({{stock_entry_list?.confirmed_count}})</h3>
       </div>
       <div class="confirmed_list">
-        <!-- <div *ngFor="let item of confirmed_receipt_list" class="boxes">
-          <div class="book_detail">
-            <h4 class="m-0">{{item.book_name}}</h4>
-            <p class="m-0">{{item.units}} units confirmed</p>
-          </div>
-          <div class="status"><ion-icon src="/assets/icon/confirm-tick-green.svg"></ion-icon>{{item.status}}</div>
-        </div> -->
-        <div *ngFor="let item of stock_entry_list_completed" class="stock_boxes">
+       
+        <div *ngFor="let item of stock_entry_list.confirmed" class="stock_boxes">
           <div class="boxes">
             <div class="box_1">
               <div class="sec_1">
                 <ion-icon src="/assets/icon/receipt-items-completed.svg"></ion-icon>
               </div>
               <div class="sec_2">
-                <p class="m-0 id">{{item.id}}</p>
-                <p class="m-0 from">From: {{item.from}}</p>
-                <p class="m-0 date">Date: {{item.date}}</p>
+                <p class="m-0 id">{{item.name}}</p>
+                <p class="m-0 from">From: {{item.from_warehouse ?? " - "}}</p>
+                <p class="m-0 date">Date: {{item.posting_date}}</p>
                 <div class="count_status">
-                  <p class="m-0 items">{{item.items_count}} Items</p>
-                  <p class="m-0 status">{{item.status}}</p>
+                  <p class="m-0 items">{{item.items_count ?? " 0 "}} Items</p>
+                  <p class="m-0 status">{{item.status ?? " - "}}</p>
                 </div>
               </div>
             </div>

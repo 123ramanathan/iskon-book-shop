@@ -28,6 +28,8 @@ $line-height: 1.25rem;
     top: 0;
     padding: 1rem;
     border-bottom: 1px solid $border-color;
+    z-index: 100;
+    background: #fff;
   }
 
   &__input {
