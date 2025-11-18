@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { first } from 'rxjs';
 import { Db } from 'src/app/service/db';
 
@@ -21,7 +22,7 @@ export class PaymentComponent implements OnInit {
 
     customer_name:any = ""
    
-  constructor(public db: Db) {}
+  constructor(public db: Db,private navCtrl:NavController) {}
 
   ngOnInit() {}
 
@@ -35,7 +36,7 @@ export class PaymentComponent implements OnInit {
       icon: '/assets/icon/upi-type.svg',
     },
     {
-      name: 'Card',
+      name: 'Credit Card',
       icon: '/assets/icon/card-type.svg',
     },
     {
@@ -61,13 +62,22 @@ export class PaymentComponent implements OnInit {
       items.push(data)
     }
     const params = {
-      pos_profile: 'Main POS',
+      pos_profile: localStorage['store_name'],
       items: items,
       payments: this.generate_payment_method(),
       customer_name: this.customer_name
     };
     this.db.payments_invoice({invoice_data:params}).subscribe((res: any) => {
       console.log(res, 'res');
+      if(res.status === "Success"){
+        const thankyouValues = {
+          amount: res.message.total_amount,
+          mode_of_payment : this.payment.type
+        };
+
+        localStorage['thankyou_content'] = JSON.stringify(thankyouValues);
+        this.navCtrl.navigateForward('/thankyou');
+      }
     });
   }
 
@@ -81,7 +91,7 @@ export class PaymentComponent implements OnInit {
         }];
         break;
 
-      case 'Card':
+      case 'Credit Card':
         data= [{
           mode_of_payment: this.payment?.type,
           amount: this.db.subtotal,

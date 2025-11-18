@@ -2,88 +2,58 @@
 
 <ion-content [fullscreen]="true" style="--background: #f6f7f9;">
 
-  <div class="main_section">
+  <div class="main_section" *ngIf="report_details">
 
     <div class="header_content">
       <h2 class="m-0">Reports & Analytics</h2>
       <p class="m-0">View your store performance</p>
     </div>
 
-    <div class="today_summary">
+    <div class="today_summary" *ngIf="report_details.today_summary">
       <h3 class="m-0">Today's Summary</h3>
       <div class="section_2">
         <div class="sec_1">
-          <p class="m-0">24</p>
+          <p class="m-0">{{report_details.today_summary.total_sales}}</p>
           <p class="m-0">Total Sales</p>
         </div>
         <div class="sec_2">
-          <p class="m-0">₹12,450</p>
+          <p class="m-0">{{db.formatCurrency(report_details.today_summary.revenue)}}</p>
           <p class="m-0">Revenue</p>
         </div>
       </div>
     </div>
 
-    <div class="payment_methods">
+    <div class="payment_methods" *ngIf="report_details.payment_methods">
       <h3 class="m-0">Payment Methods</h3>
       <div class="types_sec">
-        <div class="secs">
-          <p class="m-0 type">Cash</p>
+        <div class="secs" *ngFor="let item of report_details.payment_methods">
+          <p class="m-0 type">{{item.method}}</p>
           <div class="cost_sec">
-            <p class="m-0 transaction">12 transactions</p>
-            <p class="m-0 amount">₹5,200</p>
-          </div>
-        </div>
-        <div class="secs">
-          <p class="m-0 type">UPI</p>
-          <div class="cost_sec">
-            <p class="m-0 transaction">8 transactions</p>
-            <p class="m-0 amount">₹4,850</p>
-          </div>
-        </div>
-        <div class="secs">
-          <p class="m-0 type">Card</p>
-          <div class="cost_sec">
-            <p class="m-0 transaction">4 transactions</p>
-            <p class="m-0 amount">₹2,400</p>
+            <p class="m-0 transaction">{{item.count}} transactions</p>
+            <p class="m-0 amount">{{db.formatCurrency(item.amount)}}</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="top_selling_books">
+    <div class="top_selling_books" *ngIf="report_details.top_selling_books">
       <h3 class="m-0">Top Selling Books</h3>
       <div class="books_sec">
-        <div class="book_list">
+
+        <div class="book_list" *ngFor="let item of report_details.top_selling_books">
           <div class="sec_1">
-            <p class="m-0 book_name">Atomic Habits</p>
-            <p class="m-0 sold">8 units sold</p>
+            <p class="m-0 book_name">{{item.item_name}}</p>
+            <p class="m-0 sold">{{item.qty}} units sold</p>
           </div>
           <div class="sec_2">
-            <p class="m-0 amount">₹4,792</p>
+            <p class="m-0 amount">{{db.formatCurrency(item.amount)}}</p>
           </div>
         </div>
-        <div class="book_list">
-          <div class="sec_1">
-            <p class="m-0 book_name">Harry Potter</p>
-            <p class="m-0 sold">6 units sold</p>
-          </div>
-          <div class="sec_2">
-            <p class="m-0 amount">₹2,994</p>
-          </div>
-        </div>
-        <div class="book_list">
-          <div class="sec_1">
-            <p class="m-0 book_name">Sapiens</p>
-            <p class="m-0 sold">4 units sold</p>
-          </div>
-          <div class="sec_2">
-            <p class="m-0 amount">₹2,796</p>
-          </div>
-        </div>
+        
       </div>
     </div>
 
-    <div class="this_week">
+    <div class="this_week" *ngIf="false">
       <h3 class="m-0">This Week</h3>
 
       <div class="types">
