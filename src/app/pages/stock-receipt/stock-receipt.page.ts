@@ -51,6 +51,6 @@ export class StockReceiptPage implements OnInit {
   }
 
   goToReceiptDetails(item: any){
-    this.router.navigateByUrl('/transfer-receipt');
+    this.router.navigateByUrl('/transfer-receipt/' + item.name);
   }
 }

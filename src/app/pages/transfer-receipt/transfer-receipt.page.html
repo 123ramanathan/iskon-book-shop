@@ -10,13 +10,13 @@
           <div class="sec_1">
             <ion-icon src="/assets/icon/receipt-items-pending.svg"></ion-icon>
           </div>
-          <div class="sec_2">
-            <p class="m-0 id">{{stock_details.id}}</p>
-            <p class="m-0 from">From: {{stock_details.from}}</p>
-            <p class="m-0 date">Date: {{stock_details.date}}</p>
+          <div class="sec_2" *ngIf="stock_details && stock_details.stock_entry">
+            <p class="m-0 id">{{stock_details.stock_entry.name}}</p>
+            <p class="m-0 from">From: {{stock_details.stock_entry.from_warehouse}}</p>
+            <p class="m-0 date">Date: {{stock_details.stock_entry.posting_date}}</p>
             <div class="count_status">
-              <p class="m-0 items">{{stock_details.items_count}} Items</p>
-              <p class="m-0 status">{{stock_details.status}}</p>
+              <p class="m-0 items">{{stock_details.total_items}} Items</p>
+              <p class="m-0 status">{{stock_details.stock_entry.custom_status}}</p>
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@
 
   <div class="save_btn">
     <ion-button fill="clear" (click)="saveReceipt()"><ion-icon class="white" name="checkmark-circle-outline"></ion-icon>Confirm Receipt</ion-button>
-    <ion-button class="wrong_transfer" routerLink="/wrong-receipt" fill="clear"><ion-icon name="warning-outline"></ion-icon>Report Wrong Transfer</ion-button>
+    <ion-button class="wrong_transfer" [routerLink]="'/wrong-receipt/' + router_name" fill="clear"><ion-icon name="warning-outline"></ion-icon>Report Wrong Transfer</ion-button>
   </div>
 
 </ion-content>

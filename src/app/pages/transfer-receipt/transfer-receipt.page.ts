@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Db } from 'src/app/service/db';
 
 @Component({
   selector: 'app-transfer-receipt',
@@ -14,9 +16,19 @@ export class TransferReceiptPage implements OnInit {
     items_count: 3,
     status: 'Pending'
   }
-  constructor() { }
+  router_name: any;
+  stock_entry_list: any = [];
+
+  constructor(public route: ActivatedRoute, public db: Db) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      console.log(params);
+      if(params && params['id']){
+        this.router_name = params['id'];
+        this.get_stock_entry_details();
+      }
+    })
   }
 
   receipt_book_list: any = [
@@ -39,6 +51,27 @@ export class TransferReceiptPage implements OnInit {
 
   saveReceipt(){
     console.log("Receipt Saved")
+    let data = {
+      stock_entry_name: this.router_name
+    }
+    this.db.confirm_receipt(data).subscribe((res: any) => {
+      console.log(res);
+    });
+  }
+
+  get_stock_entry_details(){
+    let data = {
+      stock_entry_name: this.router_name
+    }
+    this.db.get_stock_entry_details(data).subscribe((res: any) => {
+      console.log(res);
+      if(res && res.message && res.message.status == 'success'){
+        this.stock_entry_list = res.message.items;
+        this.stock_details = res.message;
+      }else{
+        this.stock_entry_list = [];
+      }
+    })
   }
 
 }
