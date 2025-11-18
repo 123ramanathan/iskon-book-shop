@@ -8,34 +8,15 @@ import { Db } from 'src/app/service/db';
   standalone: false
 })
 export class OrdersPage implements OnInit {
-  orders: any[] = [
-    {
-      id: 'ORD-001',
-      date: '2025-10-02',
-      time: '10:30 AM',
-      payment: 'cash',
-      total: 1409.0,
-      items: [
-        { name: 'The Great Gatsby', qty: 2 },
-        { name: 'Atomic Habits', qty: 1 },
-      ],
-    },
-    {
-      id: 'ORD-002',
-      date: '2025-10-02',
-      time: '11:15 AM',
-      payment: 'upi',
-      total: 1447.0,
-      items: [{ name: "Harry Potter and the Philosopher's Stone", qty: 3 }],
-    },
-  ];
+  orders: any[] = [];
+  page:number = 1;
 
   // Dynamic icons map
   paymentIcons: Record<string, string> = {
-    cash: 'assets/payment-type/wallet.svg',
-    upi: 'assets/payment-type/upi.svg',
-    card: 'assets/payment-type/card.svg',
-    split: 'assets/payment-type/split-payment.svg'
+    Cash: 'assets/payment-type/wallet.svg',
+    UPI: 'assets/payment-type/upi.svg',
+    "Credit Card": 'assets/payment-type/card.svg',
+    Split: 'assets/payment-type/split-payment.svg'
   };
 
 
@@ -50,10 +31,17 @@ export class OrdersPage implements OnInit {
 
   getOrdersList(){
     let data = {
-      pos_profile: 'Test'
+      pos_profile: localStorage['store_name'],
+      page:this.page,
+      limit: 20
     }
     this.db.get_orders(data).subscribe((res:any)=>{
       console.log(res, "orders list response");
+      if(res.message && res.message.message && res.message.message.length > 0){
+        this.orders = this.page === 1 ? res.message.message : [...this.orders,...res.message.message]
+      }else{
+        this.orders = []
+      }
     });
   }
 

@@ -78,7 +78,7 @@ export class StockReconciliationPage implements OnInit {
 
   getStocksReconcilation(){
     let data = {
-      pos_profile: 'Test'
+      pos_profile: localStorage['store_name']
     }
     this.db.get_stock_reconcilation(data).subscribe((res:any)=>{
       if(res && res.status == 'Success' && res.message && res.message.item_details && res.message.item_details.length > 0){
@@ -91,7 +91,7 @@ export class StockReconciliationPage implements OnInit {
 
   saveReconciliation(){
     let data = {
-      pos_profile: 'Test',
+      pos_profile: localStorage['store_name'],
       item_details: this.conciliation_list
     }
     this.db.create_stock_reconciliation(data).subscribe((res:any)=>{

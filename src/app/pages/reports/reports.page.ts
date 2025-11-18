@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Db } from 'src/app/service/db';
 
 @Component({
   selector: 'app-reports',
@@ -7,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   standalone: false
 })
 export class ReportsPage implements OnInit {
-
-  constructor() { }
+  report_details:any;
+  constructor(public db:Db) { }
 
   ngOnInit() {
+    this.get_reports()
+  }
+
+  get_reports(){
+    const params = {
+      pos_profile: localStorage['store_name']
+    }
+    this.db.get_reports(params).subscribe((res:any)=>{
+      if(res.message){
+        this.report_details = res.message;
+      }
+    })
   }
 
 }

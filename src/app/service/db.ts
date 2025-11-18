@@ -227,6 +227,11 @@ export class Db {
     return this.callApi(endpoint,"POST",params)
   }
 
+  get_reports(params:any){
+    const endpoint = "/api/method/iskcon.iskcon.mobile_app_report_page.sales_details";
+    return this.callApi(endpoint,"POST",params)
+  }
+
   headerDetails(){
     let data = {
       user: 'umarbenz@gmail.com'
@@ -234,6 +239,10 @@ export class Db {
     this.store_details(data).subscribe((res:any)=>{
       if(res && res.status == 'Success' && res.message){
         this.header_content = res.message;
+        Object.keys(res.message).map((key:any)=>{
+          localStorage[key] = res.message[key]
+        });
+        
       }else{
         this.header_content = {};
       }
