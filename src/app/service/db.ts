@@ -212,6 +212,11 @@ export class Db {
     return this.callApi(endpoint,"POST",params)
   }
 
+  get_item_group(){
+    const endpoint = this.baseUrlPos + "get_items_group";
+    return this.callApi(endpoint,"GET")
+  }
+
   headerDetails(){
     let data = {
       user: 'umarbenz@gmail.com'
@@ -222,7 +227,7 @@ export class Db {
         Object.keys(res.message).map((key:any)=>{
           localStorage[key] = res.message[key]
         });
-        
+
       }else{
         this.header_content = {};
       }

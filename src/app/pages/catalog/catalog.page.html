@@ -85,7 +85,7 @@
             [(ngModel)]="category"
             (change)="categoryChange($event)"
           >
-            <option *ngFor="let item of categories" [value]="item.value">
+            <option *ngFor="let item of categories" [value]="item.name">
               {{ item.name }}
             </option>
           </select>
@@ -102,7 +102,7 @@
           loadingSpinner="bubbles">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
-      
+
     </section>
 
     <div class="cart-container" *ngIf="db.cartItems.length > 0">
