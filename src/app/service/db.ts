@@ -177,6 +177,26 @@ export class Db {
     return this.callApi(endpoint,"POST",params)
   }
 
+  get_stock_entry_details(params:any){
+    const endpoint = this.baseUrl + "get_stock_entry_details";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  get_wrong_books_list(params:any){
+    const endpoint = this.baseUrl + "get_wrong_books_list";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  submit_books_report(params:any){
+    const endpoint = this.baseUrl + "submit_books_report";
+    return this.callApi(endpoint,"POST",params)
+  }
+
+  confirm_receipt(params:any){
+    const endpoint = this.baseUrl + "confirm_receipt";
+    return this.callApi(endpoint,"POST",params)
+  }
+
   payments_invoice(params:any){
     const endpoint = "/api/method/iskcon.iskcon.mobile_app_payments.create_pos_invoice";
     return this.callApi(endpoint,"POST",params)

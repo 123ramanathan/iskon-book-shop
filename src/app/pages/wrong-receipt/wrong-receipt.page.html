@@ -10,11 +10,9 @@
       <div class="inputs_sec">
         <div class="book_name_input">
           <label>Physical Quantity</label>
-          <select [(ngModel)]="selected_book">
+          <select [(ngModel)]="selected_book" *ngIf="wrong_book_list && wrong_book_list.length > 0">
             <option value="" selected>Select Book</option>
-            <option value="Book A">Book A</option>
-            <option value="Book B">Book B</option>
-            <option value="Book C">Book C</option>
+            <option *ngFor="let item of wrong_book_list" [value]="item.item_code">{{item.book_name}}</option>
           </select>
         </div>
         <div class="quantity">
@@ -33,11 +31,15 @@
 
       <div *ngFor="let item of saved_books; let i = index" class="books_">
         <div>
-          <p class="m-0 book">{{item.book}}</p>
+          <p class="m-0 book">{{item.book_name}}</p>
           <p class="m-0 quantity">Qty: {{item.quantity}}</p>
         </div>
         <ion-icon (click)="remove_book(i)" name="close-outline"></ion-icon>
       </div>
+    </div>
+
+    <div class="save_btn">
+      <ion-button fill="clear" (click)="saveWrongBook()"><ion-icon class="white" name="checkmark-circle-outline"></ion-icon>Submit Report</ion-button>
     </div>
 
   </div>
