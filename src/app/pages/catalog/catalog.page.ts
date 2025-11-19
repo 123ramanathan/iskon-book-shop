@@ -10,7 +10,7 @@ import { Db } from 'src/app/service/db';
 export class CatalogPage implements OnInit {
   private debounceTimer: any;
   searchTxt:any="";
-  category:any="";
+  category:any="All Categories";
   page:number= 1;
   loading:boolean = false
   noProduct:boolean = false
@@ -26,22 +26,24 @@ export class CatalogPage implements OnInit {
     // }
   ]
 
-  categories = [
-    {name: "All Categories", value: ""},
-    {name: "Classic Fiction", value: "classic fiction"},
-    {name: "Dystopian Fiction", value: "dystopian fiction"},
-    {name: "Romance", value: "romance"},
-    {name: "Fantasy", value: "fantasy"},
-    {name: "Self Help", value: "self help"},
-    {name: "Fiction", value: "fiction"},
-    {name: "Non-fiction", value: "non-fiction"},
-  ]
+  categories:any[] = []
 
   constructor(public db:Db) { }
 
   ngOnInit() {
     this.db.get_cart_items();
     this.getItems();
+    this.get_item_group()
+  }
+
+  get_item_group(){
+    this.db.get_item_group().subscribe((res:any)=>{
+      if(res.message && res.message.item_groups && res.message.item_groups.length > 0){
+        const value = {name: "All Categories"}
+        res.message.item_groups.unshift(value);
+        this.categories = res.message.item_groups
+      }
+    })
   }
 
   getItems(){
