@@ -18,6 +18,8 @@ export class StockReceiptPage implements OnInit {
     confirmed_count:0,
 
   }
+
+  selectedSegment: any = 'pending_list';
   constructor(public db: Db, private router: Router) { }
 
   ngOnInit() {
@@ -52,5 +54,20 @@ export class StockReceiptPage implements OnInit {
 
   goToReceiptDetails(item: any){
     this.router.navigateByUrl('/transfer-receipt/' + item.name);
+  }
+
+  segmentChanged(event: any) {
+    this.selectedSegment = event.detail.value;
+  }
+
+  load_more(event: any){
+  //   if(!this.no_products){
+  //     let value = event.target.offsetHeight + event.target.scrollTop + 1;
+  //     value = value.toFixed();
+  //     if(value >= event.target.scrollHeight){
+  //       this.page_no += 1;
+  //       this.getLatestPendingReceipt()
+  //     }
+  //   }
   }
 }

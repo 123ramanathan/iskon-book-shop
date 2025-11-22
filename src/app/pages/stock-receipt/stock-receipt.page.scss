@@ -1,6 +1,6 @@
 .main_section {
     padding: 1rem;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 170px);
     overflow: auto;
 
     .pending_reviews {
@@ -164,7 +164,7 @@
             }
 
             .stock_boxes {
-                
+
                 .boxes {
                     display: flex;
                     align-items: center;
@@ -312,6 +312,7 @@
 
             .stock_boxes {
                 margin-bottom: .75rem;
+
                 .boxes {
                     display: flex;
                     align-items: center;
@@ -416,4 +417,21 @@
             margin-right: 1rem;
         }
     }
+}
+
+ion-segment-button {
+    ion-label {
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: capitalize;
+        color: var(--primary-color) !important;
+    }
+}
+
+.segment_bar {
+    border-bottom: 1px solid var(--border-col);
+}
+
+.completed_list {
+    height: calc(100vh - 105px);
 }

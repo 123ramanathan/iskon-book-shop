@@ -30,11 +30,16 @@ export class CatalogPage implements OnInit {
 
   constructor(public db:Db) { }
 
-  ngOnInit() {
+  ionViewWillEnter(){
     this.db.get_cart_items();
     this.getItems();
     this.get_item_group()
   }
+
+  ngOnInit(): void {
+    
+  }
+
 
   get_item_group(){
     this.db.get_item_group().subscribe((res:any)=>{
@@ -95,10 +100,33 @@ export class CatalogPage implements OnInit {
   }
 
   loadMore(event:any){
-    if(!this.loading){
+    if(!this.noProduct){
       this.page += 1;
       this.loading = true
       this.getItems();
     }
   }
+
+  loadMoreItems(event: any) {
+    // Support both Ionic ionScroll (event.detail.scrollTop) and plain DOM scroll (event.target.scrollTop)
+    const scrollTop = event?.detail?.scrollTop ?? event?.target?.scrollTop ?? 0;
+    const scrollHeight = event?.target?.scrollHeight ?? event?.detail?.scrollHeight ?? 0;
+    const clientHeight = event?.target?.clientHeight ?? event?.detail?.clientHeight ?? 0;
+
+    // Debugging help (remove if not needed)
+    // console.log({ scrollTop, clientHeight, scrollHeight, loading: this.loading, noProduct: this.noProduct });
+
+    // Prevent multiple triggers while already loading or when there are no more products
+    if (this.loading || this.noProduct) {
+      return;
+    }
+
+    // Trigger when user reaches (or gets within 20px of) the bottom
+    if (scrollTop + clientHeight >= scrollHeight - 20) {
+      this.page += 1;
+      this.loading = true;
+      this.getItems();
+    }
+  }
+
 }

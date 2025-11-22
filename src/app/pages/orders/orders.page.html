@@ -65,5 +65,12 @@
       </div>
     </div>
   </main>
+
+  <div class="no-orders" *ngIf="orders && orders.length === 0">
+    <!-- <img src="assets/images/no-orders.svg" alt="No Orders" class="no-orders__image" /> -->
+    <h2 class="no-orders__title">No Orders Yet</h2>
+    <p class="no-orders__subtitle">You haven't placed any orders yet. Start shopping now!</p>
+    <ion-button routerLink="/catalog" class="no-orders__button">Shop Now</ion-button>
+  </div>
   
 </ion-content>

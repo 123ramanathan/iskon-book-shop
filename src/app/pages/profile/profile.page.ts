@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Db } from 'src/app/service/db';
+import { ModalPopupComponent } from 'src/app/components/modal-popup/modal-popup.component';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,7 @@ import { Db } from 'src/app/service/db';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private alertController: AlertController, private router: Router, public db: Db) { }
+  constructor(private alertController: AlertController, private router: Router, public db: Db, public modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
@@ -20,29 +21,49 @@ export class ProfilePage implements OnInit {
     this.db.headerDetails();
   }
 
+  // async confirmLogout() {
+  //   const alert = await this.alertController.create({
+  //     header: 'Logout',
+  //     message: 'Do you want to logout?',
+  //     buttons: [
+  //       {
+  //         text: 'No',
+  //         role: 'cancel'
+  //       },
+  //       {
+  //         text: 'Yes',
+  //         handler: () => {
+  //           this.logout();
+  //         }
+  //       }
+  //     ]
+  //   });
+
+  //   await alert.present();
+  // }
+
   async confirmLogout() {
-    const alert = await this.alertController.create({
-      header: 'Logout',
-      message: 'Do you want to logout?',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel'
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            this.logout();
-          }
-        }
-      ]
+    const modal = await this.modalCtrl.create({
+      component: ModalPopupComponent,
+      componentProps: { 
+        headerText: "Confirm Logout",
+        title: "Are you sure you want to Logout?",
+        btn1: "Yes",
+        btn2: "No"
+       },
+      cssClass: 'confirm-modal',
     });
 
-    await alert.present();
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+
+    if (data?.confirmed) {
+      this.logout();
+    }
   }
 
-  private logout() {
-    // Add your logout logic here
+  logout() {
     this.router.navigate(['/login']);
   }
 
