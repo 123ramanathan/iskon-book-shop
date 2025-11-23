@@ -10,13 +10,13 @@
           <div class="sec_1">
             <ion-icon src="/assets/icon/receipt-items-pending.svg"></ion-icon>
           </div>
-          <div class="sec_2" *ngIf="stock_details && stock_details.stock_entry">
-            <p class="m-0 id">{{stock_details.stock_entry.name}}</p>
-            <p class="m-0 from">From: {{stock_details.stock_entry.from_warehouse}}</p>
-            <p class="m-0 date">Date: {{stock_details.stock_entry.posting_date}}</p>
+          <div class="sec_2" *ngIf="stock_details">
+            <p class="m-0 id">{{stock_details.transfer_receipt_id}}</p>
+            <p class="m-0 from">From: {{stock_details.from_warehouse}}</p>
+            <p class="m-0 date">Date: {{stock_details.posting_date}}</p>
             <div class="count_status">
               <p class="m-0 items">{{stock_details.total_items}} Items</p>
-              <p class="m-0 status">{{stock_details.stock_entry.custom_status}}</p>
+              <p class="m-0 status">{{stock_details.status}}</p>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
         <div class="cost_inputs">
           <div class="system_quantity">
             <label>System Quantity</label>
-            <input type="number" readonly placeholder="System Quantity" [(ngModel)]="item.system_quantity">
+            <input type="number" readonly placeholder="System Quantity" [(ngModel)]="item.system_qty">
           </div>
           <div class="physical_quantity">
             <label>Physical Quantity</label>

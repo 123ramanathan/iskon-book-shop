@@ -52,7 +52,8 @@ export class TransferReceiptPage implements OnInit {
   saveReceipt(){
     console.log("Receipt Saved")
     let data = {
-      stock_entry_name: this.router_name
+      stock_entry_name: this.router_name,
+      items_data: this.stock_entry_list
     }
     this.db.confirm_receipt(data).subscribe((res: any) => {
       console.log(res);
@@ -65,9 +66,11 @@ export class TransferReceiptPage implements OnInit {
     }
     this.db.get_stock_entry_details(data).subscribe((res: any) => {
       console.log(res);
-      if(res && res.message && res.message.status == 'success'){
-        this.stock_entry_list = res.message.items;
-        this.stock_details = res.message;
+      if(res && res.message && res.message.data && res.message.status == 'success'){
+        if(res.message.data.items && res.message.data.items.length > 0){
+          this.stock_entry_list = res.message.data.items;
+        }
+        this.stock_details = res.message.data.header;
       }else{
         this.stock_entry_list = [];
       }

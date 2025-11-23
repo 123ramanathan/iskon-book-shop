@@ -11,7 +11,7 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div class="main_section" [class.completed_list]="selectedSegment == 'confirmed_list'" (scroll)="selectedSegment == 'pending_list' ? load_more($event) : null">
+  <div class="main_section" [class.completed_list]="selectedSegment == 'confirmed_list'" (scroll)="load_more($event)">
 
     <div class="pending_reviews" *ngIf="selectedSegment == 'pending_list'">
 
