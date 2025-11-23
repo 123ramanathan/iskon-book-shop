@@ -53,13 +53,16 @@ export class LoginPage implements OnInit {
       username: this.loginForm.value.username,
       password: this.loginForm.value.password,
     }
-    this.db.login(data).subscribe((res: any) => {
+    this.db.login(data).subscribe( async (res: any) => {
       // console.log('Login response', res);
       if(res && res.status == 'Success' && res.message){
+        this.error_message = "";
+        this.submitted = false;
         let token = `token ${res.message.api_key}:${res.message.api_secret}`;
         localStorage['token'] = token;
-        this.loginForm.reset();
+        await this.loginForm.reset();
         this.router.navigateByUrl('/tabs/sales');
+        this.db.presentToast('Login Successful');
       }else{
         this.error_message = res.message.message;
       }

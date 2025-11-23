@@ -22,11 +22,11 @@
           <div class="cost_inputs">
             <div class="system_quantity">
               <label>System Quantity</label>
-              <input type="number" readonly [(ngModel)]="item.system_quantity">
+              <input type="number" readonly [ngModel]="item.system_quantity ? item.system_quantity : 0">
             </div>
             <div class="physical_quantity">
               <label>Physical Quantity</label>
-              <input type="number" [(ngModel)]="item.physical_qty">
+              <input type="number" [ngModel]="item.physical_qty ? item.physical_qty : 0">
             </div>
           </div>
         </div>

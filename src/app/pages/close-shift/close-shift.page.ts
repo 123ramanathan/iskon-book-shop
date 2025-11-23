@@ -8,10 +8,14 @@ import { Db } from 'src/app/service/db';
   standalone: false
 })
 export class CloseShiftPage implements OnInit {
-
+  report_details: any = {};
   constructor(public db: Db) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.getDashboardDetails();
   }
 
   closeShift(){
@@ -20,6 +24,20 @@ export class CloseShiftPage implements OnInit {
     }
     this.db.pos_closing_entry(data).subscribe((res:any)=>{
       console.log(res, "close shift response");
+    });
+  }
+
+  getDashboardDetails(){
+    let data = {
+      pos_profile: localStorage['store_name']
+    }
+    this.db.sales_details(data).subscribe((res:any)=>{
+      console.log(res, "sales details");
+      if(res && res.status == "Success" && res.message){
+        this.report_details = res.message;
+      }else{
+        this.report_details = {};
+      }
     });
   }
 

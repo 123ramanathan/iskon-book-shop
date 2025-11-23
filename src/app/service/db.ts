@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ToastController } from '@ionic/angular';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +16,7 @@ export class Db {
   private baseUrlPos:string = "/api/method/iskcon.iskcon.mobile_app_pos."
 
   header_content:any = {};
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient, private toastController: ToastController){}
 
   formatCurrency(amount:number, currency = "INR", locale = "en-IN") {
     if (isNaN(amount)) return "Invalid number";
@@ -265,5 +267,16 @@ export class Db {
     return image; // Already a full URL
   }
   
+  async presentToast(message: any) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,     // 2 seconds
+      position: 'bottom', // 👈 show at bottom
+      color: 'success',      // optional
+    });
+
+    await toast.present();
+  }
+
 
 }

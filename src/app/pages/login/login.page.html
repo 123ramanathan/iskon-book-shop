@@ -19,7 +19,7 @@
           placeholder="Email address" (keydown.enter)="onSubmit()">
         </ion-input>
       </div>
-      <div class="error" *ngIf="(f.username.touched || submitted) && f.username.errors">
+      <div class="error" *ngIf="(f.username.touched && submitted) && f.username.errors">
         <div *ngIf="f.username.errors.required">Email is required.</div>
         <div *ngIf="f.username.errors.email">Enter a valid email address.</div>
       </div>
@@ -35,7 +35,7 @@
           <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
         </ion-button>
       </div>
-      <div class="error" *ngIf="(f.password.touched || submitted) && f.password.errors">
+      <div class="error" *ngIf="(f.password.touched && submitted) && f.password.errors">
         <div *ngIf="f.password.errors.required">Password is required.</div>
         <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters.</div>
       </div>

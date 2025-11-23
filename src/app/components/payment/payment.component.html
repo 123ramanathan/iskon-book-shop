@@ -4,14 +4,19 @@
     <div class="customer_details">
       <div class="type_input">
         <label for="customer_name">Customer Name <span>*</span></label>
-        <input id="customer_name" [(ngModel)]="customer_name" placeholder="Enter customer name" name="customer_name" type="text" />
+        <input id="customer_name" [(ngModel)]="customer.customer_name" placeholder="Enter customer name" name="customer_name" type="text" />
+      </div>
+
+      <div class="type_input">
+        <label for="customer_phone">Customer Phone <span>*</span></label>
+        <input id="customer_phone" [(ngModel)]="customer.customer_phone" placeholder="Enter customer phone" name="customer_phone" type="number" />
       </div>
     </div>
 
     <div class="select_payment_method">
       <label>Select Payment Mode</label>
       <div class="payment_list">
-        <div *ngFor="let item of payment_types; let i = index" class="boxes" (click)="selected_payment(item)" [class.selected_payment]="payment?.type == item.name">
+        <div *ngFor="let item of payment_types; let i = index" class="boxes" (click)="selected_payment(item)" [class.selected_payment]="payment ? payment.type == item.name : null">
           <ion-icon [src]="item.icon"></ion-icon>
           <p class="m-0">{{item.name}}</p>
         </div>
@@ -27,23 +32,44 @@
       <div class="payment_fields first_payment">
         <div class="type_input">
           <label for="first_payment">First Payment Method</label>
-          <input id="first_payment" [(ngModel)]="payment.first_payment_type" placeholder="Enter payment type" name="first_payment" type="text">
+          <select
+            class="select mt-10"
+            placeholder="Enter payment type"
+            name="first_payment"
+            [(ngModel)]="payment.first_payment_type"
+            (change)="split_change($event,'first_payment_type')"
+          >
+            <option *ngFor="let item of payment_select" [value]="item.name">
+              {{ item.name }}
+            </option>
+            </select>
         </div>
+
         <div class="amount">
           <label for="first_payment_amount">Amount</label>
-          <input id="first_payment_amount" [(ngModel)]="payment.first_payment_amount" placeholder="Enter Amount" name="first_payment_amount" type="number">
+          <input id="first_payment_amount" (change)="payment_amount_change($event,'first_payment_amount')" [(ngModel)]="payment.first_payment_amount" placeholder="Enter Amount" name="first_payment_amount" type="number">
         </div>
       </div>
   
       <div class="payment_fields">
         <div class="type_input">
           <label for="second_payment">Second Payment Method</label>
-          <input id="second_payment" [(ngModel)]="payment.second_payment_type" placeholder="Enter payment type" name="second_payment" type="text">
+           <select
+            class="select mt-10"
+            placeholder="Enter payment type"
+            name="first_payment"
+            [(ngModel)]="payment.second_payment_type"
+            (change)="split_change($event,'second_payment_type')"
+          >
+            <option *ngFor="let item of payment_select" [value]="item.name">
+              {{ item.name }}
+            </option>
+            </select>
         </div>
 
         <div class="amount">
           <label for="second_payment_amount">Amount</label>
-          <input id="second_payment_amount" [(ngModel)]="payment.second_payment_amount" placeholder="Enter Amount" name="second_payment_amount" type="number">
+          <input id="second_payment_amount" (change)="payment_amount_change($event,'second_payment_amount')" [(ngModel)]="payment.second_payment_amount" placeholder="Enter Amount" name="second_payment_amount" type="number">
         </div>
       </div>
     </div>
@@ -51,6 +77,6 @@
   </div>
 
   <div class="save_btn">
-    <ion-button fill="clear" [disabled]="!customer_name" class="complete" (click)="create_invoice()">Complete Payment</ion-button>
+    <ion-button fill="clear" [disabled]="!(customer.customer_name && customer.customer_phone)" class="complete" (click)="create_invoice()">Complete Payment</ion-button>
   </div>
 </section>

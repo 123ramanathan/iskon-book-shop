@@ -2,9 +2,18 @@
 
 <ion-content [fullscreen]="true" style="--background: #f6f7f9;">
 
-  <div class="main_section">
+  <ion-segment (ionChange)="segmentChanged($event)" [value]="selectedSegment" class="segment_bar" mode="md">
+    <ion-segment-button value="pending_list" content-id="first">
+      <ion-label>Pending</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="confirmed_list" content-id="second">
+      <ion-label>Confirmed</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
-    <div class="pending_reviews">
+  <div class="main_section" [class.completed_list]="selectedSegment == 'confirmed_list'" (scroll)="selectedSegment == 'pending_list' ? load_more($event) : null">
+
+    <div class="pending_reviews" *ngIf="selectedSegment == 'pending_list'">
 
       <div class="title">
         <h3 class="m-0">Pending Confirmation ({{stock_entry_list?.pending_count}})</h3>
@@ -34,11 +43,11 @@
 
     </div>
 
-    <div class="confirmed_receipt" *ngIf="stock_entry_list.confirmed && stock_entry_list.confirmed.length > 0">
+    <div class="confirmed_receipt" *ngIf="selectedSegment == 'confirmed_list'">
       <div class="title">
         <h3 class="m-0">Confirmed ({{stock_entry_list?.confirmed_count}})</h3>
       </div>
-      <div class="confirmed_list">
+      <div class="confirmed_list" *ngIf="stock_entry_list.confirmed && stock_entry_list.confirmed.length > 0">
        
         <div *ngFor="let item of stock_entry_list.confirmed" class="stock_boxes">
           <div class="boxes">
@@ -56,7 +65,7 @@
                 </div>
               </div>
             </div>
-            <ion-icon name="chevron-forward-outline"></ion-icon>
+            <!-- <ion-icon name="chevron-forward-outline"></ion-icon> -->
           </div>
         </div>
       </div>
@@ -65,7 +74,7 @@
 
   </div>
 
-  <div class="save_btn">
+  <div class="save_btn" *ngIf="selectedSegment == 'pending_list'">
     <ion-button fill="clear">Complete Receipt Process</ion-button>
   </div>
 

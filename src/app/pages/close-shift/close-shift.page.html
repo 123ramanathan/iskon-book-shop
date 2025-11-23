@@ -6,23 +6,23 @@
     <div class="sec_1">
       <ion-icon src="/assets/icon/close-shift-currency.svg"></ion-icon>
       <h2 class="m-0">Close Shift</h2>
-      <p class="m-0">SHIFT-20251029-2103</p>
+      <!-- <p class="m-0">SHIFT-20251029-2103</p> -->
     </div>
     <div class="sec_2">
       <div class="opening_balance">
         <p class="m-0">Opening Balance:</p>
-        <p class="m-0">₹ 200.00</p>
+        <p class="m-0">₹ 0</p>
       </div>
-      <div class="cash_sales">
+      <div class="cash_sales" *ngIf="false">
         <p class="m-0">Cash Sales:</p>
         <p class="m-0">+₹ 0.00</p>
       </div>
-      <div class="expected_closing">
+      <div class="expected_closing" *ngIf="report_details">
         <p class="m-0">Expected Closing:</p>
-        <p class="m-0">₹ 200.00</p>
+        <p class="m-0">{{db.formatCurrency(report_details.total_revenue)}}</p>
       </div>
     </div>
-    <div class="sec_3">
+    <div class="sec_3" *ngIf="false">
       <label>Actual Cash Count (₹)</label>
       <input placeholder="Enter Actual Cash Count" type="number">
     </div>

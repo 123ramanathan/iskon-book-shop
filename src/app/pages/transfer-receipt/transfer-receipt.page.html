@@ -23,8 +23,8 @@
       </div>
     </div>
 
-    <div class="books_list">
-      <div *ngFor="let item of receipt_book_list" class="boxes_item">
+    <div class="books_list" *ngIf="stock_entry_list && stock_entry_list.length > 0">
+      <div *ngFor="let item of stock_entry_list" class="boxes_item">
         <div>
           <h3 class="m-0 book_name">{{item.item_name}}</h3>
           <p class="m-0 sub_title">{{item.item_code}}</p>
