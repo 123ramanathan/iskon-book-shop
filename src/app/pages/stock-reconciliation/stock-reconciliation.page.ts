@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RefresherCustomEvent } from '@ionic/angular';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -97,6 +98,14 @@ export class StockReconciliationPage implements OnInit {
     this.db.create_stock_reconciliation(data).subscribe((res:any)=>{
       console.log(res, "create stock reconciliation");
     });
+  }
+
+  handleRefresh(event: RefresherCustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      this.getStocksReconcilation();
+    }, 2000);
   }
 
 }

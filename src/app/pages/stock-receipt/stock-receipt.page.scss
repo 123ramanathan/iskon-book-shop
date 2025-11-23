@@ -1,6 +1,7 @@
 .main_section {
     padding: 1rem;
-    height: calc(100vh - 170px);
+    // height: calc(100vh - 170px);
+    height: calc(100vh - 105px);
     overflow: auto;
 
     .pending_reviews {
@@ -434,4 +435,23 @@ ion-segment-button {
 
 .completed_list {
     height: calc(100vh - 105px);
+}
+
+.no_data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 240px);
+
+    img {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1rem;
+        color: #6b7280;
+    }
 }

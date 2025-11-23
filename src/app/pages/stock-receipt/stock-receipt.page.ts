@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RefresherCustomEvent } from '@ionic/angular';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -50,6 +51,10 @@ export class StockReceiptPage implements OnInit {
 
         this.stock_entry_list.pending_count =  res.message?.pending?.total_items
         this.stock_entry_list.confirmed_count =  res.message?.confirmed?.total_items
+
+        if((res.message?.pending?.data.length == 0 && this.selectedSegment == 'pending_list') || (res.message?.confirmed?.data.length == 0 && this.selectedSegment == 'confirmed_list')){
+          this.no_products = true;
+        }
       }else{
         if(this.page_no == 1){
           this.stock_entry_list = {
@@ -84,5 +89,15 @@ export class StockReceiptPage implements OnInit {
         this.getLatestPendingReceipt()
       }
     }
+  }
+
+  handleRefresh(event: RefresherCustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      this.page_no = 1;
+      this.no_products = false;
+      this.getLatestPendingReceipt();
+    }, 2000);
   }
 }

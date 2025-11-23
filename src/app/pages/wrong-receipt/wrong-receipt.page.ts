@@ -29,7 +29,7 @@ export class WrongReceiptPage implements OnInit {
   saveSelectBook(){
     let data = {
       book_name: this.selected_book,
-      quantity: this.quantity
+      qty: this.quantity
     }
     this.saved_books.push(data);
     this.selected_book = null;
@@ -58,10 +58,12 @@ export class WrongReceiptPage implements OnInit {
     console.log("Wrong Book Saved", this.saved_books)
     let data = {
       stock_entry_name: this.router_name,
-      books_data: this.saved_books
+      wrong_books_data: this.saved_books
     }
     this.db.submit_books_report(data).subscribe((res: any) => {
-      console.log(res);
+      if(res && res.message && res.message.status == 'success'){
+        this.db.presentToast(res.message.message);
+      }
     });
   }
 

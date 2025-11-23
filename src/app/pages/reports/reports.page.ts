@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RefresherCustomEvent } from '@ionic/angular';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -24,6 +25,14 @@ export class ReportsPage implements OnInit {
         this.report_details = res.message;
       }
     })
+  }
+
+  handleRefresh(event: RefresherCustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      this.get_reports();
+    }, 2000);
   }
 
 }

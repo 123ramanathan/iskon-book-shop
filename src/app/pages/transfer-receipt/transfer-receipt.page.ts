@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RefresherCustomEvent } from '@ionic/angular';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -29,6 +30,10 @@ export class TransferReceiptPage implements OnInit {
         this.get_stock_entry_details();
       }
     })
+  }
+
+  ionViewWillEnter(){
+    this.get_stock_entry_details();
   }
 
   receipt_book_list: any = [
@@ -75,6 +80,18 @@ export class TransferReceiptPage implements OnInit {
         this.stock_entry_list = [];
       }
     })
+  }
+
+  fetch_variance(item: any){
+    item.variance = item.physical_qty - item.system_qty;
+  }
+
+  handleRefresh(event: RefresherCustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      this.get_stock_entry_details();
+    }, 2000);
   }
 
 }

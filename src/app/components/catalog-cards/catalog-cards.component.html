@@ -6,7 +6,8 @@
       <!-- Thumbnail -->
       <div class="product-card__thumbnail">
         <img *ngIf="item.item_image" [src]="db.getImage(item.item_image)" [alt]="item.item_name" />
-        <span *ngIf="!item.item_image" class="product-card__thumbnail-text">{{item.item_name}}</span>
+        <!-- <span *ngIf="!item.item_image" class="product-card__thumbnail-text">{{item.item_name}}</span> -->
+         <img *ngIf="!item.item_image" src="/assets/icon/no-img.png" [alt]="item.item_name" />
       </div>
   
       <!-- Content -->

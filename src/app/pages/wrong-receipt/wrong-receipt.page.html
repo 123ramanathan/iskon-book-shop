@@ -32,7 +32,7 @@
       <div *ngFor="let item of saved_books; let i = index" class="books_">
         <div>
           <p class="m-0 book">{{item.book_name}}</p>
-          <p class="m-0 quantity">Qty: {{item.quantity}}</p>
+          <p class="m-0 quantity">Qty: {{item.qty}}</p>
         </div>
         <ion-icon (click)="remove_book(i)" name="close-outline"></ion-icon>
       </div>

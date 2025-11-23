@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RefresherCustomEvent } from '@ionic/angular';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -85,6 +86,14 @@ export class SalesPage implements OnInit {
       this.router.navigateByUrl('/catalog');
     });
     // this.router.navigateByUrl('/catalog');
+  }
+
+  handleRefresh(event: RefresherCustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      this.getDashboardDetails();
+    }, 2000);
   }
 
 }

@@ -190,7 +190,7 @@ export class Db {
   }
 
   submit_books_report(params:any){
-    const endpoint = this.baseUrl + "submit_books_report";
+    const endpoint = this.baseUrl + "submit_wrong_books_report";
     return this.callApi(endpoint,"POST",params)
   }
 
