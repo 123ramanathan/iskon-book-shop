@@ -137,7 +137,7 @@ export class PaymentComponent implements OnInit {
     return data;
   }
 
-  split_change(e:any, field:string){
+  split_change(e:any, field:any){
     this.payment[field] = e.target.value;
   }
 
