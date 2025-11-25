@@ -60,9 +60,10 @@ export class LoginPage implements OnInit {
         this.submitted = false;
         let token = `token ${res.message.api_key}:${res.message.api_secret}`;
         localStorage['token'] = token;
+        localStorage['username'] = res.message.username
         await this.loginForm.reset();
         this.router.navigateByUrl('/tabs/sales');
-        this.db.presentToast('Login Successful');
+        this.db.presentToast('Login Successful', 'success');
       }else{
         this.error_message = res.message.message;
       }

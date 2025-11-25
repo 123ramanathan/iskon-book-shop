@@ -179,6 +179,11 @@ export class Db {
     return this.callApi(endpoint,"POST",params)
   }
 
+  get_all_book_list(params:any){
+    const endpoint = this.baseUrl + "all_items";
+    return this.callApi(endpoint,"POST",params)
+  }
+
   get_stock_entry_details(params:any){
     const endpoint = this.baseUrl + "get_stock_entry_details";
     return this.callApi(endpoint,"POST",params)
@@ -241,7 +246,7 @@ export class Db {
 
   headerDetails(){
     let data = {
-      user: 'umarbenz@gmail.com'
+      user: localStorage['username']
     }
     this.store_details(data).subscribe((res:any)=>{
       if(res && res.status == 'Success' && res.message){
@@ -267,12 +272,12 @@ export class Db {
     return image; // Already a full URL
   }
   
-  async presentToast(message: any) {
+  async presentToast(message: any, type: any) {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000,     // 2 seconds
       position: 'bottom', // 👈 show at bottom
-      color: 'success',      // optional
+      color: type == 'success' ? 'success' : 'danger',      // optional
     });
 
     await toast.present();

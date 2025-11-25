@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { CatalogFilterComponent } from 'src/app/components/catalog-filter/catalog-filter.component';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -14,26 +16,22 @@ export class CatalogPage implements OnInit {
   page:number= 1;
   loading:boolean = false
   noProduct:boolean = false
-  catalog:any[] = [
-    // {
-    //  image: "",
-    //  image_alt: "The Great",
-    //  book_name: "The Great Gatsby",
-    //  author_name: "F. Scott Fitzgerald",
-    //  price: 450,
-    //  stock: 25,
-    //  name: "great"
-    // }
-  ]
+  catalog:any[] = []
 
   categories:any[] = []
 
-  constructor(public db:Db) { }
+  constructor(public db:Db,private modalCtrl:ModalController) { }
 
   ionViewWillEnter(){
     this.db.get_cart_items();
     this.getItems();
     this.get_item_group()
+  }
+
+  ionViewWillLeave(){
+    this.catalog = []
+    this.page = 1;
+    this.noProduct = false;
   }
 
   ngOnInit(): void {
@@ -56,8 +54,8 @@ export class CatalogPage implements OnInit {
       pos_profile: localStorage['store_name'],
       search_book_name: this.searchTxt,
       item_group: this.category,
-      page: this.page,
-      limit: 20
+      start: this.page,
+      page_length: 20
     } 
 
     this.db.sales_items_with_filters(params).subscribe((res:any)=>{
@@ -127,6 +125,19 @@ export class CatalogPage implements OnInit {
       this.loading = true;
       this.getItems();
     }
+  }
+
+
+  async openFilterModal() {
+    const modal = await this.modalCtrl.create({
+      component: CatalogFilterComponent,
+      cssClass: 'catalog-filter'
+    });
+
+    await modal.present();
+
+    // 👇 Here you get the dismiss value
+    const { data, role } = await modal.onDidDismiss();
   }
 
 }

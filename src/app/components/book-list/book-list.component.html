@@ -1,0 +1,19 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-title>Book List</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="modalCntrl.dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar (ionInput)="handleInput($event)" mode="ios"></ion-searchbar>
+  <ion-list lines="full" (scroll)="load_more($event)">
+    <ion-item *ngFor="let item of wrong_book_list" (click)="selectBook(item)">
+      <ion-label>{{ item.item_name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

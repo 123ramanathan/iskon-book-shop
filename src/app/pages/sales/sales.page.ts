@@ -79,7 +79,7 @@ export class SalesPage implements OnInit {
 
   openingPosEntry(){
     let data = {
-      user: 'umarbenz@gmail.com'
+      user: localStorage['username']
     }
     this.db.pos_opening_entry(data).subscribe((res:any)=>{
       console.log(res, "pos opening entry");

@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="payment_methods" *ngIf="report_details.payment_methods">
+    <div class="payment_methods" *ngIf="report_details.payment_methods && report_details.payment_methods.length > 0">
       <h3 class="m-0">Payment Methods</h3>
       <div class="types_sec">
         <div class="secs" *ngFor="let item of report_details.payment_methods">
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="top_selling_books" *ngIf="report_details.top_selling_books">
+    <div class="top_selling_books" *ngIf="report_details.top_selling_books && report_details.top_selling_books.length > 0">
       <h3 class="m-0">Top Selling Books</h3>
       <div class="books_sec">
 

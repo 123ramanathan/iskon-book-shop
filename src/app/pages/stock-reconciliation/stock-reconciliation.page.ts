@@ -96,7 +96,11 @@ export class StockReconciliationPage implements OnInit {
       item_details: this.conciliation_list
     }
     this.db.create_stock_reconciliation(data).subscribe((res:any)=>{
-      console.log(res, "create stock reconciliation");
+      if(res.status === "Failed"){
+        this.db.presentToast(res.message.message ?? "failed... something went wrong", 'error')
+      }else{
+        this.db.presentToast(res.message.message ?? "Success... stock reconciliation created successfully", 'success')
+      }
     });
   }
 
