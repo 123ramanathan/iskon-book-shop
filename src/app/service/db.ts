@@ -180,7 +180,7 @@ export class Db {
   }
 
   get_all_book_list(params:any){
-    const endpoint = this.baseUrl + "all_items";
+    const endpoint = this.baseUrl + "get_all_book_list";
     return this.callApi(endpoint,"POST",params)
   }
 
@@ -275,7 +275,7 @@ export class Db {
   async presentToast(message: any, type: any) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000,     // 2 seconds
+      duration: 5000,     // 2 seconds
       position: 'bottom', // 👈 show at bottom
       color: type == 'success' ? 'success' : 'danger',      // optional
     });

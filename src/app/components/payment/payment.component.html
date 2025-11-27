@@ -9,7 +9,9 @@
 
       <div class="type_input">
         <label for="customer_phone">Customer Phone <span>*</span></label>
-        <input id="customer_phone" [(ngModel)]="customer.customer_phone" placeholder="Enter customer phone" name="customer_phone" type="number" />
+        <input id="customer_phone" [(ngModel)]="customer.customer_phone" placeholder="Enter customer phone" name="customer_phone" type="number" (change)="validatePhone($event)"/>
+
+        <p class="error" *ngIf="phone_error">Please enter a valid mobile number</p>
       </div>
     </div>
 

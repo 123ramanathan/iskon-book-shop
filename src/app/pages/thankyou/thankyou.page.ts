@@ -10,6 +10,8 @@ import { Db } from 'src/app/service/db';
 export class ThankyouPage implements OnInit {
   amountPaid: number = 0;
   paymentMode: string = '';
+  customer_name: string = '';
+  customer_phone: string = '';
 
   constructor(public db:Db) { }
 
@@ -18,6 +20,8 @@ export class ThankyouPage implements OnInit {
     if(data){
       this.amountPaid = data.amount
       this.paymentMode = data.mode_of_payment
+      this.customer_name = data.customer_name
+      this.customer_phone = data.customer_phone
     }
   }
 
