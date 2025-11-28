@@ -63,6 +63,20 @@ export class PaymentComponent implements OnInit {
 
   create_invoice() {
     if(!this.phone_error){
+
+      if(!this.payment?.type){
+        this.db.presentToast('Please select a payment type', 'error');
+        return;
+      }
+
+      // Validate total payment against subtotal
+      const totalPayment = this.computeTotalPayment();
+      const subtotal = this.db.subtotal ?? 0;
+      if(totalPayment < subtotal){
+        this.db.presentToast('Payment amount is less than the total amount', 'error');
+        return;
+      }
+
       let items:any=[] = [];
   
       for (let i = 0; i < this.db.cartItems.length; i++) {
@@ -92,6 +106,18 @@ export class PaymentComponent implements OnInit {
           localStorage['thankyou_content'] = JSON.stringify(thankyouValues);
           localStorage.removeItem('cartItems');
           this.navCtrl.navigateForward('/thankyou');
+          this.payment = {
+            type: '',
+            cash: 0,
+            first_payment_type: 'Select payment type',
+            first_payment_amount: 0,
+            second_payment_type: 'Select payment type',
+            second_payment_amount: 0,
+          };
+          this.customer = {
+            customer_name: "",
+            customer_phone: null
+          };
         }else{
           if(res && res.message && res.message.message){
             this.db.presentToast(res.message.message, 'error');
@@ -177,6 +203,26 @@ export class PaymentComponent implements OnInit {
       this.customer.customer_phone = event.target.value;
     }else if(event.target.value.length < 10){
       this.phone_error = true;
+    }
+  }
+
+  computeTotalPayment() {
+    const subtotal = this.db.subtotal ?? 0;
+    if(this.payment?.type === 'Split'){
+      const first = Number(this.payment.first_payment_amount) || 0;
+      const second = Number(this.payment.second_payment_amount) || 0;
+      return first + second;
+    }
+
+    // For single payments use entered cash (or fallback to subtotal)
+    return Number(this.payment.cash) || subtotal;
+  }
+
+  equalCost(payment:any){
+    if(payment.cash){
+      payment.variance = payment.cash - this.db.subtotal;
+    }else{
+      payment.variance = 0;
     }
   }
 

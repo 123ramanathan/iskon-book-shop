@@ -60,14 +60,33 @@ export class LoginPage implements OnInit {
         this.submitted = false;
         let token = `token ${res.message.api_key}:${res.message.api_secret}`;
         localStorage['token'] = token;
-        localStorage['username'] = res.message.username
-        await this.loginForm.reset();
-        this.router.navigateByUrl('/tabs/sales');
-        this.db.presentToast('Login Successful', 'success');
+        localStorage['username'] = res.message.username;
+        localStorage['pos_profile'] = res.message.pos_profile;
+        this.openingPosEntry();
+        // await this.loginForm.reset();
+        // this.router.navigateByUrl('/tabs/sales');
+        // this.db.presentToast('Login Successful', 'success');
       }else{
         this.error_message = res.message.message;
       }
     })
+  }
+
+  openingPosEntry(){
+    let data = {
+      user: localStorage['username']
+    }
+    this.db.pos_opening_entry(data).subscribe((res:any)=>{
+      if(res && res.message && res.status == "Success"){
+        // console.log(res, "pos opening entry");
+        // this.router.navigateByUrl('/catalog');
+        this.loginForm.reset();
+        this.router.navigateByUrl('/tabs/sales');
+        this.db.presentToast('Login Successful', 'success');
+      }else{
+        this.db.presentToast(res.message.message, 'error');
+      }
+    });
   }
 
 }

@@ -51,7 +51,8 @@ export class CatalogPage implements OnInit {
 
   getItems(){
     let params = {
-      pos_profile: localStorage['store_name'],
+      // pos_profile: localStorage['store_name'],
+      user: localStorage['username'],
       search_book_name: this.searchTxt,
       item_group: this.category,
       start: this.page,

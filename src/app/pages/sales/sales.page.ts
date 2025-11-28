@@ -65,7 +65,7 @@ export class SalesPage implements OnInit {
 
   getDashboardDetails(){
     let data = {
-      pos_profile: localStorage['store_name']
+      pos_profile: this.db.header_content ? this.db.header_content.store_name : '',
     }
     this.db.sales_details(data).subscribe((res:any)=>{
       console.log(res, "sales details");
