@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { BookListComponent } from 'src/app/components/book-list/book-list.component';
 import { Db } from 'src/app/service/db';
 
@@ -17,7 +17,7 @@ export class WrongReceiptPage implements OnInit {
   router_name: any;
   wrong_book_list: any = [];
   selected_book_name: any;
-  constructor(public route: ActivatedRoute, public db: Db, public modalCntrl: ModalController) { }
+  constructor(public route: ActivatedRoute, public db: Db, public modalCntrl: ModalController, private nav: NavController) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -66,6 +66,7 @@ export class WrongReceiptPage implements OnInit {
     this.db.submit_books_report(data).subscribe((res: any) => {
       if(res && res.message && res.message.status == 'success'){
         this.db.presentToast(res.message.message, 'success');
+        this.nav.back();
       }
     });
   }

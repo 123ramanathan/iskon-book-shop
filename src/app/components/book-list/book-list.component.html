@@ -11,9 +11,12 @@
 
 <ion-content>
   <ion-searchbar (ionInput)="handleInput($event)" mode="ios"></ion-searchbar>
-  <ion-list lines="full" (scroll)="load_more($event)">
+  <ion-list lines="full" (scroll)="load_more($event)" *ngIf="wrong_book_list && wrong_book_list.length > 0">
     <ion-item *ngFor="let item of wrong_book_list" (click)="selectBook(item)">
       <ion-label>{{ item.item_name }}</ion-label>
     </ion-item>
   </ion-list>
+  <div class="no_data" *ngIf="no_products && wrong_book_list && wrong_book_list.length == 0">
+    <p>No Books Found</p>
+  </div>
 </ion-content>

@@ -40,12 +40,12 @@
           </div>
           <div class="physical_quantity">
             <label>Physical Quantity</label>
-            <input type="number" placeholder="Physical Quantity" (change)="fetch_variance(item)" [(ngModel)]="item.physical_qty">
+            <input type="number" placeholder="Physical Quantity" (change)="validateQty(item); fetch_variance(item)" [(ngModel)]="item.physical_qty">
           </div>
         </div>
         <div class="variance">
           <label>Variance</label>
-          <input type="number" placeholder="Variance" [(ngModel)]="item.variance">
+          <input type="number" readonly placeholder="Variance" [(ngModel)]="item.variance">
         </div>
       </div>
     </div>

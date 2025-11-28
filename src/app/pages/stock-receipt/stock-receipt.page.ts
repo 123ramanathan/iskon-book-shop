@@ -36,7 +36,8 @@ export class StockReceiptPage implements OnInit {
   getLatestPendingReceipt(){
     let data = {
       page: this.page_no,
-      limit: 10
+      limit: 10,
+      store: localStorage['store_name']
     }
     this.db.get_latest_stock_entries(data).subscribe((res: any) => {
       if(res && res.message && res.message.status == 'success'){

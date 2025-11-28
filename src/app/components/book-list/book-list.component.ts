@@ -12,6 +12,7 @@ export class BookListComponent  implements OnInit {
   wrong_book_list: any = [];
   page_no: number = 1;
   no_products: boolean = false;
+  search_book: string = '';
   constructor(public db: Db, public modalCntrl: ModalController) { }
 
   ngOnInit() {
@@ -19,9 +20,12 @@ export class BookListComponent  implements OnInit {
   }
 
   getBookList(){
-    let data = {
+    let data: any = {
       page: this.page_no,
       page_size: 20
+    }
+    if(this.search_book){
+      data['search'] = this.search_book;
     }
     this.db.get_all_book_list(data).subscribe((res: any) => {
       // console.log(res);
@@ -42,10 +46,13 @@ export class BookListComponent  implements OnInit {
   }
 
   handleInput(event: any){
-    const value = event.target.value.toLowerCase();
-    this.wrong_book_list = this.wrong_book_list.filter((book: any) => 
-      book.item_name.toLowerCase().includes(value)
-    );
+    // const value = event.target.value.toLowerCase();
+    // this.wrong_book_list = this.wrong_book_list.filter((book: any) => 
+    //   book.item_name.toLowerCase().includes(value)
+    // );
+    this.search_book = event.target.value;
+    this.page_no = 1;
+    this.getBookList();
   }
 
   load_more(event: any){

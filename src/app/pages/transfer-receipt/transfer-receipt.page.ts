@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RefresherCustomEvent } from '@ionic/angular';
 import { Db } from 'src/app/service/db';
 
@@ -20,7 +20,7 @@ export class TransferReceiptPage implements OnInit {
   router_name: any;
   stock_entry_list: any = [];
 
-  constructor(public route: ActivatedRoute, public db: Db) { }
+  constructor(public route: ActivatedRoute, public db: Db, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -62,6 +62,16 @@ export class TransferReceiptPage implements OnInit {
     }
     this.db.confirm_receipt(data).subscribe((res: any) => {
       console.log(res);
+      if(res && res.message && res.message.status == 'success'){
+        this.db.presentToast(res.message.message, 'success');
+        this.router.navigateByUrl('/stock-receipt');
+      }else{
+        if(res && res.message && res.message.message){
+          this.db.presentToast(res.message.message, 'error');
+        }else{
+          this.db.presentToast('Error in saving receipt', 'error');
+        }
+      }
     });
   }
 
@@ -83,7 +93,9 @@ export class TransferReceiptPage implements OnInit {
   }
 
   fetch_variance(item: any){
-    item.variance = item.physical_qty - item.system_qty;
+    if(item.physical_qty){
+      item.variance = item.physical_qty - item.system_qty;
+    }
   }
 
   handleRefresh(event: RefresherCustomEvent) {
@@ -92,6 +104,13 @@ export class TransferReceiptPage implements OnInit {
       event.target.complete();
       this.get_stock_entry_details();
     }, 2000);
+  }
+
+  validateQty(item: any) {
+    if (item.physical_qty < 0) {
+      item.physical_qty = 0;
+      item.variance = 0;
+    }
   }
 
 }
