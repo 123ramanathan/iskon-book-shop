@@ -64,6 +64,7 @@ export class ProfilePage implements OnInit {
   }
 
   logout() {
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 
