@@ -93,6 +93,7 @@ export class PaymentComponent implements OnInit {
         payments: this.generate_payment_method(),
         customer_name: this.customer.customer_name,
         customer_phone: this.customer.customer_phone,
+        user: localStorage['username']
       };
       this.db.payments_invoice({invoice_data:params}).subscribe((res: any) => {
         if(res.status === "Success"){
