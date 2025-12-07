@@ -18,7 +18,8 @@ export class ReportsPage implements OnInit {
 
   get_reports(){
     const params = {
-      pos_profile: localStorage['store_name']
+      pos_profile: localStorage['store_name'],
+      user: localStorage['user_id']
     }
     this.db.get_reports(params).subscribe((res:any)=>{
       if(res.message){

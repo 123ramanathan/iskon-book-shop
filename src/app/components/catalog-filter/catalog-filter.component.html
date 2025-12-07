@@ -28,12 +28,12 @@
             <ion-item
               class="option-item"
               *ngFor="let lang of languages"
-              (click)="selectLanguage(lang)"
-              [class.selected-item]="selectedLanguage === lang"
+              (click)="selectLanguage(lang.name)"
+              [class.selected-item]="language === lang.name"
             >
-              <ion-label>{{ lang }}</ion-label>
+              <ion-label>{{ lang.name }}</ion-label>
               <ion-icon
-                *ngIf="selectedLanguage === lang"
+                *ngIf="language === lang.name"
                 name="checkmark-circle"
                 class="selected-icon"
                 slot="end"
@@ -57,12 +57,12 @@
             <ion-item
               class="option-item"
               *ngFor="let cat of categories"
-              (click)="selectCategory(cat)"
-              [class.selected-item]="selectedCategory === cat"
+              (click)="selectCategory(cat.name)"
+              [class.selected-item]="category === cat.name"
             >
-              <ion-label>{{ cat }}</ion-label>
+              <ion-label>{{ cat.name }}</ion-label>
               <ion-icon
-                *ngIf="selectedCategory === cat"
+                *ngIf="category === cat.name"
                 name="checkmark-circle"
                 class="selected-icon"
                 slot="end"

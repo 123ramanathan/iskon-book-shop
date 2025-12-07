@@ -7,7 +7,27 @@
 <ion-content [fullscreen]="true">
   <main class="section">
     <section class="section__group">
-      <div class="section__input">
+      
+      <div class="section__filters">
+        <svg
+        (click)="openFilterModal()"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-filter h-4 w-4 text-muted-foreground flex-shrink-0"
+        >
+          <polygon
+            points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+          ></polygon>
+        </svg>
+
+        <div class="section__input">
         <input
           class="section__input-field"
           [(ngModel)]="searchTxt"
@@ -32,69 +52,11 @@
           <path d="m21 21-4.3-4.3"></path>
         </svg>
       </div>
-
-      <div class="section__filters">
-        <svg
-        (click)="openFilterModal()"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-filter h-4 w-4 text-muted-foreground flex-shrink-0"
-        >
-          <polygon
-            points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
-          ></polygon>
-        </svg>
-
-        <!-- <button
-          type="button"
-          role="combobox"
-          aria-controls="radix-:r0:"
-          aria-expanded="false"
-          aria-autocomplete="none"
-          dir="ltr"
-          data-state="closed"
-          class="section__filters__btn"
-        >
-          <span style="pointer-events: none">All Categories</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-            aria-hidden="true"
-          >
-            <path d="m6 9 6 6 6-6"></path>
-          </svg>
-        </button> -->
-        <div class="select-wrapper">
-          <select
-            class="select"
-            name="categories"
-            [(ngModel)]="category"
-            (change)="categoryChange($event)"
-          >
-            <option *ngFor="let item of categories" [value]="item.name">
-              {{ item.name }}
-            </option>
-          </select>
-        </div>
+        
       </div>
     </section>
 
-    <section class="section__body" [class.def__body]="db.cartItems.length > 0" (scroll)="loadMoreItems($event)">
+    <section class="section__body" [class.def__body]="db.cartItems.length > 0" (scroll)="loadMore($event)">
       <app-catalog-cards *ngIf="catalog && catalog.length > 0" [catalog]="catalog"></app-catalog-cards>
 
       <div *ngIf="catalog && catalog.length === 0" class="no-data">
@@ -117,7 +79,7 @@
         <p>No items found.</p>
       </div>
       
-      <!-- <ion-infinite-scroll (ionInfinite)="loadMore($event)" threshold="100px">
+      <!-- <ion-infinite-scroll *ngIf="!noProduct" (ionInfinite)="loadMore($event)" threshold="100px">
         <ion-infinite-scroll-content
           loadingText="Loading more..."
           loadingSpinner="bubbles">

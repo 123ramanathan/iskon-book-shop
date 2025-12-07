@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -8,28 +8,36 @@ import { ModalController } from '@ionic/angular';
   standalone: false
 })
 export class CatalogFilterComponent  implements OnInit {
- languages = ['English', 'Tamil', 'Hindi', 'Malayalam'];
-  categories = ['Fiction', 'Kids', 'History', 'Education'];
+  @Input() categories: any[] = [];
+  @Input() languages: any[] = [];
 
-  selectedLanguage: string | null = null;
-  selectedCategory: string | null = null;
+  @Input() selectedLanguage: string | null = null;
+  @Input() selectedCategory: string | null = null;
+
+  language: string | null = null;
+  category: string | null = null;
+
  
 
  constructor(private modalCtrl: ModalController) {}
 
-  ngOnInit() {}
-
- 
+  ngOnInit() {
+    this.language = this.selectedLanguage;
+    this.category = this.selectedCategory;
+  }
 
   selectLanguage(lang: string) {
-    this.selectedLanguage = lang;
+    this.language = this.language === lang ? null : lang;
   }
 
   selectCategory(cat: string) {
-    this.selectedCategory = cat;
+    this.category = this.category === cat ? null : cat;
   }
 
   submit() {
+    this.selectedCategory = this.category;
+    this.selectedLanguage = this.language;
+
     this.modalCtrl.dismiss(
       {
         language: this.selectedLanguage,

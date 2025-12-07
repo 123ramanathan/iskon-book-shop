@@ -13,6 +13,8 @@ export class CatalogPage implements OnInit {
   private debounceTimer: any;
   searchTxt:any="";
   category:any="All Categories";
+  languages = [{name: 'English'}, {name:'Tamil'}, {name:'Hindi'}, {name:'Malayalam'}];
+  language:any="";
   page:number= 1;
   loading:boolean = false
   noProduct:boolean = false
@@ -54,6 +56,7 @@ export class CatalogPage implements OnInit {
       // pos_profile: localStorage['store_name'],
       user: localStorage['username'],
       search_book_name: this.searchTxt,
+      language: this.language,
       item_group: this.category,
       start: this.page,
       page_length: 20
@@ -67,25 +70,29 @@ export class CatalogPage implements OnInit {
         this.noProduct = false
       }else{
         this.catalog = this.page === 1 ? [] : this.catalog
-        this.loading = false
         this.noProduct = true
+        this.loading = false
       }
     })
   }
 
   onSearchChange(event: any) {
+    window.scrollTo(0,0);
+
     const value = event.target.value.toLowerCase();
-    // Clear old timer before setting a new one
+
     if (this.debounceTimer) {
       clearTimeout(this.debounceTimer);
     }
 
-    // Set new debounce timer
     this.debounceTimer = setTimeout(() => {
-      this.page = 1
-      this.getItems()
-    }, 500); // custom delay (500ms)
+      this.page = 1;
+      this.loading = true;
+      this.getItems();
+    }, 500);
   }
+
+
 
   categoryChange($event:any){
     this.page = 1
@@ -98,33 +105,42 @@ export class CatalogPage implements OnInit {
     }
   }
 
-  loadMore(event:any){
-    if(!this.noProduct){
-      this.page += 1;
-      this.loading = true
-      this.getItems();
-    }
+  async loadMore(event: any) {
+    if (!this.loading && this.loadMoreItems(event)){
+      this.loading = true;
+      this.page++;
+  
+      await this.getItems();  // loading will become false after fetch finishes
+  
+      event.target.complete();
+    } 
   }
 
-  loadMoreItems(event: any) {
+
+  // loadMore(event:any){
+  //   setTimeout(() => {
+  //     if(!this.loading){
+  //       // if(!this.loading && this.loadMoreItems(event)){
+  //         this.page += 1;
+  //         this.loading = true
+  //         this.getItems();
+  //         event.target.complete();
+  //     }
+  //   }, 1000);
+  // }
+
+  loadMoreItems(event: any):any {
     // Support both Ionic ionScroll (event.detail.scrollTop) and plain DOM scroll (event.target.scrollTop)
     const scrollTop = event?.detail?.scrollTop ?? event?.target?.scrollTop ?? 0;
     const scrollHeight = event?.target?.scrollHeight ?? event?.detail?.scrollHeight ?? 0;
     const clientHeight = event?.target?.clientHeight ?? event?.detail?.clientHeight ?? 0;
 
-    // Debugging help (remove if not needed)
-    // console.log({ scrollTop, clientHeight, scrollHeight, loading: this.loading, noProduct: this.noProduct });
-
     // Prevent multiple triggers while already loading or when there are no more products
-    if (this.loading || this.noProduct) {
-      return;
-    }
+    if (this.loading || this.noProduct) return false;
 
     // Trigger when user reaches (or gets within 20px of) the bottom
     if (scrollTop + clientHeight >= scrollHeight - 20) {
-      this.page += 1;
-      this.loading = true;
-      this.getItems();
+      return true
     }
   }
 
@@ -132,13 +148,27 @@ export class CatalogPage implements OnInit {
   async openFilterModal() {
     const modal = await this.modalCtrl.create({
       component: CatalogFilterComponent,
-      cssClass: 'catalog-filter'
+      cssClass: 'catalog-filter',
+      componentProps: {
+        categories: this.categories,
+        languages: this.languages,
+        selectedCategory: this.category,
+        selectedLanguage: this.language
+      }
     });
 
     await modal.present();
 
     // 👇 Here you get the dismiss value
     const { data, role } = await modal.onDidDismiss();
+
+    if(data || role){
+      this.category = data.category ? data.category : "All Categories"
+      this.language = data.language ? data.language : ""
+      this.loading = true;
+      this.page = 1;
+      this.getItems();
+    }
   }
 
 }
