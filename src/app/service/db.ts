@@ -239,9 +239,10 @@ export class Db {
     return this.callApi(endpoint,"POST",params)
   }
 
-  get_item_group(){
-    const endpoint = this.baseUrlPos + "get_items_group";
-    return this.callApi(endpoint,"GET")
+  get_item_group(data: any){
+    // const endpoint = this.baseUrlPos + "get_items_group";
+    const endpoint = this.baseUrlPos + "get_items_category";
+    return this.callApi(endpoint,"POST",data)
   }
 
   headerDetails(){

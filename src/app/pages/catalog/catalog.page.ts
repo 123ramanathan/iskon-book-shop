@@ -42,11 +42,15 @@ export class CatalogPage implements OnInit {
 
 
   get_item_group(){
-    this.db.get_item_group().subscribe((res:any)=>{
-      if(res.message && res.message.item_groups && res.message.item_groups.length > 0){
+    let data = {
+      doctype: "Item Group",
+      languages: this.language
+    }
+    this.db.get_item_group(data).subscribe((res:any)=>{
+      if(res.message && res.message.data && res.message.data.length > 0){
         const value = {name: "All Categories"}
-        res.message.item_groups.unshift(value);
-        this.categories = res.message.item_groups
+        res.message.data.unshift(value);
+        this.categories = res.message.data
       }
     })
   }
@@ -59,7 +63,7 @@ export class CatalogPage implements OnInit {
       language: this.language,
       item_group: this.category,
       start: this.page,
-      page_length: 20
+      page_length: 10
     } 
 
     this.db.sales_items_with_filters(params).subscribe((res:any)=>{

@@ -11,6 +11,7 @@ import { Db } from 'src/app/service/db';
 export class StockReconciliationPage implements OnInit {
 
   conciliation_list: any = [];
+  searchTxt: any = "";
   constructor(public db: Db) { }
 
   ngOnInit() {
@@ -110,6 +111,12 @@ export class StockReconciliationPage implements OnInit {
       event.target.complete();
       this.getStocksReconcilation();
     }, 2000);
+  }
+
+  onSearchChange(event: any) {
+    const value = event.target.value.toLowerCase();
+    this.searchTxt = value;
+    this.getStocksReconcilation();
   }
 
 }

@@ -48,14 +48,26 @@
 }
 
 .selected-icon {
-  color: #3b6ff8;
+  color: var(--primary-color);
   font-size: 1.25rem;
 }
 
 .submit-btn {
   margin-top: 10px;
-  --border-radius: 14px;
-  height: 48px;
+  --border-radius: 10px;
+  height: 45px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
+}
+
+ion-toolbar {
+  --background: var(--primary-color);
+
+  ion-title {
+    color: #fff;
+  }
+
+  ion-icon {
+    color: #fff;
+  }
 }

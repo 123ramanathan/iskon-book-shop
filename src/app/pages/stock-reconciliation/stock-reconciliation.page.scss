@@ -38,6 +38,9 @@
     }
 
     .books_list {
+        height: calc(100vh - 305px);
+        overflow: auto;
+
         .boxes {
             padding: 1rem;
             margin-bottom: 0.75rem;
@@ -64,7 +67,8 @@
                 width: 100%;
                 gap: 0.75rem;
 
-                .system_quantity, .physical_quantity {
+                .system_quantity,
+                .physical_quantity {
                     label {
                         color: #6b7280;
                         font-weight: 600;
@@ -111,6 +115,51 @@
 
         ion-icon {
             margin-right: 1rem;
+        }
+    }
+}
+
+.section {
+    background: rgb(246 247 249);
+    //   padding: 1rem;
+
+    &__group {
+        position: sticky;
+        top: 0;
+        padding: 1rem;
+        border-bottom: 1px solid #ddd;
+        z-index: 100;
+        background: #fff;
+    }
+
+    &__input {
+        position: relative;
+        width: 100%;
+
+        &-field {
+            padding-left: 2.5rem;
+            padding-block: 0.5rem;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            background: rgb(246 247 249);
+            border: 1px solid #ddd;
+            height: 2.5rem;
+            border-radius: 0.675rem;
+            width: 100%;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        &-icon {
+            // class="lucide lucide-search absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground"
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0.75rem;
+            height: 1.25rem;
+            width: 1.25rem;
         }
     }
 }
