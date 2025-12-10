@@ -63,6 +63,7 @@ export class LoginPage implements OnInit {
         localStorage['username'] = res.message.username;
         localStorage['pos_profile'] = res.message.pos_profile;
         this.openingPosEntry();
+        this.db.header_content['store_name'] = res.message.pos_profile;
         // await this.loginForm.reset();
         // this.router.navigateByUrl('/tabs/sales');
         // this.db.presentToast('Login Successful', 'success');
