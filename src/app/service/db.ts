@@ -17,6 +17,7 @@ export class Db {
   private baseUrlPos:string = "/api/method/iskcon.iskcon.mobile_app_pos."
 
   header_content:any = {};
+  isSearchFocused = false;
   constructor(private http:HttpClient, private toastController: ToastController, private router: Router){}
 
   formatCurrency(amount:number, currency = "INR", locale = "en-IN") {

@@ -33,6 +33,8 @@
           [(ngModel)]="searchTxt"
           placeholder="Search here..."
           (input)="onSearchChange($event)"
+          (focus)="onSearchFocus()"
+          (blur)="onSearchBlur()"
           clearInput
         />
 

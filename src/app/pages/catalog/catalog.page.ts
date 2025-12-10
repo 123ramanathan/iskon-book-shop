@@ -122,7 +122,7 @@ export class CatalogPage implements OnInit {
   }
 
   async loadMore(event: any) {
-    if (!this.loading && this.loadMoreItems(event)){
+    if (!this.loading && this.loadMoreItems(event) && !this.db.isSearchFocused){
       this.loading = true;
       this.page++;
       window.scrollTo(0,0)
@@ -185,6 +185,18 @@ export class CatalogPage implements OnInit {
       this.page = 1;
       this.getItems();
     }
+  }
+
+  onSearchFocus(){
+    this.db.isSearchFocused = true;
+  }
+
+  onSearchBlur(){
+    this.db.isSearchFocused = false;
+  }
+
+  mouseLeaveSearch(){
+    this.db.isSearchFocused = false;
   }
 
 }
