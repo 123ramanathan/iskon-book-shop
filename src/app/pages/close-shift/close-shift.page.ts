@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalPopupComponent } from 'src/app/components/modal-popup/modal-popup.component';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -9,7 +11,7 @@ import { Db } from 'src/app/service/db';
 })
 export class CloseShiftPage implements OnInit {
   report_details: any = {};
-  constructor(public db: Db) { }
+  constructor(public db: Db, public modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
@@ -26,10 +28,32 @@ export class CloseShiftPage implements OnInit {
       console.log(res, "close shift response");
       if(res && res.message && res.status == 'Success'){
         this.db.presentToast(res.message.message, 'success');
+        this.db.logout();
       }else{
         this.db.presentToast(res.message.message, 'error');
       }
     });
+  }
+
+  async confirmCloseShift() {
+    const modal = await this.modalCtrl.create({
+      component: ModalPopupComponent,
+      componentProps: { 
+        headerText: "Confirm Close Shift",
+        title: "Are you sure you want to Close Shift?",
+        btn1: "Yes",
+        btn2: "No"
+        },
+      cssClass: 'confirm-modal',
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+
+    if (data?.confirmed) {
+      this.closeShift();
+    }
   }
 
   getDashboardDetails(){

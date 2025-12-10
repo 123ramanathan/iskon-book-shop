@@ -25,4 +25,8 @@ export class HeaderComponent  implements OnInit {
     }
   }
 
+  openProfileModal(){
+    this.router.navigateByUrl('/tabs/profile');
+  }
+
 }

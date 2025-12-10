@@ -92,6 +92,7 @@ export class StockReconciliationPage implements OnInit {
   }
 
   saveReconciliation(){
+    console.log('Reconciliation List', this.conciliation_list);
     let data = {
       pos_profile: localStorage['store_name'],
       item_details: this.conciliation_list

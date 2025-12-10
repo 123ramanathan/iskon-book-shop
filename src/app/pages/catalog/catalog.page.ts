@@ -64,7 +64,7 @@ export class CatalogPage implements OnInit {
       item_group: this.category,
       start: this.page,
       page_length: 10
-    } 
+    }
 
     this.db.sales_items_with_filters(params).subscribe((res:any)=>{
       // console.log(res,"res")
