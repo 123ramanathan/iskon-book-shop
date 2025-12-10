@@ -127,7 +127,7 @@ export class CatalogPage implements OnInit {
       this.page++;
       window.scrollTo(0,0)
       await this.getItems();  // loading will become false after fetch finishes
-  
+   
       // event.target.complete();
     } 
   }
