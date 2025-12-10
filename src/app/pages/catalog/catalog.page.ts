@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { CatalogFilterComponent } from 'src/app/components/catalog-filter/catalog-filter.component';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -11,29 +13,27 @@ export class CatalogPage implements OnInit {
   private debounceTimer: any;
   searchTxt:any="";
   category:any="All Categories";
+  languages = [{name: 'English'}, {name:'Tamil'}, {name:'Hindi'}, {name:'Malayalam'}];
+  language:any="";
   page:number= 1;
   loading:boolean = false
   noProduct:boolean = false
-  catalog:any[] = [
-    // {
-    //  image: "",
-    //  image_alt: "The Great",
-    //  book_name: "The Great Gatsby",
-    //  author_name: "F. Scott Fitzgerald",
-    //  price: 450,
-    //  stock: 25,
-    //  name: "great"
-    // }
-  ]
+  catalog:any[] = []
 
   categories:any[] = []
 
-  constructor(public db:Db) { }
+  constructor(public db:Db,private modalCtrl:ModalController) { }
 
   ionViewWillEnter(){
     this.db.get_cart_items();
     this.getItems();
     this.get_item_group()
+  }
+
+  ionViewWillLeave(){
+    this.catalog = []
+    this.page = 1;
+    this.noProduct = false;
   }
 
   ngOnInit(): void {
@@ -42,22 +42,28 @@ export class CatalogPage implements OnInit {
 
 
   get_item_group(){
-    this.db.get_item_group().subscribe((res:any)=>{
-      if(res.message && res.message.item_groups && res.message.item_groups.length > 0){
+    let data = {
+      doctype: "Item Group",
+      languages: this.language
+    }
+    this.db.get_item_group(data).subscribe((res:any)=>{
+      if(res.message && res.message.data && res.message.data.length > 0){
         const value = {name: "All Categories"}
-        res.message.item_groups.unshift(value);
-        this.categories = res.message.item_groups
+        res.message.data.unshift(value);
+        this.categories = res.message.data;
       }
     })
   }
 
   getItems(){
     let params = {
-      pos_profile: localStorage['store_name'],
+      // pos_profile: localStorage['store_name'],
+      user: localStorage['username'],
       search_book_name: this.searchTxt,
+      language: this.language,
       item_group: this.category,
-      page: this.page,
-      limit: 20
+      start: this.page,
+      page_length: 10
     } 
 
     this.db.sales_items_with_filters(params).subscribe((res:any)=>{
@@ -68,25 +74,29 @@ export class CatalogPage implements OnInit {
         this.noProduct = false
       }else{
         this.catalog = this.page === 1 ? [] : this.catalog
-        this.loading = false
         this.noProduct = true
+        this.loading = false
       }
     })
   }
 
   onSearchChange(event: any) {
+    window.scrollTo(0,0);
+
     const value = event.target.value.toLowerCase();
-    // Clear old timer before setting a new one
+
     if (this.debounceTimer) {
       clearTimeout(this.debounceTimer);
     }
 
-    // Set new debounce timer
     this.debounceTimer = setTimeout(() => {
-      this.page = 1
-      this.getItems()
-    }, 500); // custom delay (500ms)
+      this.page = 1;
+      this.loading = true;
+      this.getItems();
+    }, 500);
   }
+
+
 
   categoryChange($event:any){
     this.page = 1
@@ -99,32 +109,68 @@ export class CatalogPage implements OnInit {
     }
   }
 
-  loadMore(event:any){
-    if(!this.noProduct){
-      this.page += 1;
-      this.loading = true
-      this.getItems();
-    }
+  async loadMore(event: any) {
+    if (!this.loading && this.loadMoreItems(event)){
+      this.loading = true;
+      this.page++;
+  
+      await this.getItems();  // loading will become false after fetch finishes
+  
+      event.target.complete();
+    } 
   }
 
-  loadMoreItems(event: any) {
+
+  // loadMore(event:any){
+  //   setTimeout(() => {
+  //     if(!this.loading){
+  //       // if(!this.loading && this.loadMoreItems(event)){
+  //         this.page += 1;
+  //         this.loading = true
+  //         this.getItems();
+  //         event.target.complete();
+  //     }
+  //   }, 1000);
+  // }
+
+  loadMoreItems(event: any):any {
     // Support both Ionic ionScroll (event.detail.scrollTop) and plain DOM scroll (event.target.scrollTop)
     const scrollTop = event?.detail?.scrollTop ?? event?.target?.scrollTop ?? 0;
     const scrollHeight = event?.target?.scrollHeight ?? event?.detail?.scrollHeight ?? 0;
     const clientHeight = event?.target?.clientHeight ?? event?.detail?.clientHeight ?? 0;
 
-    // Debugging help (remove if not needed)
-    // console.log({ scrollTop, clientHeight, scrollHeight, loading: this.loading, noProduct: this.noProduct });
-
     // Prevent multiple triggers while already loading or when there are no more products
-    if (this.loading || this.noProduct) {
-      return;
-    }
+    if (this.loading || this.noProduct) return false;
 
     // Trigger when user reaches (or gets within 20px of) the bottom
     if (scrollTop + clientHeight >= scrollHeight - 20) {
-      this.page += 1;
+      return true
+    }
+  }
+
+
+  async openFilterModal() {
+    const modal = await this.modalCtrl.create({
+      component: CatalogFilterComponent,
+      cssClass: 'catalog-filter',
+      componentProps: {
+        categories: this.categories,
+        languages: this.languages,
+        selectedCategory: this.category,
+        selectedLanguage: this.language
+      }
+    });
+
+    await modal.present();
+
+    // 👇 Here you get the dismiss value
+    const { data, role } = await modal.onDidDismiss();
+
+    if(data || role){
+      this.category = data.category ? data.category : "All Categories"
+      this.language = data.language ? data.language : ""
       this.loading = true;
+      this.page = 1;
       this.getItems();
     }
   }

@@ -1,6 +1,10 @@
 <app-header [home]="false" [title]="'Transfer Receipt'"></app-header>
 
 <ion-content [fullscreen]="true" style="--background: #f6f7f9;">
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   
   <div class="main_section">
 
@@ -10,13 +14,13 @@
           <div class="sec_1">
             <ion-icon src="/assets/icon/receipt-items-pending.svg"></ion-icon>
           </div>
-          <div class="sec_2" *ngIf="stock_details && stock_details.stock_entry">
-            <p class="m-0 id">{{stock_details.stock_entry.name}}</p>
-            <p class="m-0 from">From: {{stock_details.stock_entry.from_warehouse}}</p>
-            <p class="m-0 date">Date: {{stock_details.stock_entry.posting_date}}</p>
+          <div class="sec_2" *ngIf="stock_details">
+            <p class="m-0 id">{{stock_details.transfer_receipt_id}}</p>
+            <!-- <p class="m-0 from">From: {{stock_details.from_warehouse}}</p> -->
+            <p class="m-0 date">Date: {{stock_details.posting_date}}</p>
             <div class="count_status">
               <p class="m-0 items">{{stock_details.total_items}} Items</p>
-              <p class="m-0 status">{{stock_details.stock_entry.custom_status}}</p>
+              <p class="m-0 status">{{stock_details.status}}</p>
             </div>
           </div>
         </div>
@@ -29,19 +33,19 @@
           <h3 class="m-0 book_name">{{item.item_name}}</h3>
           <p class="m-0 sub_title">{{item.item_code}}</p>
         </div>
-        <div class="cost_inputs">
+        <div class="cost_inputs mb-10">
           <div class="system_quantity">
             <label>System Quantity</label>
-            <input type="number" readonly placeholder="System Quantity" [(ngModel)]="item.system_quantity">
+            <input type="number" readonly placeholder="System Quantity" [(ngModel)]="item.system_qty">
           </div>
           <div class="physical_quantity">
             <label>Physical Quantity</label>
-            <input type="number" placeholder="Physical Quantity" [(ngModel)]="item.physical_qty">
+            <input type="number" placeholder="Physical Quantity" (change)="validateQty(item); fetch_variance(item)" [(ngModel)]="item.physical_qty">
           </div>
         </div>
         <div class="variance">
           <label>Variance</label>
-          <input type="number" placeholder="Variance" [(ngModel)]="item.variance">
+          <input type="number" readonly placeholder="Variance" [(ngModel)]="item.variance">
         </div>
       </div>
     </div>

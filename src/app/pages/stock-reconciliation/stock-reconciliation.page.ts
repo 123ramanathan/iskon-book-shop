@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RefresherCustomEvent } from '@ionic/angular';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -10,6 +11,7 @@ import { Db } from 'src/app/service/db';
 export class StockReconciliationPage implements OnInit {
 
   conciliation_list: any = [];
+  searchTxt: any = "";
   constructor(public db: Db) { }
 
   ngOnInit() {
@@ -95,8 +97,26 @@ export class StockReconciliationPage implements OnInit {
       item_details: this.conciliation_list
     }
     this.db.create_stock_reconciliation(data).subscribe((res:any)=>{
-      console.log(res, "create stock reconciliation");
+      if(res.status === "Failed"){
+        this.db.presentToast(res.message.message ?? "failed... something went wrong", 'error')
+      }else{
+        this.db.presentToast(res.message.message ?? "Success... stock reconciliation created successfully", 'success')
+      }
     });
+  }
+
+  handleRefresh(event: RefresherCustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      this.getStocksReconcilation();
+    }, 2000);
+  }
+
+  onSearchChange(event: any) {
+    const value = event.target.value.toLowerCase();
+    this.searchTxt = value;
+    this.getStocksReconcilation();
   }
 
 }

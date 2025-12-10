@@ -18,7 +18,7 @@ export class CatalogCardsComponent  implements OnInit {
 
   
   async add_to_cart(item:any) {    
-    item['qty'] = 1;
+    item['qty'] = item?.qty ?? 1;
     const value = await this.db.add_to_cart(item);
   }
 

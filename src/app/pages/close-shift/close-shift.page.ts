@@ -20,10 +20,15 @@ export class CloseShiftPage implements OnInit {
 
   closeShift(){
     let data = {
-      user: "umarbenz@gmail.com"
+      user: localStorage['username']
     }
     this.db.pos_closing_entry(data).subscribe((res:any)=>{
       console.log(res, "close shift response");
+      if(res && res.message && res.status == 'Success'){
+        this.db.presentToast(res.message.message, 'success');
+      }else{
+        this.db.presentToast(res.message.message, 'error');
+      }
     });
   }
 

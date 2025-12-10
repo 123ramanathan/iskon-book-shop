@@ -1,6 +1,10 @@
 <app-header [home]="false" [title]="'Stock Reconciliation'"></app-header>
 
 <ion-content [fullscreen]="true" style="--background: #f6f7f9;">
+
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   
   <div class="main_section">
 
@@ -10,6 +14,35 @@
         <div class="stock_content">
           <p class="m-0 label">Stock Reconciliation</p>
           <p class="m-0 value">Enter the physical count for each item to identify discrepancies</p>
+        </div>
+      </div>
+
+      <div class="section__filters mb-10">
+
+        <div class="section__input">
+          <input
+            class="section__input-field"
+            [(ngModel)]="searchTxt"
+            placeholder="Search here..."
+            (input)="onSearchChange($event)"
+            clearInput
+          />
+
+          <svg
+            class="section__input-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
         </div>
       </div>
   
@@ -22,7 +55,7 @@
           <div class="cost_inputs">
             <div class="system_quantity">
               <label>System Quantity</label>
-              <input type="number" readonly [ngModel]="item.system_quantity ? item.system_quantity : 0">
+              <input type="number" readonly [ngModel]="item.system_qty ? item.system_qty : 0">
             </div>
             <div class="physical_quantity">
               <label>Physical Quantity</label>

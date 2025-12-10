@@ -7,14 +7,18 @@ import { HeaderComponent } from './header/header.component';
 import { ModalPopupComponent } from './modal-popup/modal-popup.component';
 import { PaymentComponent } from './payment/payment.component';
 import { FormsModule } from '@angular/forms';
+import { CatalogFilterComponent } from './catalog-filter/catalog-filter.component';
+import { BookListComponent } from './book-list/book-list.component';
+
 @NgModule({
   declarations: [
     CatalogCardsComponent,
     DropdownComponent,
     HeaderComponent,
     ModalPopupComponent,
-    PaymentComponent
-    
+    PaymentComponent,
+    CatalogFilterComponent,
+    BookListComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     DropdownComponent,
     HeaderComponent,
     ModalPopupComponent,
-    PaymentComponent
+    PaymentComponent,
+    CatalogFilterComponent,
+    BookListComponent
   ]
 })
 export class ComponentsModule { }

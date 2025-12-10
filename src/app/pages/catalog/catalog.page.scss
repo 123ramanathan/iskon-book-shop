@@ -32,6 +32,7 @@ $line-height: 1.25rem;
 
   &__input {
     position: relative;
+    width: 100%;
 
     &-field {
       padding-left: 2.5rem;
@@ -64,7 +65,11 @@ $line-height: 1.25rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: .75rem;
+    // margin-top: .75rem;
+
+    svg{
+      flex: 0 0 auto;
+    }
 
     &__btn {
       width: 100%;
@@ -97,12 +102,12 @@ $line-height: 1.25rem;
 
   &__body {
     padding: 1rem;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 130px);
     overflow: auto;
   }
 
   .def__body{
-     height: calc(100vh - 235px);
+     height: calc(100vh - 200px);
   }
 
   

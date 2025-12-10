@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Filters</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="filter-wrapper">
+
+    <ion-accordion-group expand="inset" class="m-0">
+      <!-- LANGUAGE -->
+      <ion-accordion value="lang" class="filter-card">
+        <ion-item slot="header">
+          <ion-label class="header-label">
+            <ion-icon name="language" class="header-icon"></ion-icon>
+            Language
+          </ion-label>
+        </ion-item>
+
+        <div slot="content" class="content-block">
+          <ion-list>
+            <ion-item
+              class="option-item"
+              *ngFor="let lang of languages"
+              (click)="selectLanguage(lang.name)"
+              [class.selected-item]="language === lang.name"
+            >
+              <ion-label>{{ lang.name }}</ion-label>
+              <ion-icon
+                *ngIf="language === lang.name"
+                name="checkmark-circle"
+                class="selected-icon"
+                slot="end"
+              ></ion-icon>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-accordion>
+
+      <!-- CATEGORY -->
+      <ion-accordion value="cat" class="filter-card">
+        <ion-item slot="header">
+          <ion-label class="header-label">
+            <ion-icon name="list" class="header-icon"></ion-icon>
+            Category
+          </ion-label>
+        </ion-item>
+
+        <div slot="content" class="content-block">
+          <ion-list>
+            <ion-item
+              class="option-item"
+              *ngFor="let cat of categories"
+              (click)="selectCategory(cat.name)"
+              [class.selected-item]="category === cat.name"
+            >
+              <ion-label>{{ cat.name }}</ion-label>
+              <ion-icon
+                *ngIf="category === cat.name"
+                name="checkmark-circle"
+                class="selected-icon"
+                slot="end"
+              ></ion-icon>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-accordion>
+
+    </ion-accordion-group>
+
+    <ion-button expand="block" class="submit-btn" (click)="submit()">Apply Filters</ion-button>
+  </div>
+
+</ion-content>

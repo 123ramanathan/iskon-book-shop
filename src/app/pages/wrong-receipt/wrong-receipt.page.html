@@ -9,11 +9,12 @@
   
       <div class="inputs_sec">
         <div class="book_name_input">
-          <label>Physical Quantity</label>
-          <select [(ngModel)]="selected_book" *ngIf="wrong_book_list && wrong_book_list.length > 0">
+          <label>Select Book</label>
+          <!-- <select [(ngModel)]="selected_book" *ngIf="wrong_book_list && wrong_book_list.length > 0">
             <option value="" selected>Select Book</option>
-            <option *ngFor="let item of wrong_book_list" [value]="item.item_code">{{item.book_name}}</option>
-          </select>
+            <option *ngFor="let item of wrong_book_list" [value]="item.item_code">{{item.item_name}}</option>
+          </select> -->
+          <input placeholder="Select Book" readonly (click)="openBookList()" [(ngModel)]="selected_book_name"/>
         </div>
         <div class="quantity">
           <label>Quantity</label>
@@ -32,7 +33,7 @@
       <div *ngFor="let item of saved_books; let i = index" class="books_">
         <div>
           <p class="m-0 book">{{item.book_name}}</p>
-          <p class="m-0 quantity">Qty: {{item.quantity}}</p>
+          <p class="m-0 quantity">Qty: {{item.qty}}</p>
         </div>
         <ion-icon (click)="remove_book(i)" name="close-outline"></ion-icon>
       </div>

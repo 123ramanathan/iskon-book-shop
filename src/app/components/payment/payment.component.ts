@@ -23,6 +23,7 @@ export class PaymentComponent implements OnInit {
     customer_name: "",
     customer_phone: null
   }
+  phone_error = false;
 
    
   constructor(public db: Db,private navCtrl:NavController) {}
@@ -61,35 +62,74 @@ export class PaymentComponent implements OnInit {
   }
 
   create_invoice() {
-    let items:any=[] = [];
+    if(!this.phone_error){
 
-    for (let i = 0; i < this.db.cartItems.length; i++) {
-      let data = {
-        "item_code": this.db.cartItems[i].item_code,
-        "qty": this.db.cartItems[i].qty,
-        "rate": this.db.cartItems[i].price_list_rate ?? 0,
+      if(!this.payment?.type){
+        this.db.presentToast('Please select a payment type', 'error');
+        return;
       }
-      items.push(data)
+
+      // Validate total payment against subtotal
+      const totalPayment = this.computeTotalPayment();
+      const subtotal = this.db.subtotal ?? 0;
+      if(totalPayment < subtotal){
+        this.db.presentToast('Payment amount is less than the total amount', 'error');
+        return;
+      }
+
+      let items:any=[] = [];
+  
+      for (let i = 0; i < this.db.cartItems.length; i++) {
+        let data = {
+          "item_code": this.db.cartItems[i].item_code,
+          "qty": this.db.cartItems[i].qty,
+          "rate": this.db.cartItems[i].price_list_rate ?? 0,
+        }
+        items.push(data)
+      }
+      const params = {
+        pos_profile: localStorage['store_name'],
+        items: items,
+        payments: this.generate_payment_method(),
+        customer_name: this.customer.customer_name,
+        customer_phone: this.customer.customer_phone,
+        user: localStorage['username']
+      };
+      this.db.payments_invoice({invoice_data:params}).subscribe((res: any) => {
+        if(res.status === "Success"){
+          const thankyouValues = {
+            amount: res.message.total_amount,
+            mode_of_payment : this.payment.type,
+            customer_name: this.customer.customer_name,
+            customer_phone: this.customer.customer_phone
+          };
+  
+          localStorage['thankyou_content'] = JSON.stringify(thankyouValues);
+          localStorage.removeItem('cartItems');
+          this.navCtrl.navigateForward('/thankyou');
+          this.payment = {
+            type: '',
+            cash: 0,
+            first_payment_type: 'Select payment type',
+            first_payment_amount: 0,
+            second_payment_type: 'Select payment type',
+            second_payment_amount: 0,
+          };
+          this.customer = {
+            customer_name: "",
+            customer_phone: null
+          };
+        }else{
+          if(res && res.message && res.message.message){
+            this.db.presentToast(res.message.message, 'error');
+          }else{
+            this.db.presentToast('Something went wrong, please try again', 'error');
+          }
+        }
+      });
+    }else{
+      this.db.presentToast('Please give a valid mobile number', 'error');
     }
-    const params = {
-      pos_profile: localStorage['store_name'],
-      items: items,
-      payments: this.generate_payment_method(),
-      customer_name: this.customer.customer_name,
-      customer_phone: this.customer.customer_phone,
-    };
-    this.db.payments_invoice({invoice_data:params}).subscribe((res: any) => {
-      if(res.status === "Success"){
-        const thankyouValues = {
-          amount: res.message.total_amount,
-          mode_of_payment : this.payment.type
-        };
-
-        localStorage['thankyou_content'] = JSON.stringify(thankyouValues);
-        localStorage.removeItem('cartItems');
-        this.navCtrl.navigateForward('/thankyou');
-      }
-    });
   }
 
   generate_payment_method() {
@@ -154,6 +194,36 @@ export class PaymentComponent implements OnInit {
       this.payment.second_payment_amount = 0;
     } else {
       this.payment.second_payment_amount = balance_amount;
+    }
+  }
+
+  validatePhone(event:any){
+    if(event.target.value.length >= 10){
+      this.phone_error = false;
+      event.target.value = event.target.value.slice(0,10);
+      this.customer.customer_phone = event.target.value;
+    }else if(event.target.value.length < 10){
+      this.phone_error = true;
+    }
+  }
+
+  computeTotalPayment() {
+    const subtotal = this.db.subtotal ?? 0;
+    if(this.payment?.type === 'Split'){
+      const first = Number(this.payment.first_payment_amount) || 0;
+      const second = Number(this.payment.second_payment_amount) || 0;
+      return first + second;
+    }
+
+    // For single payments use entered cash (or fallback to subtotal)
+    return Number(this.payment.cash) || subtotal;
+  }
+
+  equalCost(payment:any){
+    if(payment.cash){
+      payment.variance = payment.cash - this.db.subtotal;
+    }else{
+      payment.variance = 0;
     }
   }
 

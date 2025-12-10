@@ -1,0 +1,13 @@
+ion-list {
+    padding: 0px;
+    height: calc(100vh - 305px);
+    overflow: auto;
+}
+
+.no_data {
+    text-align: center;
+    margin-top: 20px;
+    color: gray;
+    font-size: 16px;
+    font-weight: 500;
+}

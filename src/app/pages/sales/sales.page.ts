@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RefresherCustomEvent } from '@ionic/angular';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -64,7 +65,8 @@ export class SalesPage implements OnInit {
 
   getDashboardDetails(){
     let data = {
-      pos_profile: localStorage['store_name']
+      pos_profile: this.db.header_content ? this.db.header_content.store_name : localStorage['pos_profile'] ? localStorage['pos_profile'] : '',
+      user: localStorage['username']
     }
     this.db.sales_details(data).subscribe((res:any)=>{
       console.log(res, "sales details");
@@ -78,13 +80,25 @@ export class SalesPage implements OnInit {
 
   openingPosEntry(){
     let data = {
-      user: 'umarbenz@gmail.com'
+      user: localStorage['username']
     }
     this.db.pos_opening_entry(data).subscribe((res:any)=>{
-      console.log(res, "pos opening entry");
-      this.router.navigateByUrl('/catalog');
+      if(res && res.message && res.status == "Success"){
+        console.log(res, "pos opening entry");
+        this.router.navigateByUrl('/catalog');
+      }else{
+        this.db.presentToast(res.message.message, 'error');
+      }
     });
     // this.router.navigateByUrl('/catalog');
+  }
+
+  handleRefresh(event: RefresherCustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      this.getDashboardDetails();
+    }, 2000);
   }
 
 }

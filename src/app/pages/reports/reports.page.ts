@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RefresherCustomEvent } from '@ionic/angular';
 import { Db } from 'src/app/service/db';
 
 @Component({
@@ -17,13 +18,22 @@ export class ReportsPage implements OnInit {
 
   get_reports(){
     const params = {
-      pos_profile: localStorage['store_name']
+      pos_profile: localStorage['store_name'],
+      user: localStorage['user_id']
     }
     this.db.get_reports(params).subscribe((res:any)=>{
       if(res.message){
         this.report_details = res.message;
       }
     })
+  }
+
+  handleRefresh(event: RefresherCustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      this.get_reports();
+    }, 2000);
   }
 
 }

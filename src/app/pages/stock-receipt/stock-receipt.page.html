@@ -2,6 +2,10 @@
 
 <ion-content [fullscreen]="true" style="--background: #f6f7f9;">
 
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-segment (ionChange)="segmentChanged($event)" [value]="selectedSegment" class="segment_bar" mode="md">
     <ion-segment-button value="pending_list" content-id="first">
       <ion-label>Pending</ion-label>
@@ -11,7 +15,7 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div class="main_section" [class.completed_list]="selectedSegment == 'confirmed_list'" (scroll)="selectedSegment == 'pending_list' ? load_more($event) : null">
+  <div class="main_section" [class.completed_list]="selectedSegment == 'confirmed_list'" (scroll)="load_more($event)">
 
     <div class="pending_reviews" *ngIf="selectedSegment == 'pending_list'">
 
@@ -28,7 +32,7 @@
               </div>
               <div class="sec_2">
                 <p class="m-0 id">{{item.name}}</p>
-                <p class="m-0 from">From: {{item.from_warehouse ?? " - "}}</p>
+                <!-- <p class="m-0 from">From: {{item.custom_final_target_warehouse ?? " - "}}</p> -->
                 <p class="m-0 date">Date: {{item.posting_date}}</p>
                 <div class="count_status">
                   <p class="m-0 items">{{item.items_count ?? ' 0 '}} Items</p>
@@ -38,6 +42,13 @@
             </div>
             <ion-icon name="chevron-forward-outline"></ion-icon>
           </div>
+        </div>
+      </div>
+
+      <div *ngIf="stock_entry_list.pending && stock_entry_list.pending.length == 0">
+        <div class="no_data">
+          <!-- <img src="/assets/images/no_data.png" alt="No Data"> -->
+          <p class="m-0">No Pending Stock Receipts</p>
         </div>
       </div>
 
@@ -57,7 +68,7 @@
               </div>
               <div class="sec_2">
                 <p class="m-0 id">{{item.name}}</p>
-                <p class="m-0 from">From: {{item.from_warehouse ?? " - "}}</p>
+                <!-- <p class="m-0 from">From: {{item.custom_final_target_warehouse ?? " - "}}</p> -->
                 <p class="m-0 date">Date: {{item.posting_date}}</p>
                 <div class="count_status">
                   <p class="m-0 items">{{item.items_count ?? " 0 "}} Items</p>
@@ -70,12 +81,19 @@
         </div>
       </div>
 
+      <div *ngIf="stock_entry_list && stock_entry_list.confirmed && stock_entry_list.confirmed.length == 0">
+        <div class="no_data">
+          <!-- <img src="/assets/images/no_data.png" alt="No Data"> -->
+          <p class="m-0">No Confirmed Stock Receipts</p>
+        </div>
+      </div>
+
     </div>
 
   </div>
 
-  <div class="save_btn" *ngIf="selectedSegment == 'pending_list'">
+  <!-- <div class="save_btn" *ngIf="selectedSegment == 'pending_list'">
     <ion-button fill="clear">Complete Receipt Process</ion-button>
-  </div>
+  </div> -->
 
 </ion-content>

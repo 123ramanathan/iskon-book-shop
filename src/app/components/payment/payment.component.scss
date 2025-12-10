@@ -38,8 +38,8 @@
         font-size: 0.875rem;
         line-height: 1.25rem;
 
-        span{
-            color: red;
+        span {
+          color: red;
         }
       }
 
@@ -205,4 +205,10 @@
     border: 1px solid var(--border-col);
     border-radius: calc(0.75rem - 2px);
   }
+}
+
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
 }
