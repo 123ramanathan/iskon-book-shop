@@ -50,7 +50,7 @@ export class CatalogPage implements OnInit {
       if(res.message && res.message.data && res.message.data.length > 0){
         const value = {name: "All Categories"}
         res.message.data.unshift(value);
-        this.categories = res.message.data
+        this.categories = res.message.data;
       }
     })
   }
