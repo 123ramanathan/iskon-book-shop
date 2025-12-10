@@ -76,6 +76,11 @@ export class PaymentComponent implements OnInit {
         this.db.presentToast('Payment amount is less than the total amount', 'error');
         return;
       }
+      
+      if(totalPayment > subtotal){
+        this.db.presentToast('Payment amount is higher than the total amount', 'error');
+        return;
+      }
 
       let items:any=[] = [];
   

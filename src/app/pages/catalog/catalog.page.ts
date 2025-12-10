@@ -13,7 +13,7 @@ export class CatalogPage implements OnInit {
   private debounceTimer: any;
   searchTxt:any="";
   category:any="All Categories";
-  languages = [{name: 'English'}, {name:'Tamil'}, {name:'Hindi'}, {name:'Malayalam'}];
+  languages = [];
   language:any="";
   page:number= 1;
   loading:boolean = false
@@ -27,7 +27,8 @@ export class CatalogPage implements OnInit {
   ionViewWillEnter(){
     this.db.get_cart_items();
     this.getItems();
-    this.get_item_group()
+    this.get_item_group();
+    this.get_languages();
   }
 
   ionViewWillLeave(){
@@ -44,13 +45,24 @@ export class CatalogPage implements OnInit {
   get_item_group(){
     let data = {
       doctype: "Item Group",
-      languages: this.language
+      languages: "Languages"
     }
     this.db.get_item_group(data).subscribe((res:any)=>{
       if(res.message && res.message.data && res.message.data.length > 0){
-        const value = {name: "All Categories"}
-        res.message.data.unshift(value);
+        res.message.data.unshift({name: "All Categories"});
         this.categories = res.message.data;
+        this.languages = res.message.data
+      }
+    })
+  }
+
+  get_languages(){
+    let data = {
+      doctype: "Languages"
+    }
+    this.db.get_item_group(data).subscribe((res:any)=>{
+      if(res.message && res.message.data && res.message.data.length > 0){
+        this.languages = res.message.data
       }
     })
   }
@@ -113,10 +125,10 @@ export class CatalogPage implements OnInit {
     if (!this.loading && this.loadMoreItems(event)){
       this.loading = true;
       this.page++;
-  
+      window.scrollTo(0,0)
       await this.getItems();  // loading will become false after fetch finishes
   
-      event.target.complete();
+      // event.target.complete();
     } 
   }
 

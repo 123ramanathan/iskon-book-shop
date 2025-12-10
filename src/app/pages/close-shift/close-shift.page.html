@@ -19,7 +19,7 @@
       </div>
       <div class="expected_closing" *ngIf="report_details">
         <p class="m-0">Expected Closing:</p>
-        <p class="m-0">{{db.formatCurrency(report_details.total_revenue)}}</p>
+        <p class="m-0">{{db.formatCurrency(report_details?.total_revenue ?? 0)}}</p>
       </div>
     </div>
     <div class="sec_3" *ngIf="false">
