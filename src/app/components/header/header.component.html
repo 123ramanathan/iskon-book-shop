@@ -11,7 +11,7 @@
           <p class="m-0">POS Terminal</p>
         </div>
       </div>
-      <div class="sec_2" *ngIf="db.header_content">
+      <div class="sec_2" *ngIf="db.header_content" (click)="openProfileModal()">
         <ion-icon src="/assets/tabs-icon/profile.svg"></ion-icon>
         <p class="m-0">{{db.header_content ? db.header_content.user_name : 'Guest'}}</p>
       </div>

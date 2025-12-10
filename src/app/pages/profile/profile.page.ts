@@ -59,13 +59,8 @@ export class ProfilePage implements OnInit {
     const { data } = await modal.onWillDismiss();
 
     if (data?.confirmed) {
-      this.logout();
+      this.db.logout();
     }
-  }
-
-  logout() {
-    localStorage.clear();
-    this.router.navigate(['/login']);
   }
 
 }

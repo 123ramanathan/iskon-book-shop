@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class Db {
   private baseUrlPos:string = "/api/method/iskcon.iskcon.mobile_app_pos."
 
   header_content:any = {};
-  constructor(private http:HttpClient, private toastController: ToastController){}
+  constructor(private http:HttpClient, private toastController: ToastController, private router: Router){}
 
   formatCurrency(amount:number, currency = "INR", locale = "en-IN") {
     if (isNaN(amount)) return "Invalid number";
@@ -284,6 +285,11 @@ export class Db {
     });
 
     await toast.present();
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigateByUrl('/login');
   }
 
 
