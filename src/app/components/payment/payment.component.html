@@ -25,17 +25,12 @@
       </div>
     </div>
 
-    <div class="payment_fields" *ngIf="payment?.type === 'Cash'">
+    <!-- <div class="payment_fields" *ngIf="payment?.type === 'Cash'">
       <div class="mb-10">
         <label>Cash Received</label>
-        <!-- (change)="equalCost(payment)" -->
         <input placeholder="Enter Amount"  [(ngModel)]="payment.cash" name="cash" type="number" />
       </div>
-      <!-- <div class="mb-10">
-        <label>Variance</label>
-        <input placeholder="Variance" readonly [(ngModel)]="payment.variance" name="cash" type="number" />
-      </div> -->
-    </div>
+    </div> -->
 
     <div *ngIf="payment?.type === 'Split'">
       <div class="payment_fields first_payment">

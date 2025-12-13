@@ -13,7 +13,6 @@ export class PaymentComponent implements OnInit {
   // selected_payment_type: any;
   payment: any = {
     type: '',
-    cash: null,
     first_payment_type: '',
     first_payment_amount: null,
     second_payment_type: '',
@@ -94,7 +93,6 @@ export class PaymentComponent implements OnInit {
         this.navCtrl.navigateForward('/thankyou');
         this.payment = {
           type: '',
-          cash: 0,
           first_payment_type: '',
           first_payment_amount: 0,
           second_payment_type: '',
@@ -140,24 +138,7 @@ export class PaymentComponent implements OnInit {
       return false;
     }
 
-    // CASH validation
-    if (this.payment.type === 'Cash') {
-      if (!this.payment.cash || this.payment.cash <= 0) {
-        this.db.presentToast('Please enter cash amount', 'error');
-        return false;
-      }
-    }
-
-    // UPI / CARD validation
-    if (this.payment.type === 'UPI' || this.payment.type === 'Card') {
-      // if (!this.payment.amount || this.payment.amount <= 0) {
-      //   this.db.presentToast(
-      //     `Please enter ${this.payment.type} amount`,
-      //     'error'
-      //   );
-      //   return false;
-      // }
-
+    if(this.payment.type !== "Split"){
       return true;
     }
 
@@ -248,7 +229,7 @@ export class PaymentComponent implements OnInit {
         data = [
           {
             mode_of_payment: this.payment?.type,
-            amount: this.payment?.cash,
+            amount: this.db.subtotal
           },
         ];
         break;
@@ -313,14 +294,7 @@ export class PaymentComponent implements OnInit {
     }
 
     // For single payments use entered cash (or fallback to subtotal)
-    return Number(this.payment.cash) || subtotal;
+    return subtotal;
   }
 
-  equalCost(payment: any) {
-    if (payment.cash) {
-      payment.variance = payment.cash - this.db.subtotal;
-    } else {
-      payment.variance = 0;
-    }
-  }
 }
