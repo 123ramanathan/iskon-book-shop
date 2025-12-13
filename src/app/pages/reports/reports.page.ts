@@ -13,7 +13,11 @@ export class ReportsPage implements OnInit {
   constructor(public db:Db) { }
 
   ngOnInit() {
-    this.get_reports()
+    
+  }
+
+  ionViewWillEnter(){
+    this.get_reports();
   }
 
   get_reports(){
