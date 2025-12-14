@@ -2,13 +2,14 @@
 
 <ion-content [fullscreen]="true" style="--background: #f6f7f9;">
   
-  <div class="main_section">
+  <div class="main_section" *ngIf="report_details">
     <div class="sec_1">
       <ion-icon src="/assets/icon/close-shift-currency.svg"></ion-icon>
       <h2 class="m-0">Close Shift</h2>
       <!-- <p class="m-0">SHIFT-20251029-2103</p> -->
     </div>
-    <div class="sec_2">
+
+    <!-- <div class="sec_2">
       <div class="opening_balance">
         <p class="m-0">Opening Balance:</p>
         <p class="m-0">₹ 0</p>
@@ -21,11 +22,27 @@
         <p class="m-0">Expected Closing:</p>
         <p class="m-0">{{db.formatCurrency(report_details?.total_revenue ?? 0)}}</p>
       </div>
+    </div> -->
+
+    <div class="payment_methods" *ngIf="report_details.payment_methods && report_details.payment_methods.length > 0">
+      <h3 class="m-0">Payment Methods</h3>
+      <div class="types_sec">
+        <div class="secs" *ngFor="let item of report_details.payment_methods">
+          <p class="m-0 type">{{item.method}}</p>
+          <div class="cost_sec">
+            <p class="m-0 transaction">{{item.count}} transactions</p>
+            <p class="m-0 amount">{{db.formatCurrency(item.amount)}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="expected_closing" *ngIf="report_details?.today_summary">
+        <p class="m-0">Total:</p>
+        <p class="m-0">{{db.formatCurrency(report_details?.today_summary?.revenue ?? 0)}}</p>
+      </div>
     </div>
-    <div class="sec_3" *ngIf="false">
-      <label>Actual Cash Count (₹)</label>
-      <input placeholder="Enter Actual Cash Count" type="number">
-    </div>
+
+    
     <div class="save_btn">
       <ion-button fill="clear" (click)="confirmCloseShift()">Close Shift</ion-button>
     </div>

@@ -52,6 +52,11 @@ export class AppComponent {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         this.db.path = event.url;
+        if(!(this.db.path.includes('transfer-receipt') && this.db.path.includes('wrong-receipt'))){
+          localStorage.removeItem('wrong_books');
+           localStorage.removeItem('stock_entry_list');
+        }
+
         console.log('Current URL:', this.db.path);
       }
     });
