@@ -49,6 +49,13 @@ export class PaymentComponent implements OnInit {
 
   payment_select = [{ name: 'Cash' }, { name: 'UPI' }, { name: 'Card' }];
 
+  select_payment(arr: any[], type: string): any[] {
+    // remove second selected payment from first dropdown
+    return arr.filter((item) => item.name !== this.payment[type]);
+
+    // return arr;
+  }
+
   selected_payment(item: any) {
     // this.selected_payment_type = item.name;
     this.payment['type'] = item.name;
@@ -138,7 +145,7 @@ export class PaymentComponent implements OnInit {
       return false;
     }
 
-    if(this.payment.type !== "Split"){
+    if (this.payment.type !== 'Split') {
       return true;
     }
 
@@ -229,7 +236,7 @@ export class PaymentComponent implements OnInit {
         data = [
           {
             mode_of_payment: this.payment?.type,
-            amount: this.db.subtotal
+            amount: this.db.subtotal,
           },
         ];
         break;
@@ -296,5 +303,4 @@ export class PaymentComponent implements OnInit {
     // For single payments use entered cash (or fallback to subtotal)
     return subtotal;
   }
-
 }
