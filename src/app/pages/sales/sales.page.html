@@ -10,14 +10,14 @@
     <ion-button fill="clear" (click)="openingPosEntry()"><ion-icon slot="start" name="cart-outline"></ion-icon>Start New Sale</ion-button>
 
     <div class="sales_report" *ngIf="report_details">
-      <div class="boxes">
+      <div class="boxes" routerLink="/tabs/orders">
         <ion-icon src="/assets/icon/today-sales.svg"></ion-icon>
         <div>
           <h5 class="m-0 value">{{report_details.overall_count}}</h5>
           <p class="m-0 label">Total Sales</p>
         </div>
       </div>
-      <div class="boxes">
+      <div class="boxes" routerLink="/tabs/reports">
         <ion-icon src="/assets/icon/revenue.svg"></ion-icon>
         <div>
           <h5 class="m-0 value">₹ {{report_details.total_revenue}}</h5>
@@ -31,7 +31,7 @@
           <p class="m-0 label">Low Stock Items</p>
         </div>
       </div>
-      <div class="boxes">
+      <div class="boxes" routerLink="/stock-receipt">
         <ion-icon src="/assets/icon/week-sales.svg"></ion-icon>
         <div>
           <h5 class="m-0 value">{{report_details?.pending_inventory_count}}</h5>

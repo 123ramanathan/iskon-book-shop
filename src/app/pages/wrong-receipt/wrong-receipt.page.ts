@@ -30,12 +30,25 @@ export class WrongReceiptPage implements OnInit {
   }
 
   saveSelectBook(){
+
+    if(!this.selected_book_name){
+      this.db.presentToast("Please select book", 'error');
+      return;
+    }
+
+    if(!this.quantity){
+      this.db.presentToast("Please add quantity for book", 'error');
+      return;
+    }
+
+
     let data = {
       book_name: this.selected_book_name,
       qty: this.quantity
     }
     this.saved_books.push(data);
     this.selected_book = null;
+    this.selected_book_name = null
     this.quantity = null;
   }
 
@@ -58,7 +71,7 @@ export class WrongReceiptPage implements OnInit {
   // }
 
   saveWrongBook(){
-    console.log("Wrong Book Saved", this.saved_books)
+    
     let data = {
       stock_entry_name: this.router_name,
       wrong_books_data: this.saved_books
