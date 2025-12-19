@@ -103,9 +103,12 @@
 
         <div class="cart-summary__total">
           <span class="cart-summary__total-label">Total</span>
-          <span class="cart-summary__total-value"
-            >{{ db.formatCurrency(db.subtotal)}}</span
-          >
+          <span class="cart-summary__total-value" >{{ db.formatCurrency(db.subtotal)}}</span>
+        </div>
+
+        <div class="cart-summary__total">
+          <span class="cart-summary__total-label">Quantity</span>
+          <span class="cart-summary__total-value" >{{db.cartItems.length}}</span>
         </div>
 
         <!-- <button on class="cart-summary__button" routerLink="/payment">

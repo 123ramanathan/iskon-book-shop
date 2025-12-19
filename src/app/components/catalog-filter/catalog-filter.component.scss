@@ -52,14 +52,6 @@
   font-size: 1.25rem;
 }
 
-.submit-btn {
-  margin-top: 10px;
-  --border-radius: 10px;
-  height: 45px;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
 ion-toolbar {
   --background: var(--primary-color);
 
@@ -69,5 +61,38 @@ ion-toolbar {
 
   ion-icon {
     color: #fff;
+  }
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: sticky;
+  bottom: 0;
+  padding: 10px 0;
+  background: #fff;
+  z-index: 9999;
+
+  .submit-btn {
+    // margin-top: 10px;
+    --border-radius: 10px;
+    height: 45px;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 50%;
+  }
+
+  .clear-btn {
+    --border-radius: 10px;
+    height: 45px;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 50%;
+    --background: #fff;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    color: var(--primary-color);
+    box-shadow: unset;
   }
 }

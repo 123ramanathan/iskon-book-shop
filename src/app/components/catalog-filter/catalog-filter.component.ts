@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Db } from 'src/app/service/db';
 
 @Component({
   selector: 'app-catalog-filter',
@@ -10,6 +11,8 @@ import { ModalController } from '@ionic/angular';
 export class CatalogFilterComponent  implements OnInit {
   @Input() categories: any[] = [];
   @Input() languages: any[] = [];
+  // languages: any[] = [];
+  // categories: any[] = [];
 
   @Input() selectedLanguage: string | null = null;
   @Input() selectedCategory: string | null = null;
@@ -19,7 +22,7 @@ export class CatalogFilterComponent  implements OnInit {
 
  
 
- constructor(private modalCtrl: ModalController) {}
+ constructor(private modalCtrl: ModalController, public db: Db) {}
 
   ngOnInit() {
     this.language = this.selectedLanguage;
@@ -49,6 +52,44 @@ export class CatalogFilterComponent  implements OnInit {
 
   close() {
     this.modalCtrl.dismiss(null, 'cancel');
+  }
+
+  clearFilters() {
+    this.selectedCategory = null;
+    this.selectedLanguage = null;
+
+    this.modalCtrl.dismiss(
+      {
+        language: this.selectedLanguage,
+        category: this.selectedCategory
+      },
+      'confirm'
+    );
+  }
+
+  get_item_group(){
+    let data = {
+      doctype: "Item Group",
+      languages: "Languages"
+    }
+    this.db.get_item_group(data).subscribe((res:any)=>{
+      if(res.message && res.message.data && res.message.data.length > 0){
+        res.message.data.unshift({name: "All Categories"});
+        this.categories = res.message.data;
+        this.languages = res.message.data
+      }
+    })
+  }
+
+  get_languages(){
+    let data = {
+      doctype: "Languages"
+    }
+    this.db.get_item_group(data).subscribe((res:any)=>{
+      if(res.message && res.message.data && res.message.data.length > 0){
+        this.languages = res.message.data
+      }
+    })
   }
 
 }

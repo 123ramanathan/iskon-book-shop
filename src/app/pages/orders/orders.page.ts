@@ -34,10 +34,11 @@ export class OrdersPage implements OnInit {
     let data = {
       pos_profile: localStorage['store_name'],
       page:this.page,
-      limit: 20
+      per_page: 20,
+      user: localStorage['user_id']
     }
     this.db.get_orders(data).subscribe((res:any)=>{
-      console.log(res, "orders list response");
+      // console.log(res, "orders list response");
       if(res.message && res.message.message && res.message.message.length > 0){
         this.orders = this.page === 1 ? res.message.message : [...this.orders,...res.message.message]
       }else{

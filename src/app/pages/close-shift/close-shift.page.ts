@@ -17,7 +17,21 @@ export class CloseShiftPage implements OnInit {
   }
 
   ionViewWillEnter(){
-    this.getDashboardDetails();
+    // this.getDashboardDetails();
+    this.get_reports();
+  }
+
+
+  get_reports(){
+    const params = {
+      pos_profile: localStorage['store_name'],
+      user: localStorage['user_id']
+    }
+    this.db.get_reports(params).subscribe((res:any)=>{
+      if(res.message){
+        this.report_details = res.message;
+      }
+    })
   }
 
   closeShift(){
@@ -25,7 +39,6 @@ export class CloseShiftPage implements OnInit {
       user: localStorage['username']
     }
     this.db.pos_closing_entry(data).subscribe((res:any)=>{
-      console.log(res, "close shift response");
       if(res && res.message && res.status == 'Success'){
         this.db.presentToast(res.message.message, 'success');
         this.db.logout();
@@ -56,18 +69,18 @@ export class CloseShiftPage implements OnInit {
     }
   }
 
-  getDashboardDetails(){
-    let data = {
-      pos_profile: localStorage['store_name']
-    }
-    this.db.sales_details(data).subscribe((res:any)=>{
-      console.log(res, "sales details");
-      if(res && res.status == "Success" && res.message){
-        this.report_details = res.message;
-      }else{
-        this.report_details = {};
-      }
-    });
-  }
+  // getDashboardDetails(){
+  //   let data = {
+  //     pos_profile: localStorage['store_name']
+  //   }
+  //   this.db.sales_details(data).subscribe((res:any)=>{
+  //     console.log(res, "sales details");
+  //     if(res && res.status == "Success" && res.message){
+  //       this.report_details = res.message;
+  //     }else{
+  //       this.report_details = {};
+  //     }
+  //   });
+  // }
 
 }

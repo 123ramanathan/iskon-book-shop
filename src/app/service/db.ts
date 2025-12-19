@@ -17,6 +17,7 @@ export class Db {
   private baseUrlPos:string = "/api/method/iskcon.iskcon.mobile_app_pos."
 
   header_content:any = {};
+  isSearchFocused = false;
   constructor(private http:HttpClient, private toastController: ToastController, private router: Router){}
 
   formatCurrency(amount:number, currency = "INR", locale = "en-IN") {
@@ -94,15 +95,17 @@ export class Db {
       item['qty'] = item['qty'] > 0 ? item['qty'] - 1 : 1
     }
     
-    for (let i = 0; i < this.cartItems.length; i++) {
-      if(item.item_name === this.cartItems[i]['item_name']){
-        this.cartItems[i] = item
+    if(this.path === "/cart"){
+      for (let i = 0; i < this.cartItems.length; i++) {
+        if(item.item_name === this.cartItems[i]['item_name']){
+          this.cartItems[i] = item
+        }
       }
+  
+      localStorage['cartItems'] = JSON.stringify(this.cartItems);
+  
+      this.get_cart_items()
     }
-
-    localStorage['cartItems'] = JSON.stringify(this.cartItems);
-
-    this.get_cart_items()
   }
 
   remove_cart_item(item:any){

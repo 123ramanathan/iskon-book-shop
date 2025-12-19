@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="save_btn">
+    <div class="save_btn" *ngIf="saved_books && saved_books.length > 0">
       <ion-button fill="clear" (click)="saveWrongBook()"><ion-icon class="white" name="checkmark-circle-outline"></ion-icon>Submit Report</ion-button>
     </div>
 

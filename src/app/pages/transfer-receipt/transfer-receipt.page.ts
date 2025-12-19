@@ -27,14 +27,25 @@ export class TransferReceiptPage implements OnInit {
       console.log(params);
       if(params && params['id']){
         this.router_name = params['id'];
-        this.get_stock_entry_details();
       }
+      this.get_stock_entry_details();
     })
   }
 
-  ionViewWillEnter(){
-    this.get_stock_entry_details();
+  ionViewWillLeave(){
+    if(this.stock_entry_list.length > 0){
+      const data = {
+        stock_entry_name: this.router_name,
+        items_data: this.stock_entry_list
+      }
+      localStorage.setItem('stock_entry_list', JSON.stringify(data));
+      this.stock_entry_list = [];
+    }
   }
+
+  // ionViewWillEnter(){
+  //   this.get_stock_entry_details();
+  // }
 
   receipt_book_list: any = [
     {
@@ -65,6 +76,8 @@ export class TransferReceiptPage implements OnInit {
       if(res && res.message && res.message.status == 'success'){
         this.db.presentToast(res.message.message, 'success');
         this.router.navigateByUrl('/stock-receipt');
+        this.stock_entry_list =[];
+              localStorage.removeItem('stock_entry_list');
       }else{
         if(res && res.message && res.message.message){
           this.db.presentToast(res.message.message, 'error');
@@ -84,6 +97,15 @@ export class TransferReceiptPage implements OnInit {
       if(res && res.message && res.message.data && res.message.status == 'success'){
         if(res.message.data.items && res.message.data.items.length > 0){
           this.stock_entry_list = res.message.data.items;
+          const stored_data = localStorage['stock_entry_list'] ? localStorage['stock_entry_list'] : null;
+          if(stored_data){
+            const parsed_data = JSON.parse(stored_data);
+            if(parsed_data && parsed_data.stock_entry_name === this.router_name){
+              this.stock_entry_list = parsed_data.items_data;
+              localStorage.removeItem('stock_entry_list');
+              console.log('Loaded stock entry list from localStorage:', this.stock_entry_list);
+            }
+          }
         }
         this.stock_details = res.message.data.header;
       }else{

@@ -67,7 +67,7 @@ $line-height: 1.25rem;
     gap: 0.5rem;
     // margin-top: .75rem;
 
-    svg{
+    svg {
       flex: 0 0 auto;
     }
 
@@ -106,11 +106,11 @@ $line-height: 1.25rem;
     overflow: auto;
   }
 
-  .def__body{
-     height: calc(100vh - 200px);
+  .def__body {
+    height: calc(100vh - 200px);
   }
 
-  
+
 
 
   .cart-container {
@@ -160,4 +160,34 @@ $line-height: 1.25rem;
   text-align: center;
   color: $muted-foreground;
   margin-top: 2rem;
+}
+
+#section__body {
+  display: none;
+}
+
+ion-content {
+  --overflow: auto;
+}
+
+.section__filters {
+  .filter_icon {
+    position: relative;
+  }
+
+  .filters_count {
+    position: absolute;
+    top: -15px;
+    right: -7px;
+    background: var(--primary-color);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 4px;
+    color: #fff;
+    font-size: 14px;
+  }
 }
