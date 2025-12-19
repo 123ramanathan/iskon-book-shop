@@ -74,7 +74,10 @@
 
     </ion-accordion-group>
 
-    <ion-button expand="block" class="submit-btn" (click)="submit()">Apply Filters</ion-button>
+    <div class="filter-actions">
+      <ion-button expand="block" class="clear-btn" (click)="clearFilters()">Clear Filters</ion-button>
+      <ion-button expand="block" class="submit-btn" (click)="submit()">Apply Filters</ion-button>
+    </div>
   </div>
 
 </ion-content>

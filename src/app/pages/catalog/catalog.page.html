@@ -9,23 +9,26 @@
     <section class="section__group">
       
       <div class="section__filters">
-        <svg
-        (click)="openFilterModal()"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-filter h-4 w-4 text-muted-foreground flex-shrink-0"
-        >
-          <polygon
-            points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
-          ></polygon>
-        </svg>
+        <div class="filter_icon">
+          <div *ngIf="filters_count" class="filters_count">{{filters_count}}</div>
+          <svg
+            (click)="openFilterModal()"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-filter h-4 w-4 text-muted-foreground flex-shrink-0"
+          >
+            <polygon
+              points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+            ></polygon>
+          </svg>
+        </div>
 
         <div class="section__input">
         <input
@@ -58,7 +61,8 @@
       </div>
     </section>
 
-    <section class="section__body" [class.def__body]="db.cartItems.length > 0" (scroll)="loadMore($event)">
+    <div #sectionBody class="section__body" [class.def__body]="db.cartItems.length > 0" (scroll)="loadMore($event)">
+      
       <app-catalog-cards *ngIf="catalog && catalog.length > 0" [catalog]="catalog"></app-catalog-cards>
 
       <div *ngIf="catalog && catalog.length === 0" class="no-data">
@@ -88,7 +92,7 @@
         </ion-infinite-scroll-content>
       </ion-infinite-scroll> -->
 
-    </section>
+    </div>
 
     <div class="cart-container" *ngIf="db.cartItems.length > 0">
       <ion-button routerLink="/cart" class="cart-button">

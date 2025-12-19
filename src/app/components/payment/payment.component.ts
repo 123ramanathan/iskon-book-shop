@@ -47,7 +47,7 @@ export class PaymentComponent implements OnInit {
     },
   ];
 
-  payment_select = [{ name: 'Cash' }, { name: 'UPI' }, { name: 'Card' }];
+  payment_select = [{ name: 'Cash' }, { name: 'UPI' }, { name: 'Credit Card' }];
 
   select_payment(arr: any[], type: string): any[] {
     // remove second selected payment from first dropdown

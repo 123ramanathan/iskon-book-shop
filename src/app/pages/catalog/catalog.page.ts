@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CatalogFilterComponent } from 'src/app/components/catalog-filter/catalog-filter.component';
 import { Db } from 'src/app/service/db';
@@ -21,6 +21,9 @@ export class CatalogPage implements OnInit {
   catalog:any[] = []
 
   categories:any[] = []
+  filters_count:number = 0;
+  @ViewChild('sectionBody') sectionBody!: ElementRef;
+
 
   constructor(public db:Db,private modalCtrl:ModalController) { }
 
@@ -33,6 +36,9 @@ export class CatalogPage implements OnInit {
 
   ionViewWillLeave(){
     this.catalog = []
+    this.searchTxt = "";
+    this.category = "All Categories";
+    this.language = "";
     this.page = 1;
     this.noProduct = false;
   }
@@ -67,7 +73,7 @@ export class CatalogPage implements OnInit {
     })
   }
 
-  getItems(){
+  getItems(searchType:string=""){
     let params = {
       // pos_profile: localStorage['store_name'],
       user: localStorage['username'],
@@ -84,17 +90,21 @@ export class CatalogPage implements OnInit {
         this.catalog = this.page === 1 ? res.message.items : [...this.catalog,...res.message.items]
         this.loading = false
         this.noProduct = false
+        if(searchType === 'search'){
+          this.sectionBody.nativeElement.scrollTop = 0;
+        }
       }else{
         this.catalog = this.page === 1 ? [] : this.catalog
         this.noProduct = true
         this.loading = false
+        if(searchType === 'search'){
+          this.sectionBody.nativeElement.scrollTop = 0;
+        }
       }
     })
   }
 
   onSearchChange(event: any) {
-    window.scrollTo(0,0);
-
     const value = event.target.value.toLowerCase();
 
     if (this.debounceTimer) {
@@ -104,7 +114,7 @@ export class CatalogPage implements OnInit {
     this.debounceTimer = setTimeout(() => {
       this.page = 1;
       this.loading = true;
-      this.getItems();
+      this.getItems('search');
     }, 500);
   }
 
@@ -122,7 +132,8 @@ export class CatalogPage implements OnInit {
   }
 
   async loadMore(event: any) {
-    if (!this.loading && this.loadMoreItems(event) && !this.db.isSearchFocused){
+    //  && !this.db.isSearchFocused
+    if (!this.loading && this.loadMoreItems(event)){
       this.loading = true;
       this.page++;
       window.scrollTo(0,0)
@@ -166,8 +177,8 @@ export class CatalogPage implements OnInit {
       component: CatalogFilterComponent,
       cssClass: 'catalog-filter',
       componentProps: {
-        categories: this.categories,
-        languages: this.languages,
+        categories: (this.categories && this.categories.length > 0) ? this.categories : [],
+        languages: (this.languages && this.languages.length > 0) ? this.languages : [],
         selectedCategory: this.category,
         selectedLanguage: this.language
       }
@@ -178,9 +189,27 @@ export class CatalogPage implements OnInit {
     // 👇 Here you get the dismiss value
     const { data, role } = await modal.onDidDismiss();
 
-    if(data || role){
-      this.category = data.category ? data.category : "All Categories"
-      this.language = data.language ? data.language : ""
+    console.log(data, role);
+
+    if(data && (data.category || data.language)){
+      this.category = (data && data.category) ? data.category : "All Categories"
+      this.language = (data && data.language) ? data.language : ""
+
+      this.filters_count = 0;
+      if(this.category && this.category !== "All Categories"){
+        this.filters_count += 1;
+      }
+      if(this.language){
+        this.filters_count += 1;
+      }
+
+      this.loading = true;
+      this.page = 1;
+      this.getItems();
+    }else if(data && (!data.category && !data.language)){
+      this.category = "All Categories";
+      this.language = ""
+      this.filters_count = 0;
       this.loading = true;
       this.page = 1;
       this.getItems();
