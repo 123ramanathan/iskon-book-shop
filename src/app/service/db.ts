@@ -249,6 +249,11 @@ export class Db {
     return this.callApi(endpoint,"POST",data)
   }
 
+  get_confirmed_details(params:any){
+    const endpoint = this.baseUrl + "get_confirmed_items";
+    return this.callApi(endpoint,"POST",params)
+  }
+
   headerDetails(){
     let data = {
       user: localStorage['username']

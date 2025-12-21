@@ -91,7 +91,14 @@ const routes: Routes = [
     path: 'wrong-receipt/:id',
     loadChildren: () => import('./pages/wrong-receipt/wrong-receipt.module').then( m => m.WrongReceiptPageModule)
   },
-
+  {
+    path: 'receipt-detail',
+    loadChildren: () => import('./pages/receipt-detail/receipt-detail.module').then( m => m.ReceiptDetailPageModule)
+  },
+  {
+    path: 'receipt-detail/:id',
+    loadChildren: () => import('./pages/receipt-detail/receipt-detail.module').then( m => m.ReceiptDetailPageModule)
+  }
 ]
 @NgModule({
   imports: [

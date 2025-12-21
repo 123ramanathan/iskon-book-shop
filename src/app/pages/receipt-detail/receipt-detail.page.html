@@ -1,0 +1,119 @@
+<app-header [home]="false" [title]="'Receipt Detail'"></app-header>
+
+<ion-content [fullscreen]="true">
+  <div class="receipt-container" *ngIf="receipt_details && receipt_details.name">
+    
+    <!-- Header Section -->
+    <div class="receipt-header">
+      <div class="receipt-number">
+        <span class="label">Receipt No.</span>
+        <span class="value">{{ receipt_details.name }}</span>
+      </div>
+      <div class="receipt-status" [ngClass]="'status-' + receipt_details.custom_status?.toLowerCase()">
+        {{ receipt_details.custom_status }}
+      </div>
+    </div>
+
+    <!-- Info Cards Section -->
+    <ion-card class="info-card">
+      <ion-card-content>
+        <div class="info-grid">
+          <!-- Left Column -->
+          <div class="info-column">
+            <div class="info-item">
+              <span class="info-label">Entry Type</span>
+              <span class="info-value">{{ receipt_details.stock_entry_type }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Store</span>
+              <span class="info-value">{{ receipt_details.custom_store }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Posting Date</span>
+              <span class="info-value">{{ formatDate(receipt_details.posting_date) }}</span>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="info-column">
+            <div class="info-item">
+              <span class="info-label">Posting Time</span>
+              <span class="info-value">{{ formatTime(receipt_details.posting_time) }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Confirmed Date</span>
+              <span class="info-value">{{ formatDate(receipt_details.confirmed_date) }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Confirmed Time</span>
+              <span class="info-value">{{ formatTime(receipt_details.confirmed_time) }}</span>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Books List Section -->
+    <div class="section-title">
+      <ion-icon name="list"></ion-icon>
+      <span>Books Transferred</span>
+    </div>
+
+    <ion-card class="books-card" *ngFor="let book of receipt_details.book_list; let i = index">
+      <ion-card-content>
+        <div class="book-item">
+          <div class="book-header">
+            <span class="book-index">Item {{ i + 1 }}</span>
+            <span class="book-id">{{ book.name }}</span>
+          </div>
+
+          <div class="book-name">{{ book.book_name }}</div>
+
+          <div class="book-details">
+            <div class="detail-row">
+              <div class="detail-box">
+                <span class="detail-label">System Qty</span>
+                <span class="detail-value">{{ book.system_qty }}</span>
+              </div>
+              <div class="detail-box">
+                <span class="detail-label">Physical Qty</span>
+                <span class="detail-value">{{ book.physical_qty }}</span>
+              </div>
+              <div class="detail-box">
+                <span class="detail-label">Difference</span>
+                <span class="detail-value" [ngClass]="book.qty_difference === '0' ? 'zero' : 'non-zero'">
+                  {{ book.qty_difference }}
+                </span>
+              </div>
+            </div>
+
+            <div class="warehouse-info">
+              <span class="warehouse-label">Target Warehouse:</span>
+              <span class="warehouse-value">{{ book.final_target_warehouse }}</span>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Empty State for Wrong Books -->
+    <div class="section-title" *ngIf="receipt_details.custom_wrong_book && receipt_details.custom_wrong_book.length > 0">
+      <ion-icon name="alert"></ion-icon>
+      <span>Wrong Books</span>
+    </div>
+
+    <ion-card class="wrong-books-card" *ngIf="receipt_details.custom_wrong_book && receipt_details.custom_wrong_book.length > 0">
+      <ion-card-content>
+        <p class="no-wrong-books">No wrong books recorded</p>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!receipt_details || !receipt_details.name">
+    <ion-icon name="document-outline"></ion-icon>
+    <p>Loading receipt details...</p>
+  </div>
+
+</ion-content>

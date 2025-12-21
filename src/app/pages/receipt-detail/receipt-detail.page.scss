@@ -1,0 +1,403 @@
+// Variables
+$primary-color: #6366f1;
+$secondary-color: #8b5cf6;
+$success-color: #10b981;
+$warning-color: #f59e0b;
+$danger-color: #ef4444;
+$light-bg: #f9fafb;
+$border-color: #e5e7eb;
+$text-primary: #1f2937;
+$text-secondary: #6b7280;
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+// Responsive Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+
+// Receipt Container
+.receipt-container {
+  padding: 16px;
+  background: #ffffff;
+  min-height: 100%;
+}
+
+// Receipt Header Section
+.receipt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  .receipt-number {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: $text-secondary;
+    }
+
+    .value {
+      font-size: 24px;
+      font-weight: 700;
+      color: $text-primary;
+      font-family: 'Courier New', monospace;
+    }
+  }
+
+  .receipt-status {
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+    white-space: nowrap;
+
+    &.status-confirmed {
+      background-color: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    &.status-pending {
+      background-color: #fef3c7;
+      color: #78350f;
+      border: 1px solid #fcd34d;
+    }
+
+    &.status-rejected {
+      background-color: #fee2e2;
+      color: #7f1d1d;
+      border: 1px solid #fca5a5;
+    }
+  }
+}
+
+// Info Card
+.info-card {
+  border-radius: 12px;
+  border: 1px solid $border-color;
+  box-shadow: $shadow-md;
+  margin: 0px;
+  overflow: hidden;
+
+  ion-card-content {
+    padding: 1rem;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    @media (max-width: $tablet) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  .info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .info-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: $text-secondary;
+    }
+
+    .info-value {
+      font-size: 16px;
+      font-weight: 500;
+      color: $text-primary;
+    }
+  }
+}
+
+// Section Title
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0 16px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: $text-primary;
+  padding: 0 4px;
+
+  ion-icon {
+    width: 24px;
+    height: 24px;
+    color: $primary-color;
+  }
+}
+
+// Books Card
+.books-card {
+  border-radius: 12px;
+  border: 1px solid $border-color;
+  box-shadow: $shadow-md;
+  margin: 0px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+    border-color: $primary-color;
+  }
+
+  ion-card-content {
+    padding: 1rem;
+  }
+
+  .book-item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .book-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid $light-bg;
+
+    .book-index {
+      background-color: $primary-color;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .book-id {
+      font-size: 13px;
+      color: $text-secondary;
+      font-family: 'Courier New', monospace;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+  }
+
+  .book-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: $text-primary;
+    line-height: 1.4;
+  }
+
+  .book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .detail-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+
+    @media (max-width: $mobile) {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+
+  .detail-box {
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    border: 1px solid $border-color;
+
+    .detail-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: $text-secondary;
+    }
+
+    .detail-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: $primary-color;
+
+      &.zero {
+        color: $success-color;
+      }
+
+      &.non-zero {
+        color: $warning-color;
+      }
+    }
+  }
+
+  .warehouse-info {
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid $primary-color;
+    border: 1px solid $border-color;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .warehouse-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: $text-secondary;
+    }
+
+    .warehouse-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-primary;
+      word-break: break-word;
+    }
+  }
+}
+
+// Wrong Books Card
+.wrong-books-card {
+  border-radius: 12px;
+  border: 1px solid $border-color;
+  box-shadow: $shadow-md;
+  margin-bottom: 24px;
+
+  ion-card-content {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .no-wrong-books {
+    margin: 0;
+    font-size: 14px;
+    color: $text-secondary;
+    font-weight: 500;
+  }
+}
+
+// Action Buttons
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 32px 0 24px 0;
+
+  @media (max-width: $tablet) {
+    gap: 10px;
+  }
+
+  ion-button {
+    --height: 48px;
+    --font-weight: 600;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+
+    &[color="primary"] {
+      --background: linear-gradient(135deg, $primary-color, $secondary-color);
+      --background-activated: linear-gradient(135deg, #4f46e5, #7c3aed);
+
+      &:active {
+        --background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      }
+    }
+
+    &[color="secondary"] {
+      --border-color: $primary-color;
+      --color: $primary-color;
+
+      &:active {
+        --background: rgba($primary-color, 0.1);
+      }
+    }
+
+    ion-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+// Empty State
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 16px;
+
+  ion-icon {
+    width: 80px;
+    height: 80px;
+    color: $border-color;
+  }
+
+  p {
+    font-size: 16px;
+    color: $text-secondary;
+    margin: 0;
+  }
+}
+
+// Animation for card entrance
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.receipt-header,
+.info-card,
+.books-card {
+  animation: slideUp 0.4s ease-out;
+}
+
+// Utility Classes
+.text-primary {
+  color: $text-primary;
+}
+
+.text-secondary {
+  color: $text-secondary;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
