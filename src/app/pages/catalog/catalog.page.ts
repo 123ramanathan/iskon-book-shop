@@ -30,8 +30,8 @@ export class CatalogPage implements OnInit {
   ionViewWillEnter(){
     this.db.get_cart_items();
     this.getItems();
-    this.get_item_group();
     this.get_languages();
+    this.get_item_group();
   }
 
   ionViewWillLeave(){
@@ -51,13 +51,11 @@ export class CatalogPage implements OnInit {
   get_item_group(){
     let data = {
       doctype: "Item Group",
-      languages: "Languages"
     }
     this.db.get_item_group(data).subscribe((res:any)=>{
       if(res.message && res.message.data && res.message.data.length > 0){
         res.message.data.unshift({name: "All Categories"});
         this.categories = res.message.data;
-        this.languages = res.message.data
       }
     })
   }
