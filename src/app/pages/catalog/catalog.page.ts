@@ -84,6 +84,10 @@ export class CatalogPage implements OnInit {
 
     this.db.sales_items_with_filters(params).subscribe((res:any)=>{
       // console.log(res,"res")
+      if(res.message && res.message.message === "No active shift found for this user"){
+        this.db.logout();
+        return;
+      }
       if(res.message && res.message.items && res.message.items.length > 0){
         this.catalog = this.page === 1 ? res.message.items : [...this.catalog,...res.message.items]
         this.loading = false
