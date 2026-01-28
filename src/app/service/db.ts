@@ -86,11 +86,41 @@ export class Db {
   }
 
   update_qty(item:any,type:string){
-
+    console.log(item,type);
     if(type === "inc"){
-      if(item.is_stock_item && (item['qty'] ?? 0) < item.actual_qty){
-        item['qty'] = item['qty'] > 0 ? item['qty'] + 1 : 2
+
+       let qtyExceeds = false;
+      if(this.cartItems && this.cartItems.length > 0){
+        const isExist = this.cartItems.findIndex((res:any)=> res['item_name'] === item.item_name)
+        if(isExist > -1){
+          
+          let qty = 0;
+          if(this.path != '/cart'){
+            qty =  this.cartItems[isExist]['qty'] + (item['qty'] > 0 ? item['qty'] + 1 : 2);
+          }else{
+            qty =  this.cartItems[isExist]['qty'] + 1;
+          }
+          qtyExceeds = qty > item.actual_qty;
+
+          if(qtyExceeds){
+            this.presentToast("Quantity is greater than available stock","danger");
+            return;
+          }
+        }
       }
+
+      if(item.is_stock_item){
+        const qty = item['qty'] > 0 ? item['qty'] + 1 : 2;
+        qtyExceeds = qty > item.actual_qty;
+
+        if(qtyExceeds){
+          this.presentToast("Quantity is greater than available stock","danger");
+          return;
+        }else{
+          item['qty'] = item['qty'] > 0 ? item['qty'] + 1 : item.actual_qty < 2 ? item.actual_qty : 2;
+        }
+      }
+
     }else{
       item['qty'] = item['qty'] > 0 ? item['qty'] - 1 : 1
     }

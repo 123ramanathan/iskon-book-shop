@@ -89,7 +89,7 @@ export class CatalogPage implements OnInit {
         return;
       }
       if(res.message && res.message.items && res.message.items.length > 0){
-        this.catalog = this.page === 1 ? res.message.items : [...this.catalog,...res.message.items]
+        this.catalog = this.page === 1 ? res.message.items : [...this.catalog,...res.message.items];
         this.loading = false
         this.noProduct = false
         if(searchType === 'search'){
@@ -105,6 +105,8 @@ export class CatalogPage implements OnInit {
       }
     })
   }
+
+
 
   onSearchChange(event: any) {
     const value = event.target.value.toLowerCase();
