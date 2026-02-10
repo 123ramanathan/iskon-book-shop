@@ -30,8 +30,8 @@ export class CatalogPage implements OnInit {
   ionViewWillEnter(){
     this.db.get_cart_items();
     this.getItems();
-    this.get_item_group();
     this.get_languages();
+    this.get_item_group();
   }
 
   ionViewWillLeave(){
@@ -51,13 +51,11 @@ export class CatalogPage implements OnInit {
   get_item_group(){
     let data = {
       doctype: "Item Group",
-      languages: "Languages"
     }
     this.db.get_item_group(data).subscribe((res:any)=>{
       if(res.message && res.message.data && res.message.data.length > 0){
         res.message.data.unshift({name: "All Categories"});
         this.categories = res.message.data;
-        this.languages = res.message.data
       }
     })
   }
@@ -86,8 +84,12 @@ export class CatalogPage implements OnInit {
 
     this.db.sales_items_with_filters(params).subscribe((res:any)=>{
       // console.log(res,"res")
+      if(res.message && res.message.message === "No active shift found for this user"){
+        this.db.logout();
+        return;
+      }
       if(res.message && res.message.items && res.message.items.length > 0){
-        this.catalog = this.page === 1 ? res.message.items : [...this.catalog,...res.message.items]
+        this.catalog = this.page === 1 ? res.message.items : [...this.catalog,...res.message.items];
         this.loading = false
         this.noProduct = false
         if(searchType === 'search'){
@@ -103,6 +105,8 @@ export class CatalogPage implements OnInit {
       }
     })
   }
+
+
 
   onSearchChange(event: any) {
     const value = event.target.value.toLowerCase();

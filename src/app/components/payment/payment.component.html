@@ -80,7 +80,9 @@
 
   </div>
 
-  <div class="save_btn">
-    <ion-button fill="clear" [disabled]="!(customer.customer_name && customer.customer_phone)" class="complete" (click)="create_invoice()">Complete Payment</ion-button>
-  </div>
+  <ion-footer>
+    <div class="save_btn">
+      <ion-button fill="clear" [disabled]="!(customer.customer_name && customer.customer_phone)" class="complete" (click)="create_invoice()">Complete Payment</ion-button>
+    </div>
+  </ion-footer>
 </section>
