@@ -1,0 +1,19 @@
+<app-header
+  [home]="false"
+  [title]="'Barcode Scan'"
+  [backRoute]="'/catalog'"
+></app-header>
+
+<ion-content [fullscreen]="true">
+  <div class="scanner-content">
+    <div class="scanner-frame" (click)="startScan()">
+      <p class="m-0 d__flex gap-10"><ion-icon name="camera-outline"></ion-icon>Scan Book Bar Code</p>
+    </div>
+  
+    <div *ngIf="scannedValue && scannedValue.length != 0" class="book_list">
+      <div *ngFor="let item of scannedValue" class="book_box">
+        <p class="m-0">{{item.book_name}}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>
