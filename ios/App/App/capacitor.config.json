@@ -1,0 +1,12 @@
+{
+	"appId": "com.iskon.bookshop",
+	"appName": "book-shop",
+	"webDir": "www",
+	"packageClassList": [
+		"BarcodeScannerPlugin",
+		"AppPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"StatusBarPlugin"
+	]
+}

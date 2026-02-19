@@ -29,4 +29,8 @@ export class HeaderComponent  implements OnInit {
     this.router.navigateByUrl('/tabs/profile');
   }
 
+  openBarcodeScan(){
+    this.router.navigateByUrl('/barcode-scan');
+  }
+
 }

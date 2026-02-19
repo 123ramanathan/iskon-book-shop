@@ -98,7 +98,11 @@ const routes: Routes = [
   {
     path: 'receipt-detail/:id',
     loadChildren: () => import('./pages/receipt-detail/receipt-detail.module').then( m => m.ReceiptDetailPageModule)
+  },  {
+    path: 'barcode-scan',
+    loadChildren: () => import('./pages/barcode-scan/barcode-scan.module').then( m => m.BarcodeScanPageModule)
   }
+
 ]
 @NgModule({
   imports: [
