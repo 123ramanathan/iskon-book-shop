@@ -10,10 +10,8 @@
       <p class="m-0 d__flex gap-10"><ion-icon name="camera-outline"></ion-icon>Scan Book Bar Code</p>
     </div>
   
-    <div *ngIf="scannedValue && scannedValue.length != 0" class="book_list">
-      <div *ngFor="let item of scannedValue" class="book_box">
-        <p class="m-0">{{item.book_name}}</p>
-      </div>
+    <div class="p-10">
+      <app-catalog-cards *ngIf="scannedValue && scannedValue.length > 0" [catalog]="scannedValue"></app-catalog-cards>
     </div>
   </div>
 </ion-content>
