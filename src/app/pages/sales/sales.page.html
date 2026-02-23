@@ -7,7 +7,10 @@
   </ion-refresher>
 
   <div class="main_section">
-    <ion-button fill="clear" (click)="openingPosEntry()"><ion-icon slot="start" name="cart-outline"></ion-icon>Start New Sale</ion-button>
+    <div class="button--wrapper">
+      <ion-button fill="clear" (click)="openingPosEntry('/catalog')"><ion-icon slot="start" name="cart-outline"></ion-icon>Manual Sale</ion-button>
+      <ion-button fill="clear" (click)="openingPosEntry('/barcode-scan')"><ion-icon slot="start" name="scan-outline"></ion-icon>Scanner Sale</ion-button>
+    </div>
 
     <div class="sales_report" *ngIf="report_details">
       <div class="boxes" routerLink="/tabs/orders">

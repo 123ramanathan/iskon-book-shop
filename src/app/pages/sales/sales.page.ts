@@ -78,14 +78,14 @@ export class SalesPage implements OnInit {
     });
   }
 
-  openingPosEntry(){
+  openingPosEntry(route:string){
     let data = {
       user: localStorage['username']
     }
     this.db.pos_opening_entry(data).subscribe((res:any)=>{
       if(res && res.message && res.status == "Success"){
         console.log(res, "pos opening entry");
-        this.router.navigateByUrl('/catalog');
+        this.router.navigateByUrl(route);
       }else{
         this.db.presentToast(res.message.message, 'error');
       }
