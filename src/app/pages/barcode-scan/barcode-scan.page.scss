@@ -40,3 +40,9 @@
         margin-bottom: 10px;
     }
 }
+
+.no-data {
+  text-align: center;
+  color: var(--combobox-muted, #6b7280);
+  margin-top: 2rem;
+}

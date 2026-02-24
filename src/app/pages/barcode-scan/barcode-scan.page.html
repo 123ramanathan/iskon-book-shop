@@ -14,6 +14,48 @@
   
     <div class="p-10">
       <app-catalog-cards *ngIf="scannedValue && scannedValue.length > 0" [catalog]="scannedValue"></app-catalog-cards>
+
+      <div *ngIf="scannedValue && scannedValue.length === 0" class="no-data">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="64"
+          height="64"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-inbox-off"
+        >
+          <path
+            d="M22 22 2 2m16.5 16.5H20a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2h-1.5M16 16h-1.5a2 2 0 0 1-2-2v-1.5M4.27 4.27 2 6.54V11a2 2 0 0 0 2 2h1.5m2.61 0h3.62M12 16h1.5a2 2 0 0 0 2-2v-1.5m3.73-5.73L22 6.54V11a2 2 0 0 1-2 2h-5.73"
+          ></path>
+        </svg>
+        <p>No items found.</p>
+      </div>
     </div>
   </div>
+
+  <ion-footer *ngIf="db.cartItems.length > 0">
+    <div class="cart-container" >
+      <ion-button routerLink="/cart" class="cart-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="cart-icon"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="8" cy="21" r="1"></circle>
+          <circle cx="19" cy="21" r="1"></circle>
+          <path
+            d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+          ></path>
+        </svg>
+        View Cart ({{ db.cartItems.length }} items)
+      </ion-button>
+    </div>
+  </ion-footer>
 </ion-content>
