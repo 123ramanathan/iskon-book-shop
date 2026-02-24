@@ -37,7 +37,7 @@ export class AppComponent {
         // or: Style.Dark
 
       } catch (err) {
-        console.log('StatusBar error:', err);
+        // console.log('StatusBar error:', err);
       }
     });
 
@@ -57,7 +57,7 @@ export class AppComponent {
            localStorage.removeItem('stock_entry_list');
         }
 
-        console.log('Current URL:', this.db.path);
+        // console.log('Current URL:', this.db.path);
       }
     });
   }

@@ -14,17 +14,10 @@ export class CatalogCardsComponent  implements OnInit {
 
   ngOnInit() {}
 
-  
-
-  
   async add_to_cart(item:any) {
     item['qty'] = item?.qty ?? 1;
     const value = await this.db.add_to_cart(item);
     item['qty'] = 1;
   }
-
-
-
-
 
 }
