@@ -68,10 +68,18 @@ export class Db {
   }
 
   add_to_cart(item:any){
+
     this.cartItems = this.get_cart_items()
     if(this.cartItems && this.cartItems.length > 0){
       const isExist = this.cartItems.findIndex((res:any)=> res['item_name'] === item.item_name)
       if(isExist > -1){
+
+        let checkQty = this.cartItems[isExist].qty + item.qty
+        if(this.cartItems[isExist].actual_qty < checkQty){
+          this.presentToast("Quantity is greater than available stock","danger");
+          return;
+        }
+
         this.cartItems[isExist]['qty'] += item.qty;
       }else{
         this.cartItems.push(item)
@@ -315,7 +323,7 @@ export class Db {
   async presentToast(message: any, type: any) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 5000,     // 2 seconds
+      duration: 2000,     // 2 seconds
       position: 'bottom', // 👈 show at bottom
       color: type == 'success' ? 'success' : 'danger',      // optional
     });
