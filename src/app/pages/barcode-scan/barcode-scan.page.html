@@ -12,7 +12,7 @@
       <p class="m-0 d__flex gap-10"><ion-icon name="camera-outline"></ion-icon>Scan Book Bar Code</p>
     </div>
   
-    <div class="p-10">
+    <div class="p-10 heightSec">
       <app-catalog-cards *ngIf="scannedValue && scannedValue.length > 0" [catalog]="scannedValue"></app-catalog-cards>
 
       <div *ngIf="scannedValue && scannedValue.length === 0" class="no-data">

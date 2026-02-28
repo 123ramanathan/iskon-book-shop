@@ -52,6 +52,38 @@ export class BarcodeScanPage implements OnDestroy {
       return;
     }
 
+    // On Android we rely on the optional Google barcode scanner module.  If it
+    // isn't already installed the plugin will throw the error you saw.  We can
+    // proactively check and install it before opening the scanner UI.
+    //
+    // Note: installGoogleBarcodeScannerModule() only *starts* the download – an
+    // event will be fired when the install has finished.  We await that event so
+    // the user doesn't tap "Scan" before the module is ready.
+    try {
+      const avail = await BarcodeScanner.isGoogleBarcodeScannerModuleAvailable();
+      if (!avail.available) {
+        await BarcodeScanner.installGoogleBarcodeScannerModule();
+        await new Promise<void>(async (resolve, reject) => {
+          const handle = await BarcodeScanner.addListener(
+            'googleBarcodeScannerModuleInstallProgress',
+            (event: any) => {
+              if (event.status === 'installed') {
+                handle.remove();
+                resolve();
+              } else if (event.status === 'failed') {
+                handle.remove();
+                reject(new Error('Google barcode module installation failed'));
+              }
+            }
+          );
+        });
+      }
+    } catch (e) {
+      // If the install fails for whatever reason we still attempt the scan
+      // because the API may fallback to the web‑based scanner on iOS/desktop.
+      console.warn('barcode module check/install error', e);
+    }
+
     const result = await BarcodeScanner.scan({
       formats: [
         BarcodeFormat.QrCode,
