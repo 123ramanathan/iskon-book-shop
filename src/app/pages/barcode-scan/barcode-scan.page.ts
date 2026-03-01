@@ -32,6 +32,7 @@ export class BarcodeScanPage implements OnDestroy {
   //   },
   // ];
   scannedValue: any = [];
+  selectedBook: any;
 
   constructor(private navCtrl: NavController, public db: Db) {}
 
@@ -52,6 +53,38 @@ export class BarcodeScanPage implements OnDestroy {
       return;
     }
 
+    // On Android we rely on the optional Google barcode scanner module.  If it
+    // isn't already installed the plugin will throw the error you saw.  We can
+    // proactively check and install it before opening the scanner UI.
+    //
+    // Note: installGoogleBarcodeScannerModule() only *starts* the download – an
+    // event will be fired when the install has finished.  We await that event so
+    // the user doesn't tap "Scan" before the module is ready.
+    try {
+      const avail = await BarcodeScanner.isGoogleBarcodeScannerModuleAvailable();
+      if (!avail.available) {
+        await BarcodeScanner.installGoogleBarcodeScannerModule();
+        await new Promise<void>(async (resolve, reject) => {
+          const handle = await BarcodeScanner.addListener(
+            'googleBarcodeScannerModuleInstallProgress',
+            (event: any) => {
+              if (event.status === 'installed') {
+                handle.remove();
+                resolve();
+              } else if (event.status === 'failed') {
+                handle.remove();
+                reject(new Error('Google barcode module installation failed'));
+              }
+            }
+          );
+        });
+      }
+    } catch (e) {
+      // If the install fails for whatever reason we still attempt the scan
+      // because the API may fallback to the web‑based scanner on iOS/desktop.
+      console.warn('barcode module check/install error', e);
+    }
+
     const result = await BarcodeScanner.scan({
       formats: [
         BarcodeFormat.QrCode,
@@ -66,7 +99,7 @@ export class BarcodeScanPage implements OnDestroy {
       //   book_name: result.barcodes[0].rawValue
       // }
       // this.scannedValue.push(data);
-      console.log('Scanned:', result.barcodes[0].rawValue);
+      // console.log('Scanned:', result.barcodes[0].rawValue);
       this.getScannedBookDetails(result.barcodes[0].rawValue);
     }
   }
@@ -84,6 +117,7 @@ export class BarcodeScanPage implements OnDestroy {
     this.db.sales_items_with_filters(data).subscribe((res : any) => {
       // console.log(res, "getScannedBookDetails");
       if(res && res.message && res.message.items && res.message.items.length > 0 && res.status == 'Success'){
+        this.selectedBook = res.message.items[0];
         this.scannedValue.push(...res.message.items);
       }else{
         this.db.presentToast("No details found for the scanned book", "danger");

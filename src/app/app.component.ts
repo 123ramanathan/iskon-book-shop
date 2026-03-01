@@ -23,6 +23,11 @@ export class AppComponent {
 
   ngOnInit(){
 
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.router.navigate(['/login']);
+    }
+
     this.db.headerDetails();
 
     this.platform.ready().then(async () => {
