@@ -32,6 +32,7 @@ export class BarcodeScanPage implements OnDestroy {
   //   },
   // ];
   scannedValue: any = [];
+  selectedBook: any;
 
   constructor(private navCtrl: NavController, public db: Db) {}
 
@@ -98,7 +99,7 @@ export class BarcodeScanPage implements OnDestroy {
       //   book_name: result.barcodes[0].rawValue
       // }
       // this.scannedValue.push(data);
-      console.log('Scanned:', result.barcodes[0].rawValue);
+      // console.log('Scanned:', result.barcodes[0].rawValue);
       this.getScannedBookDetails(result.barcodes[0].rawValue);
     }
   }
@@ -116,6 +117,7 @@ export class BarcodeScanPage implements OnDestroy {
     this.db.sales_items_with_filters(data).subscribe((res : any) => {
       // console.log(res, "getScannedBookDetails");
       if(res && res.message && res.message.items && res.message.items.length > 0 && res.status == 'Success'){
+        this.selectedBook = res.message.items[0];
         this.scannedValue.push(...res.message.items);
       }else{
         this.db.presentToast("No details found for the scanned book", "danger");
