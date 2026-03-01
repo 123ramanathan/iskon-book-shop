@@ -20,9 +20,9 @@
           <span class="product-card__price">{{db.formatCurrency(item.price_list_rate)}}</span>
           <div class="product-card__stock">{{item.actual_qty > 0 ? item.actual_qty + " in stock" : "Out of stock"}} </div>
         </div>
-  
+
         <!-- Actions -->
-        <div class="product-card__actions">
+        <div class="product-card__actions" *ngIf="!delete_btn">
           
           <!-- Quantity Control -->
           <div class="product-card__quantity" [class.disable__qty]="!item.actual_qty">
@@ -39,7 +39,7 @@
               </svg>
             </button>
           </div>
-  
+
           <!-- Add to Cart -->
           <ion-button (click)="add_to_cart(item)" class="product-card__add-btn" [disabled]="!item.actual_qty">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--medium" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -48,8 +48,61 @@
             </svg>
             Add
           </ion-button>
+
         </div>
+
       </div>
     </div>
+
+    <!-- Actions -->
+    <div class="product-card__actions" *ngIf="delete_btn">
+      
+      <!-- Quantity Control -->
+      <div class="product-card__quantity" [class.disable__qty]="!item.actual_qty">
+        <button (click)="db.update_qty(item,'dec')" [disabled]="item.qty <= 1" class="product-card__quantity-btn product-card__quantity-btn--decrease" >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M5 12h14"></path>
+          </svg>
+        </button>
+        <span class="product-card__quantity-value">{{item.qty ?? 1}}</span>
+        <button (click)="db.update_qty(item,'inc')" class="product-card__quantity-btn product-card__quantity-btn--increase">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M5 12h14"></path>
+            <path d="M12 5v14"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Add to Cart -->
+      <ion-button (click)="add_to_cart(item)" class="product-card__add-btn" [disabled]="!item.actual_qty">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--medium" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M5 12h14"></path>
+          <path d="M12 5v14"></path>
+        </svg>
+        Add
+      </ion-button>
+
+      <!-- Delete Item -->
+      <button class="product-card__delete" (click)="openDeleteModal(item)">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M3 6h18"></path>
+          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+          <line x1="10" x2="10" y1="11" y2="17"></line>
+          <line x1="14" x2="14" y1="11" y2="17"></line>
+        </svg>
+      </button>
+
+    </div>
+    
   </div>
 </div>

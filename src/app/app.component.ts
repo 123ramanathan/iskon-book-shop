@@ -49,7 +49,9 @@ export class AppComponent {
     this.platform.backButton.subscribeWithPriority(10, () => {
       if (this.router.url === '/login' || this.router.url === '/tabs/sales') { // Check if on login page
         this.showExitConfirmation();
-      }else{
+      } else if(this.router.url === '/thankyou'){
+        this.router.navigateByUrl('/tabs/sales');
+      } else{
         this.navCtrl.back();
       }
     });

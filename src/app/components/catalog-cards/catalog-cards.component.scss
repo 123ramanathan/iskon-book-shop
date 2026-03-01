@@ -1,3 +1,6 @@
+$destructive: #dc2626;
+$accent: #f3f4f6;
+
 .product{
     display: grid;
     gap: .75rem;
@@ -13,6 +16,7 @@
         &__container {
           display: flex;
           gap: 1rem;
+          margin-bottom: 10px;
         }
       
         /* Thumbnail */
@@ -98,6 +102,27 @@
           display: flex;
           align-items: center;
           gap: 0.5rem;
+        }
+
+        &__delete {
+          border: none;
+          color: $destructive;
+          border-radius: 0.375rem;
+          // padding: 0.25rem 0.75rem;
+          cursor: pointer;
+          transition: 0.2s;
+          height: 36px;
+          width: 36px;
+          background: #dc26262b;
+
+          &:hover {
+            background-color: $accent;
+          }
+
+          .icon {
+            width: 1rem;
+            height: 1rem;
+          }
         }
       
         /* Quantity Control */
