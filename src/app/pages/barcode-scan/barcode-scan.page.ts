@@ -13,36 +13,15 @@ import { Db } from 'src/app/service/db';
   standalone: false
 })
 export class BarcodeScanPage implements OnDestroy {
-
-  // scannedValue: any = [
-  //   {
-  //     book_name: 'Sriram'
-  //   },
-  //   {
-  //     book_name: 'John'
-  //   },
-  //   {
-  //     book_name: 'Rohan'
-  //   },
-  //   {
-  //     book_name: 'Sudalai'
-  //   },
-  //   {
-  //     book_name: 'Doss'
-  //   },
-  // ];
-  scannedValue: any = [];
   selectedBook: any;
 
   constructor(private navCtrl: NavController, public db: Db) {}
 
-  async ionViewDidEnter() {
-    // await this.startScan();
-  }
-
   ionViewWillEnter(){
-    // this.scannedValue = [];
+    // this.db.scannedBooks = [];
     // this.getScannedBookDetails("Perfect Question Perfect Answer Tamil");
+
+    // this.getScannedBookDetails('Krishna');
   }
 
   async startScan() {
@@ -98,7 +77,7 @@ export class BarcodeScanPage implements OnDestroy {
       // let data = {
       //   book_name: result.barcodes[0].rawValue
       // }
-      // this.scannedValue.push(data);
+      // this.db.scannedBooks.push(data);
       // console.log('Scanned:', result.barcodes[0].rawValue);
       this.getScannedBookDetails(result.barcodes[0].rawValue);
     }
@@ -118,7 +97,7 @@ export class BarcodeScanPage implements OnDestroy {
       // console.log(res, "getScannedBookDetails");
       if(res && res.message && res.message.items && res.message.items.length > 0 && res.status == 'Success'){
         this.selectedBook = res.message.items[0];
-        this.scannedValue.push(...res.message.items);
+        this.db.scannedBooks.push(...res.message.items);
       }else{
         this.db.presentToast("No details found for the scanned book", "danger");
       }
@@ -127,6 +106,7 @@ export class BarcodeScanPage implements OnDestroy {
 
   ionViewWillLeave() {
     BarcodeScanner.stopScan();
+    // this.db.scannedBooks = [];
   }
 
   ngOnDestroy() {

@@ -22,6 +22,8 @@ export class AppComponent {
   ) {}
 
   ngOnInit(){
+    
+    this.db.checkUserInShift();
 
     const token = localStorage.getItem('token');
     if (!token) {
@@ -49,7 +51,7 @@ export class AppComponent {
     this.platform.backButton.subscribeWithPriority(10, () => {
       if (this.router.url === '/login' || this.router.url === '/tabs/sales') { // Check if on login page
         this.showExitConfirmation();
-      } else if(this.router.url === '/thankyou'){
+      } else if(this.router.url === '/thankyou' || this.router.url === '/stock-receipt'){
         this.router.navigateByUrl('/tabs/sales');
       } else{
         this.navCtrl.back();
