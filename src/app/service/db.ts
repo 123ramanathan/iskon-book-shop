@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ModalPopupComponent } from '../components/modal-popup/modal-popup.component';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class Db {
 
   header_content:any = {};
   isSearchFocused = false;
-  constructor(private http:HttpClient, private toastController: ToastController, private router: Router){}
+  scannedBooks: any = [];
+  constructor(private http:HttpClient, private toastController: ToastController, private router: Router, private modalCtrl: ModalController){}
 
   formatCurrency(amount:number, currency = "INR", locale = "en-IN") {
     if (isNaN(amount)) return "Invalid number";
@@ -147,9 +149,11 @@ export class Db {
   }
 
   remove_cart_item(item:any){
+    // console.log('remove_cart_item:', item);
     for (let i = 0; i < this.cartItems.length; i++) {
       if(item.item_name === this.cartItems[i]['item_name']){
         this.cartItems.splice(i,1);
+        this.scannedBooks.splice(i,1);
         break;
       }
     }
@@ -292,6 +296,24 @@ export class Db {
     return this.callApi(endpoint,"POST",params)
   }
 
+  check_user_in_shift(data: any){
+    const endpoint = "/api/method/iskcon.iskcon.api.user_shift_type_from_pos";
+    return this.callApi(endpoint,"POST",data)
+  }
+
+  checkUserInShift(){
+    let data = {
+      pos_id: localStorage['pos_profile'],
+      user_name: localStorage['user_id']
+    }
+    this.check_user_in_shift(data).subscribe((res: any) => {
+      console.log(data, "checkUserInShift");
+      if(res && res.status == 'Failed'){
+        this.logout();
+      }
+    })
+  }
+
   headerDetails(){
     let data = {
       user: localStorage['username']
@@ -336,5 +358,26 @@ export class Db {
     this.router.navigateByUrl('/login');
   }
 
+  async deleteCart(){
+    const modal = await this.modalCtrl.create({
+      component: ModalPopupComponent,
+      componentProps: {
+        headerText: "Confirm Delete",
+        title: "Are you sure you want to delete this item?",
+        btn1: "Yes",
+        btn2: "No"
+      },
+      cssClass: 'confirm-modal',
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+
+    if (data?.confirmed) {
+      localStorage.removeItem('cartItems');
+      this.cartItems = [];
+    }
+  }
 
 }

@@ -85,6 +85,7 @@ export class LoginPage implements OnInit {
         this.router.navigateByUrl('/tabs/sales');
         this.db.presentToast('Login Successful', 'success');
       }else{
+        localStorage.clear();
         this.db.presentToast(res.message.message, 'error');
       }
     });

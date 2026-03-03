@@ -13,9 +13,9 @@
     </div>
   
     <div class="p-10 heightSec">
-      <app-catalog-cards *ngIf="scannedValue && scannedValue.length > 0" [catalog]="scannedValue" [selectedBook]="selectedBook" [delete_btn]="true"></app-catalog-cards>
+      <app-catalog-cards *ngIf="db.scannedBooks && db.scannedBooks.length > 0" [catalog]="db.scannedBooks" [selectedBook]="selectedBook" [delete_btn]="true"></app-catalog-cards>
 
-      <div *ngIf="scannedValue && scannedValue.length === 0" class="no-data">
+      <div *ngIf="db.scannedBooks && db.scannedBooks.length === 0" class="no-data">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="64"
