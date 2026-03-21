@@ -23,7 +23,6 @@ export class BarcodeScanPage implements OnDestroy {
   }
 
   async startScan() {
-    this.getScannedBookDetails("Krishna");
     const permission = await BarcodeScanner.requestPermissions();
     if (permission.camera !== 'granted') {
       alert('Camera permission required');
