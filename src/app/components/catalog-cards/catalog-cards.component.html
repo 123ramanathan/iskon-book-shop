@@ -41,7 +41,7 @@
           </div>
 
           <!-- Add to Cart -->
-          <ion-button (click)="add_to_cart(item)" class="product-card__add-btn" [disabled]="!item.actual_qty">
+          <ion-button (click)="add_to_cart.emit(item)" class="product-card__add-btn" [disabled]="!item.actual_qty">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--medium" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M5 12h14"></path>
               <path d="M12 5v14"></path>
@@ -74,7 +74,7 @@
       </div>
 
       <!-- Add to Cart -->
-      <ion-button (click)="add_to_cart(item)" class="product-card__add-btn" [disabled]="!item.actual_qty">
+      <ion-button (click)="add_to_cart.emit(item)" class="product-card__add-btn" [disabled]="!item.actual_qty">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon--medium" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M5 12h14"></path>
           <path d="M12 5v14"></path>

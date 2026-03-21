@@ -98,6 +98,7 @@ export class PaymentComponent implements OnInit {
         localStorage['thankyou_content'] = JSON.stringify(thankyouValues);
         localStorage.removeItem('cartItems');
         this.db.cartItems = [];
+        this.db.scannedBooks = [];
         this.navCtrl.navigateForward('/thankyou');
         this.payment = {
           type: '',

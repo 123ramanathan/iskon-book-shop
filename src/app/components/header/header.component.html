@@ -24,7 +24,7 @@
       <div [class.catalog_title]="title == 'Catalog' || title == 'Cart'">
         <h1 class="m-0">{{title}}</h1>
         <ion-icon *ngIf="false && title == 'Catalog'" name="barcode-outline" (click)="openBarcodeScan()"></ion-icon>
-        <ion-icon *ngIf="title == 'Cart'" class="delete_icon" name="trash-outline" (click)="db.deleteCart()"></ion-icon>
+        <!-- <ion-icon *ngIf="title == 'Cart'" class="delete_icon" name="trash-outline" (click)="db.deleteCart()"></ion-icon> -->
       </div>
     </div>
 

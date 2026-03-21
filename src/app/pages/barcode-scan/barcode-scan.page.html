@@ -1,7 +1,7 @@
 <app-header
   [home]="false"
   [title]="'Barcode Scan'"
-
+  [backRoute]="'/tabs/sales'"
 ></app-header>
 <!-- [backRoute]="'/catalog'" -->
 
@@ -13,7 +13,7 @@
     </div>
   
     <div class="p-10 heightSec">
-      <app-catalog-cards *ngIf="db.scannedBooks && db.scannedBooks.length > 0" [catalog]="db.scannedBooks" [selectedBook]="selectedBook" [delete_btn]="true"></app-catalog-cards>
+      <app-catalog-cards *ngIf="db.scannedBooks && db.scannedBooks.length > 0" [catalog]="db.scannedBooks" [delete_btn]="true" (add_to_cart)="add_to_cart($event)"></app-catalog-cards>
 
       <div *ngIf="db.scannedBooks && db.scannedBooks.length === 0" class="no-data">
         <svg

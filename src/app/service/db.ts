@@ -95,7 +95,7 @@ export class Db {
     return this.get_cart_items()
   }
 
-  update_qty(item:any,type:string){
+  update_qty(item:any,type:string, page:string = ''){
     console.log(item,type);
     if(type === "inc"){
 
@@ -135,7 +135,7 @@ export class Db {
       item['qty'] = item['qty'] > 0 ? item['qty'] - 1 : 1
     }
     
-    if(this.path === "/cart"){
+    if(this.path === "/cart" || page === 'barcode-scan'){
       for (let i = 0; i < this.cartItems.length; i++) {
         if(item.item_name === this.cartItems[i]['item_name']){
           this.cartItems[i] = item
@@ -143,13 +143,12 @@ export class Db {
       }
   
       localStorage['cartItems'] = JSON.stringify(this.cartItems);
-  
       this.get_cart_items()
     }
   }
 
   remove_cart_item(item:any){
-    // console.log('remove_cart_item:', item);
+    console.log('remove_cart_item:', item);
     for (let i = 0; i < this.cartItems.length; i++) {
       if(item.item_name === this.cartItems[i]['item_name']){
         this.cartItems.splice(i,1);
