@@ -63,7 +63,7 @@
 
     <div #sectionBody class="section__body" [class.def__body]="db.cartItems.length > 0" (scroll)="loadMore($event)">
       
-      <app-catalog-cards *ngIf="catalog && catalog.length > 0" [catalog]="catalog"></app-catalog-cards>
+      <app-catalog-cards *ngIf="catalog && catalog.length > 0" [catalog]="catalog" (add_to_cart)="add_to_cart($event)"></app-catalog-cards>
 
       <div *ngIf="catalog && catalog.length === 0" class="no-data">
         <svg
@@ -95,9 +95,9 @@
     </div>
 
 
-    <ion-footer *ngIf="db.cartItems.length > 0">
-      <div class="cart-container" >
-        <ion-button routerLink="/cart" class="cart-button">
+    <ion-tab-bar slot="bottom" *ngIf="db.cartItems.length > 0">
+      <ion-tab-button routerLink="/cart" class="cart-container">
+        <ion-button class="cart-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="cart-icon"
@@ -114,8 +114,8 @@
           </svg>
           View Cart ({{ db.cartItems.length }} items)
         </ion-button>
-      </div>
-    </ion-footer>
+      </ion-tab-button>
+    </ion-tab-bar>
 
   </main>
 </ion-content>

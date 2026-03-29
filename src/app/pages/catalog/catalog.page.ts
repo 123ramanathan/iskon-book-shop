@@ -107,6 +107,11 @@ export class CatalogPage implements OnInit {
   }
 
 
+  async add_to_cart(item:any) {
+      item['qty'] = item?.qty ?? 1;
+      const value = await this.db.add_to_cart(item);
+      item['qty'] = 1;
+    }
 
   onSearchChange(event: any) {
     const value = event.target.value.toLowerCase();

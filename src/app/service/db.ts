@@ -20,6 +20,10 @@ export class Db {
   header_content:any = {};
   isSearchFocused = false;
   scannedBooks: any = [];
+    customer: any = {
+    customer_name: 'Rohan',
+    customer_phone: 9500995558,
+  };
   constructor(private http:HttpClient, private toastController: ToastController, private router: Router, private modalCtrl: ModalController){}
 
   formatCurrency(amount:number, currency = "INR", locale = "en-IN") {
@@ -95,8 +99,7 @@ export class Db {
     return this.get_cart_items()
   }
 
-  update_qty(item:any,type:string){
-    console.log(item,type);
+  update_qty(item:any,type:string, page:string = ''){
     if(type === "inc"){
 
        let qtyExceeds = false;
@@ -135,7 +138,7 @@ export class Db {
       item['qty'] = item['qty'] > 0 ? item['qty'] - 1 : 1
     }
     
-    if(this.path === "/cart"){
+    if(this.path === "/cart" || page === 'barcode-scan'){
       for (let i = 0; i < this.cartItems.length; i++) {
         if(item.item_name === this.cartItems[i]['item_name']){
           this.cartItems[i] = item
@@ -143,13 +146,11 @@ export class Db {
       }
   
       localStorage['cartItems'] = JSON.stringify(this.cartItems);
-  
       this.get_cart_items()
     }
   }
 
   remove_cart_item(item:any){
-    // console.log('remove_cart_item:', item);
     for (let i = 0; i < this.cartItems.length; i++) {
       if(item.item_name === this.cartItems[i]['item_name']){
         this.cartItems.splice(i,1);

@@ -4,12 +4,12 @@
     <div class="customer_details">
       <div class="type_input">
         <label for="customer_name">Customer Name <span>*</span></label>
-        <input id="customer_name" [(ngModel)]="customer.customer_name" placeholder="Enter customer name" name="customer_name" type="text" />
+        <input id="customer_name" [(ngModel)]="db.customer.customer_name" placeholder="Enter customer name" name="customer_name" type="text" />
       </div>
 
       <div class="type_input">
         <label for="customer_phone">Customer Phone <span>*</span></label>
-        <input id="customer_phone" [(ngModel)]="customer.customer_phone" placeholder="Enter customer phone" name="customer_phone" type="number" (input)="validatePhone($event)"/>
+        <input id="customer_phone" [(ngModel)]="db.customer.customer_phone" placeholder="Enter customer phone" name="customer_phone" type="number" (input)="validatePhone($event)"/>
 
         <p class="error" *ngIf="phone_error">Please enter a valid mobile number</p>
       </div>
@@ -80,9 +80,9 @@
 
   </div>
 
-  <ion-footer>
-    <div class="save_btn">
-      <ion-button fill="clear" [disabled]="!(customer.customer_name && customer.customer_phone)" class="complete" (click)="create_invoice()">Complete Payment</ion-button>
-    </div>
-  </ion-footer>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button class="save_btn">
+      <ion-button fill="clear" [disabled]="!(db.customer.customer_name && db.customer.customer_phone)" class="complete" (click)="create_invoice()">Complete Payment</ion-button>
+    </ion-tab-button>
+  </ion-tab-bar>
 </section>

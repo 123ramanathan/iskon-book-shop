@@ -21,10 +21,11 @@
       <div class="back_icon">
         <ion-icon name="chevron-back-outline" (click)="back_route()"></ion-icon>
       </div>
-      <div [class.catalog_title]="title == 'Catalog' || title == 'Cart'">
+      <div [class.catalog_title]="title == 'Catalog' || title == 'Cart' || title == 'Barcode Scan'">
         <h1 class="m-0">{{title}}</h1>
-        <ion-icon *ngIf="false && title == 'Catalog'" name="barcode-outline" (click)="openBarcodeScan()"></ion-icon>
-        <ion-icon *ngIf="title == 'Cart'" class="delete_icon" name="trash-outline" (click)="db.deleteCart()"></ion-icon>
+        <ion-icon *ngIf="title == 'Cart' && db.cartItems && db.cartItems.length > 0" class="delete_icon" name="trash-outline" (click)="db.deleteCart()"></ion-icon>
+        <ion-icon *ngIf="title == 'Catalog'" name="barcode-outline" (click)="openBarcodeScan('/barcode-scan')"></ion-icon>
+        <ion-icon *ngIf="title == 'Barcode Scan'" name="list-outline" (click)="openBarcodeScan('/catalog')"></ion-icon>
       </div>
     </div>
 

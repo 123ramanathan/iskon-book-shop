@@ -2,7 +2,7 @@
 
 <ion-content [fullscreen]="true">
   <main class="cart">
-    <section class="cart__container">
+    <section class="cart__container" *ngIf="db.cartItems && db.cartItems.length > 0">
       <div
         class="cart__wrapper"
         *ngIf="db.cartItems && db.cartItems.length > 0"
@@ -89,7 +89,7 @@
     </section>
 
     <!-- *ngIf="db.subtotal && db.subtotal > 0" -->
-    <section class="cart-summary" >
+    <section class="cart-summary" *ngIf="db.cartItems && db.cartItems.length > 0">
       <div class="cart-summary__details">
         <!-- <div class="cart-summary__row">
             <span class="cart-summary__label">Subtotal</span>

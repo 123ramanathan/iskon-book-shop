@@ -13,15 +13,14 @@ import { Db } from 'src/app/service/db';
   standalone: false
 })
 export class BarcodeScanPage implements OnDestroy {
-  selectedBook: any;
-
   constructor(private navCtrl: NavController, public db: Db) {}
 
   ionViewWillEnter(){
+     this.db.get_cart_items();
     // this.db.scannedBooks = [];
     // this.getScannedBookDetails("Perfect Question Perfect Answer Tamil");
 
-    // this.getScannedBookDetails('Krishna');
+    this.getScannedBookDetails('Tamil');
   }
 
   async startScan() {
@@ -96,13 +95,28 @@ export class BarcodeScanPage implements OnDestroy {
     this.db.sales_items_with_filters(data).subscribe((res : any) => {
       // console.log(res, "getScannedBookDetails");
       if(res && res.message && res.message.items && res.message.items.length > 0 && res.status == 'Success'){
-        this.selectedBook = res.message.items[0];
-        this.db.scannedBooks.push(...res.message.items);
+
+        const existingItemIndex = this.db.scannedBooks.findIndex((item: any) => item.item_code === res.message.items[0].item_code);
+
+        if (existingItemIndex === -1) {
+          this.db.scannedBooks.push(...res.message.items);
+          res.message.items[0].actual_qty > 0 && this.add_to_cart(res.message.items[0]);
+        }else{
+          this.db.scannedBooks[existingItemIndex].qty = this.db.scannedBooks[existingItemIndex].qty + 1;
+          this.db.update_qty(this.db.scannedBooks[existingItemIndex],'inc','barcode-scan');
+        }
+
       }else{
         this.db.presentToast("No details found for the scanned book", "danger");
       }
     })
   }
+
+    async add_to_cart(item:any) {
+      item['qty'] = item?.qty ?? 1;
+      const value = await this.db.add_to_cart(item);
+      item['qty'] = 1;
+    }
 
   ionViewWillLeave() {
     BarcodeScanner.stopScan();

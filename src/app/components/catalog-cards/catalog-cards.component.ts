@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Db } from 'src/app/service/db';
 import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
@@ -11,30 +11,25 @@ import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
 })
 export class CatalogCardsComponent  implements OnInit {
   @Input() catalog:any;
-  @Input() selectedBook:any;
   @Input() delete_btn = false;
+  @Input() page:any;
+  @Output() add_to_cart = new EventEmitter<any>();
   constructor(public db:Db, public modalCtrl: ModalController) { 
   }
 
   ngOnInit() {
-    // if(this.selectedBook){
-    //   this.add_to_cart(this.selectedBook);
-    // }
   }
 
-  ngOnChanges(changes: SimpleChanges){
-    if(changes['selectedBook'] && changes['selectedBook'].currentValue){
-      this.selectedBook = changes['selectedBook'].currentValue;
-      this.add_to_cart(this.selectedBook);
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges){
+  //   if(changes['selectedBook'] && changes['selectedBook'].currentValue){
+  //     this.selectedBook = changes['selectedBook'].currentValue;
+  //     // if(this.selectedBook.actual_qty > 0){
+  //     //   this.add_to_cart.emit(this.selectedBook);
+  //     // }
+  //   }
+  // }
 
-  async add_to_cart(item:any) {
-    item['qty'] = item?.qty ?? 1;
-    const value = await this.db.add_to_cart(item);
-    item['qty'] = 1;
-    this.selectedBook = null;
-  }
+
 
   async openDeleteModal(item: any) {
     const modal = await this.modalCtrl.create({
@@ -54,12 +49,8 @@ export class CatalogCardsComponent  implements OnInit {
     const { data } = await modal.onWillDismiss();
 
     if (data?.confirmed) {
-      this.remove_item(item);
+     this.db.remove_cart_item(item)
     }
-  }
-
-  remove_item(item:any){
-    this.db.remove_cart_item(item)
   }
 
 }
