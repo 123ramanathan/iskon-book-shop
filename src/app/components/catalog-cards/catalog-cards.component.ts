@@ -12,6 +12,7 @@ import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
 export class CatalogCardsComponent  implements OnInit {
   @Input() catalog:any;
   @Input() delete_btn = false;
+  @Input() page:any;
   @Output() add_to_cart = new EventEmitter<any>();
   constructor(public db:Db, public modalCtrl: ModalController) { 
   }

@@ -18,10 +18,7 @@ export class PaymentComponent implements OnInit {
     second_payment_type: '',
     second_payment_amount: null,
   };
-  customer: any = {
-    customer_name: '',
-    customer_phone: null,
-  };
+
   phone_error = false;
 
   constructor(public db: Db, private navCtrl: NavController) {}
@@ -82,8 +79,8 @@ export class PaymentComponent implements OnInit {
       pos_profile: localStorage['store_name'],
       items: items,
       payments: this.generate_payment_method(),
-      customer_name: this.customer.customer_name,
-      customer_phone: this.customer.customer_phone,
+      customer_name: this.db.customer.customer_name,
+      customer_phone: this.db.customer.customer_phone,
       user: localStorage['username'],
     };
     this.db.payments_invoice({ invoice_data: params }).subscribe((res: any) => {
@@ -91,8 +88,8 @@ export class PaymentComponent implements OnInit {
         const thankyouValues = {
           amount: res.message.total_amount,
           mode_of_payment: this.payment.type,
-          customer_name: this.customer.customer_name,
-          customer_phone: this.customer.customer_phone,
+          customer_name: this.db.customer.customer_name,
+          customer_phone: this.db.customer.customer_phone,
         };
 
         localStorage['thankyou_content'] = JSON.stringify(thankyouValues);
@@ -107,9 +104,9 @@ export class PaymentComponent implements OnInit {
           second_payment_type: '',
           second_payment_amount: 0,
         };
-        this.customer = {
-          customer_name: '',
-          customer_phone: null,
+        this.db.customer = {
+          customer_name: 'Rohan',
+    customer_phone: 9500995558,
         };
       } else {
         if (res && res.message && res.message.message) {
@@ -126,14 +123,14 @@ export class PaymentComponent implements OnInit {
 
   validatePayment(): boolean {
     // Customer validation
-    if (!this.customer.customer_name) {
+    if (!this.db.customer.customer_name) {
       this.db.presentToast('Customer name is required', 'error');
       return false;
     }
 
-    if (!this.customer.customer_phone || this.phone_error) {
+    if (!this.db.customer.customer_phone || this.phone_error) {
       this.db.presentToast(
-        !this.customer.customer_phone
+        !this.db.customer.customer_phone
           ? 'Customer phone is required'
           : 'Please enter a valid customer phone number',
         'error'
@@ -288,7 +285,7 @@ export class PaymentComponent implements OnInit {
     if (event.target.value.length >= 10) {
       this.phone_error = false;
       event.target.value = event.target.value.slice(0, 10);
-      this.customer.customer_phone = event.target.value;
+      this.db.customer.customer_phone = event.target.value;
     } else if (event.target.value.length < 10) {
       this.phone_error = true;
     }

@@ -95,9 +95,9 @@
     </div>
 
 
-    <ion-footer *ngIf="db.cartItems.length > 0">
-      <div class="cart-container" >
-        <ion-button routerLink="/cart" class="cart-button">
+    <ion-tab-bar slot="bottom" *ngIf="db.cartItems.length > 0">
+      <ion-tab-button routerLink="/cart" class="cart-container">
+        <ion-button class="cart-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="cart-icon"
@@ -114,8 +114,8 @@
           </svg>
           View Cart ({{ db.cartItems.length }} items)
         </ion-button>
-      </div>
-    </ion-footer>
+      </ion-tab-button>
+    </ion-tab-bar>
 
   </main>
 </ion-content>

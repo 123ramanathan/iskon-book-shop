@@ -118,9 +118,10 @@ $line-height: 1.25rem;
     // bottom: 0;
     // left: 0;
     // right: 0;
-    padding: 1rem; // p-4
+    // padding: 1rem; // p-4
     // background: linear-gradient(to top, var(--background), transparent);
     pointer-events: none; // container non-interactive
+    max-width: 100%;
   }
 
   .cart-button {

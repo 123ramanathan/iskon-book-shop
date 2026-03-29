@@ -16,10 +16,11 @@ export class BarcodeScanPage implements OnDestroy {
   constructor(private navCtrl: NavController, public db: Db) {}
 
   ionViewWillEnter(){
+     this.db.get_cart_items();
     // this.db.scannedBooks = [];
     // this.getScannedBookDetails("Perfect Question Perfect Answer Tamil");
 
-    // this.getScannedBookDetails('Krishna');
+    this.getScannedBookDetails('Tamil');
   }
 
   async startScan() {
@@ -101,7 +102,7 @@ export class BarcodeScanPage implements OnDestroy {
           this.db.scannedBooks.push(...res.message.items);
           res.message.items[0].actual_qty > 0 && this.add_to_cart(res.message.items[0]);
         }else{
-          // this.db.scannedBooks[existingItemIndex].qty = this.db.scannedBooks[existingItemIndex].qty + 1;
+          this.db.scannedBooks[existingItemIndex].qty = this.db.scannedBooks[existingItemIndex].qty + 1;
           this.db.update_qty(this.db.scannedBooks[existingItemIndex],'inc','barcode-scan');
         }
 

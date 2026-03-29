@@ -112,8 +112,11 @@ $accent: #f3f4f6;
           cursor: pointer;
           transition: 0.2s;
           height: 36px;
-          width: 36px;
+          // width: 36px;
+          width: 100%;
           background: #dc26262b;
+          justify-content: center;
+          font-weight: 600;
 
           &:hover {
             background-color: $accent;

@@ -20,6 +20,10 @@ export class Db {
   header_content:any = {};
   isSearchFocused = false;
   scannedBooks: any = [];
+    customer: any = {
+    customer_name: 'Rohan',
+    customer_phone: 9500995558,
+  };
   constructor(private http:HttpClient, private toastController: ToastController, private router: Router, private modalCtrl: ModalController){}
 
   formatCurrency(amount:number, currency = "INR", locale = "en-IN") {
@@ -96,7 +100,6 @@ export class Db {
   }
 
   update_qty(item:any,type:string, page:string = ''){
-    console.log(item,type);
     if(type === "inc"){
 
        let qtyExceeds = false;
@@ -148,7 +151,6 @@ export class Db {
   }
 
   remove_cart_item(item:any){
-    console.log('remove_cart_item:', item);
     for (let i = 0; i < this.cartItems.length; i++) {
       if(item.item_name === this.cartItems[i]['item_name']){
         this.cartItems.splice(i,1);
